@@ -1,0 +1,11 @@
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\obj\Debug\net48\ExadelMentorship.ConsoleApp.csproj.AssemblyReference.cache
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\obj\Debug\net48\ExadelMentorship.ConsoleApp.csproj.SuggestedBindingRedirects.cache
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\obj\Debug\net48\ExadelMentorship.ConsoleApp.GeneratedMSBuildEditorConfig.editorconfig
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\obj\Debug\net48\ExadelMentorship.ConsoleApp.AssemblyInfoInputs.cache
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\obj\Debug\net48\ExadelMentorship.ConsoleApp.AssemblyInfo.cs
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\obj\Debug\net48\ExadelMentorship.ConsoleApp.csproj.CoreCompileInputs.cache
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\bin\Debug\net48\ExadelMentorship.ConsoleApp.exe.config
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\bin\Debug\net48\ExadelMentorship.ConsoleApp.exe
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\bin\Debug\net48\ExadelMentorship.ConsoleApp.pdb
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\obj\Debug\net48\ExadelMentorship.ConsoleApp.exe
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\obj\Debug\net48\ExadelMentorship.ConsoleApp.pdb
