@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "/Mbev23Z59y4q+WbqtyU/phs4fDmoTQU/Wi+FFRABiW+RHkYIS0yPVN0/FGeCuZ0zYd7v8KkVP7KKm2vOrixmA==",
+  "dgSpecHash": "S6N5yQt4RxLoGM92Gro/nfT+JIAKo76OyYzk8Nzfg/QPoreqBwVlqmQmsGgCWPFdl49eti7Ht6dItr40IPe0qw==",
   "success": true,
   "projectFilePath": "D:\\My Info\\Programming\\Exadel\\Mentorship\\MainProject\\src\\ExadelMentorship\\ExadelMentorship.BusinessLogic\\ExadelMentorship.BusinessLogic.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\sergi.lomtadze\\.nuget\\packages\\fluentvalidation\\11.0.1\\fluentvalidation.11.0.1.nupkg.sha512",
     "C:\\Users\\sergi.lomtadze\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
-    "C:\\Users\\sergi.lomtadze\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+    "C:\\Users\\sergi.lomtadze\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\sergi.lomtadze\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
   ],
   "logs": []
 }

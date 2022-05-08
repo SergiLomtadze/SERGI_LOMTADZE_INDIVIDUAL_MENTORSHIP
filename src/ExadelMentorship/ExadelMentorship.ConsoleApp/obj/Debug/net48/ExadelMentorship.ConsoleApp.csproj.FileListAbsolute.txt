@@ -9,3 +9,10 @@ D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\Exadel
 D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\bin\Debug\net48\ExadelMentorship.ConsoleApp.pdb
 D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\obj\Debug\net48\ExadelMentorship.ConsoleApp.exe
 D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\obj\Debug\net48\ExadelMentorship.ConsoleApp.pdb
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\bin\Debug\net48\ExadelMentorship.BusinessLogic.dll
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\bin\Debug\net48\ExadelMentorship.DataAccess.dll
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\bin\Debug\net48\ExadelMentorship.BusinessLogic.pdb
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\bin\Debug\net48\ExadelMentorship.DataAccess.pdb
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\obj\Debug\net48\ExadelMentorship.ConsoleApp.csproj.CopyComplete
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\bin\Debug\net48\Newtonsoft.Json.dll
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.ConsoleApp\bin\Debug\net48\FluentValidation.dll

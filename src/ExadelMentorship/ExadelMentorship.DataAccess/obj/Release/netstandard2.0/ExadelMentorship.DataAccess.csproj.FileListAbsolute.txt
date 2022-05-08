@@ -1,0 +1,10 @@
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.DataAccess\bin\Release\netstandard2.0\ExadelMentorship.DataAccess.deps.json
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.DataAccess\bin\Release\netstandard2.0\ExadelMentorship.DataAccess.dll
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.DataAccess\bin\Release\netstandard2.0\ExadelMentorship.DataAccess.pdb
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.DataAccess\obj\Release\netstandard2.0\ExadelMentorship.DataAccess.csproj.AssemblyReference.cache
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.DataAccess\obj\Release\netstandard2.0\ExadelMentorship.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.DataAccess\obj\Release\netstandard2.0\ExadelMentorship.DataAccess.AssemblyInfoInputs.cache
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.DataAccess\obj\Release\netstandard2.0\ExadelMentorship.DataAccess.AssemblyInfo.cs
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.DataAccess\obj\Release\netstandard2.0\ExadelMentorship.DataAccess.csproj.CoreCompileInputs.cache
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.DataAccess\obj\Release\netstandard2.0\ExadelMentorship.DataAccess.dll
+D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship\ExadelMentorship.DataAccess\obj\Release\netstandard2.0\ExadelMentorship.DataAccess.pdb
