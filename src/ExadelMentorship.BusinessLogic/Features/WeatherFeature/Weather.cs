@@ -4,19 +4,24 @@ using ExadelMentorship.BusinessLogic.Validators;
 using FluentValidation.Results;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
+
 using System.Net.Http;
-using System.Text;
+
 using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
 {
     public class Weather
     {
-        public double Temperature { get; set; }
 
-        public void Validate(City city)
+        public HttpClient _httpClient { get; set; }
+
+        public Weather(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
+
+        public void ValidateCityName(City city)
         {
             CityValidator validator = new CityValidator();
             ValidationResult results = validator.Validate(city);
@@ -28,28 +33,50 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
                 }
             }            
         }
-        public async Task<City> GetTemperatureByCityName(City city)
-        {
-            using (var httpClient = new HttpClient())
-            {
-                var url = $"https://api.openweathermap.org/data/2.5/weather?q={city.Name}&appid=7e66067382ed6a093c3e4b6c22940505&units=metric";
 
-                HttpResponseMessage result = await httpClient.GetAsync(url);
-                if ((int)result.StatusCode == 404)
-                {
-                    throw new NotFoundException($"City: {city.Name} was not found");
-                }
-                
-                if (result.IsSuccessStatusCode)
-                {
-                    var json = result.Content.ReadAsStringAsync().Result;
-                    JObject obj = JsonConvert.DeserializeObject<JObject>(json);
-                    JObject mainObj = obj["main"] as JObject;
-                    city.Temperature = (double)mainObj["temp"];
-                    city.FillComment();
-                }                
+        public async Task<double> GetTemperatureByCityName(string name)
+        {
+            var url = $"https://api.openweathermap.org/data/2.5/weather?q={name}&appid=7e66067382ed6a093c3e4b6c22940505&units=metric";
+            HttpResponseMessage result = await _httpClient.GetAsync(url);
+
+            if ((int)result.StatusCode == 404)
+            {
+                throw new NotFoundException($"City: {name} was not found");
             }
-            return city;   
+            else if (result.IsSuccessStatusCode)
+            {
+                var json = result.Content.ReadAsStringAsync().Result;
+                JObject obj = JsonConvert.DeserializeObject<JObject>(json);
+                JObject mainObj = obj["main"] as JObject;
+                return (double)mainObj["temp"];
+            }
+            else
+            {
+                throw new NotFoundException($"Error: {(int)result.StatusCode}");
+            }
         }
+
+        public async Task<double> GetTemperatureByCityNameTest(string name)
+        {
+            var url = $"https://api.openweathermap.org/data/2.5/weather?q={name}&appid=7e66067382ed6a093c3e4b6c22940505&units=metric";
+            HttpResponseMessage result = await _httpClient.GetAsync(url);
+
+            if ((int)result.StatusCode == 404)
+            {
+                throw new NotFoundException($"City: {name} was not found");
+            }
+            else if (result.IsSuccessStatusCode)
+            {
+                var json = result.Content.ReadAsStringAsync().Result;
+                JObject obj = JsonConvert.DeserializeObject<JObject>(json);
+                JObject mainObj = obj["main"] as JObject;
+                return (double)mainObj["temp"];
+            }
+            else
+            {
+                throw new NotFoundException($"Error: {(int)result.StatusCode}");
+            }
+        }
+
     }
 }
