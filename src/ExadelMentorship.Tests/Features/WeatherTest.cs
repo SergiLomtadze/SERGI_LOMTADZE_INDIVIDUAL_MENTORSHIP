@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ExadelMentorship.Tests.Features
+namespace ExadelMentorship.UnitTests.Features
 {
     public class WeatherTest
     {
