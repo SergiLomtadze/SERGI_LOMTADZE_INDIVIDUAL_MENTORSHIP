@@ -22,8 +22,8 @@ namespace ExadelMentorship.IntegrationTests.Features
             //Act 
             var result = await weather.GetTemperatureByCityName("Tbilisi");
 
-            //Act and Assert
-            Assert.InRange(result, -50, 60);
+            //Assert
+            Assert.InRange(result, -100, 100);
         }
 
         [Fact]
