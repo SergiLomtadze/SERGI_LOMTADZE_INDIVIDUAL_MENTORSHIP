@@ -12,6 +12,20 @@ namespace ExadelMentorship.IntegrationTests.Features
 {
     public class WeatherTest
     {
+
+        [Fact]
+        public async Task GetTemperatureByCityName_WhenCityNameIsCorrect_ReturnsTemperature()
+        {
+            //Arrange
+            Weather weather = new Weather(new HttpClient());
+
+            //Act 
+            var result = await weather.GetTemperatureByCityName("Tbilisi");
+
+            //Act and Assert
+            Assert.InRange(result, -50, 60);
+        }
+
         [Fact]
         public async Task GetTemperatureByCityName_WhenCityNameIsNotCorrect_ThrowsException()
         {
