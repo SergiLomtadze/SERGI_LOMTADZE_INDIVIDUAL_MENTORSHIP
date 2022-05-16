@@ -6,12 +6,13 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Net.Http;
 
-
+//DI setup/release 
 using var serviceProvider = new ServiceCollection()
     .AddSingleton<Weather>()
     .AddSingleton<HttpClient>()
     .BuildServiceProvider();
 
+//DI configure
 var weather = serviceProvider.GetRequiredService<Weather>();
 
 while (true) 
