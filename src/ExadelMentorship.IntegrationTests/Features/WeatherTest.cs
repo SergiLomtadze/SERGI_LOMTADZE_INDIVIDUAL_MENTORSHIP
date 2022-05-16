@@ -17,7 +17,8 @@ namespace ExadelMentorship.IntegrationTests.Features
         public async Task GetTemperatureByCityName_WhenCityNameIsCorrect_ReturnsTemperature()
         {
             //Arrange
-            Weather weather = new Weather(new HttpClient());
+            DIConfigurer dIConfigurer = new DIConfigurer();
+            Weather weather = new Weather(dIConfigurer.GetHttpClientFactory());
 
             //Act 
             var result = await weather.GetTemperatureByCityName("Tbilisi");
@@ -30,7 +31,8 @@ namespace ExadelMentorship.IntegrationTests.Features
         public async Task GetTemperatureByCityName_WhenCityNameIsNotCorrect_ThrowsException()
         {
             //Arrange
-            Weather weather = new Weather(new HttpClient());
+            DIConfigurer dIConfigurer = new DIConfigurer();
+            Weather weather = new Weather(dIConfigurer.GetHttpClientFactory());
 
             //Act and Assert
             await Assert.ThrowsAsync<NotFoundException>(() => weather.GetTemperatureByCityName("AAA"));
