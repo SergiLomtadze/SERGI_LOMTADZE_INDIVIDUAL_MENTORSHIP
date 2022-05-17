@@ -1,7 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0;net48</TargetFrameworks>
+	<LangVersion>9</LangVersion>
     <Nullable>enable</Nullable>
 
     <IsPackable>false</IsPackable>
@@ -23,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExadelMentorship.BusinessLogic\ExadelMentorship.BusinessLogic.csproj" />
+    <ProjectReference Include="..\ExadelMentorship.ConsoleApp\ExadelMentorship.ConsoleApp.csproj" />
   </ItemGroup>
 
 </Project>
