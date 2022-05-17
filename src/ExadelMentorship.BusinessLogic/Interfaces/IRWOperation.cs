@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ExadelMentorship.BusinessLogic.Features
 {
-    public interface IConsoleOperation
+    public interface IRWOperation
     {
         void WriteLine(string text);
         string ReadLine();

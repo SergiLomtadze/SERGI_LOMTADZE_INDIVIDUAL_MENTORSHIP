@@ -11,21 +11,28 @@ namespace ExadelMentorship.BusinessLogic
 {
     public class ConsoleJob
     {
-        IConsoleOperation _consoleOperation;
-        public ConsoleJob(IConsoleOperation consoleOperation)
+        IRWOperation _consoleOperation;
+        public ConsoleJob(IRWOperation consoleOperation)
         {
             _consoleOperation = consoleOperation;
         }
+
+        public City GetCityFromConsole()
+        {
+            var inputedLine = _consoleOperation.ReadLine();
+            return new City
+            {
+                Name = inputedLine
+            };
+        }
+
         public async Task DoJob(Weather weather)
         {
+         
             while (true)
             {
                 _consoleOperation.WriteLine("Please enter the city Name:");
-                var inputedLine = _consoleOperation.ReadLine();
-                City city = new City
-                {
-                    Name = inputedLine
-                };
+                var city = this.GetCityFromConsole();
 
                 try
                 {
@@ -34,6 +41,7 @@ namespace ExadelMentorship.BusinessLogic
                     city.Comment = WeatherHelper.GetCommentByTemperature(city.Temperature);
                     _consoleOperation.WriteLine($"In {city.Name} temperature is: {city.Temperature}, {city.Comment}");
                 }
+
                 catch (NotFoundException exception)
                 {
                     _consoleOperation.WriteLine(exception.Message);
