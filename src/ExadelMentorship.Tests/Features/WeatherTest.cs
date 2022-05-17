@@ -1,6 +1,6 @@
-﻿using ExadelMentorship.BusinessLogic.Exceptions;
+﻿
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
-using ExadelMentorship.BusinessLogic.Models;
+using Microsoft.Extensions.Options;
 using Moq;
 using Moq.Protected;
 using System.Net;
@@ -29,7 +29,10 @@ namespace ExadelMentorship.UnitTests.Features
         public async Task GetTemperatureByCityName_WhenCityNameIsCorrect_ReturnsTemperature()
         {
             //Arrange
-            Weather weather = new Weather(FakeHttpClient("{'main':{'temp':30.0}}"));
+            var httpClientFactoryMock = new Mock<IHttpClientFactory>();
+            httpClientFactoryMock.Setup(p => p.CreateClient(Options.DefaultName)).Returns(FakeHttpClient("{'main':{'temp':30.0}}"));
+
+            Weather weather = new Weather(httpClientFactoryMock.Object);
 
             //Act
             var result = await weather.GetTemperatureByCityName(It.IsAny<string>());

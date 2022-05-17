@@ -2,6 +2,7 @@
 using ExadelMentorship.BusinessLogic.Models;
 using ExadelMentorship.BusinessLogic.Validators;
 using FluentValidation.Results;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -14,12 +15,13 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
     public class Weather
     {
 
-        public HttpClient _httpClient { get; set; }
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public Weather(HttpClient httpClient)
+        public Weather(IHttpClientFactory httpClientFactory)
         {
-            _httpClient = httpClient;
+            _httpClientFactory = httpClientFactory;
         }
+
 
         public void ValidateCityName(City city)
         {
@@ -37,7 +39,8 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
         public async Task<double> GetTemperatureByCityName(string name)
         {
             var url = $"https://api.openweathermap.org/data/2.5/weather?q={name}&appid=7e66067382ed6a093c3e4b6c22940505&units=metric";
-            HttpResponseMessage result = await _httpClient.GetAsync(url);
+            var httpClient = _httpClientFactory.CreateClient();
+            HttpResponseMessage result = await httpClient.GetAsync(url);
 
             if ((int)result.StatusCode == 404)
             {

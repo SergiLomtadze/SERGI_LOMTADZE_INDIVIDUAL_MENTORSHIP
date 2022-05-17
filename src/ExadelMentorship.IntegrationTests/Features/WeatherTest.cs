@@ -1,10 +1,5 @@
 ﻿using ExadelMentorship.BusinessLogic.Exceptions;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -17,7 +12,7 @@ namespace ExadelMentorship.IntegrationTests.Features
         public async Task GetTemperatureByCityName_WhenCityNameIsCorrect_ReturnsTemperature()
         {
             //Arrange
-            Weather weather = new Weather(new HttpClient());
+            var weather = DI.Resolve<Weather>();
 
             //Act 
             var result = await weather.GetTemperatureByCityName("Tbilisi");
@@ -30,7 +25,7 @@ namespace ExadelMentorship.IntegrationTests.Features
         public async Task GetTemperatureByCityName_WhenCityNameIsNotCorrect_ThrowsException()
         {
             //Arrange
-            Weather weather = new Weather(new HttpClient());
+            var weather = DI.Resolve<Weather>();
 
             //Act and Assert
             await Assert.ThrowsAsync<NotFoundException>(() => weather.GetTemperatureByCityName("AAA"));
