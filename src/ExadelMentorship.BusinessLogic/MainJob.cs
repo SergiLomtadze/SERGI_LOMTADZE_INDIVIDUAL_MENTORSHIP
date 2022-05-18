@@ -9,42 +9,41 @@ using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic
 {
-    public class ConsoleJob
+    public class MainJob
     {
-        IRWOperation _consoleOperation;
-        public ConsoleJob(IRWOperation consoleOperation)
+        IRWOperation _rwOperation;
+        public MainJob(IRWOperation rwOperation)
         {
-            _consoleOperation = consoleOperation;
+            _rwOperation = rwOperation;
         }
 
-        public City GetCityFromConsole()
+        public City GetCityFromInput()
         {
-            var inputedLine = _consoleOperation.ReadLine();
+            var inputedLine = _rwOperation.ReadLine();
             return new City
             {
                 Name = inputedLine
             };
         }
 
-        public async Task DoJob(Weather weather)
+        public async Task Execute(Weather weather)
         {
-         
             while (true)
             {
-                _consoleOperation.WriteLine("Please enter the city Name:");
-                var city = this.GetCityFromConsole();
+                _rwOperation.WriteLine("Please enter the city Name:");
+                var city = this.GetCityFromInput();
 
                 try
                 {
                     weather.ValidateCityName(city);
                     city.Temperature = await weather.GetTemperatureByCityName(city.Name);
                     city.Comment = WeatherHelper.GetCommentByTemperature(city.Temperature);
-                    _consoleOperation.WriteLine($"In {city.Name} temperature is: {city.Temperature}, {city.Comment}");
+                    _rwOperation.WriteLine($"In {city.Name} temperature is: {city.Temperature}, {city.Comment}");
                 }
 
                 catch (NotFoundException exception)
                 {
-                    _consoleOperation.WriteLine(exception.Message);
+                    _rwOperation.WriteLine(exception.Message);
                 }
 
             }

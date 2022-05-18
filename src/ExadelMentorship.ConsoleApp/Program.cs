@@ -6,9 +6,9 @@ using ExadelMentorship.IntegrationTests;
 
 
 var weather = DI.Resolve<Weather>();
-var consoleJob = DI.Resolve<ConsoleJob>();
+var job = DI.Resolve<MainJob>();
 
-await consoleJob.DoJob(weather);
+await job.Execute(weather);
 
 
 

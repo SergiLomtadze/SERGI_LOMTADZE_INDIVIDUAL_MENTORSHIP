@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ExadelMentorship.BusinessLogic
 {
-    public class RWOperation : IRWOperation
+    public class ConsoleOperation : IRWOperation
     {
         public string ReadLine()
         {

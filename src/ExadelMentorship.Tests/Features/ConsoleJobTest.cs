@@ -14,23 +14,25 @@ namespace ExadelMentorship.UnitTests.Features
     public class ConsoleJobTest
     {
         [Fact]
-        public void GetCityFromConsole_WhenCityNameIsCorrect_ReturnsCorrectCity()
+        public void GetCityFromInpute_WhenCityNameIsCorrect_ReturnsCorrectCity()
         {
             //Arrange
-            var consoleMock = new Mock<IRWOperation>();
-            consoleMock.Setup(p => p.ReadLine()).Returns("Tbilisi");
+            var rwMock = new Mock<IRWOperation>();
+            rwMock.Setup(p => p.ReadLine()).Returns("Tbilisi");
 
-            ConsoleJob consoleJob = new ConsoleJob(consoleMock.Object);
+            MainJob job = new MainJob(rwMock.Object);
+
             City city = new City()
             {
                 Name = "Tbilisi"
             };
 
             //Act
-            var result = consoleJob.GetCityFromConsole();
+            var result = job.GetCityFromInput();
 
             //Assert
             Assert.Equal(city.Name, result.Name);
         }
+
     }
 }

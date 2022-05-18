@@ -16,9 +16,9 @@ namespace ExadelMentorship.IntegrationTests
         public static T Resolve<T>()
         {
             return new ServiceCollection()
-            .AddSingleton<ConsoleJob>()
+            .AddSingleton<MainJob>()
             .AddSingleton<Weather>()
-            .AddSingleton<IRWOperation, RWOperation>()
+            .AddSingleton<IRWOperation, ConsoleOperation>()
             .AddHttpClient()
             .BuildServiceProvider()
             .GetRequiredService<T>();
