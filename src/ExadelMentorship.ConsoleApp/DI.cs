@@ -1,4 +1,7 @@
-﻿using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
+﻿using ExadelMentorship.BusinessLogic;
+using ExadelMentorship.BusinessLogic.Features;
+using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
+using ExadelMentorship.BusinessLogic.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -14,7 +17,9 @@ namespace ExadelMentorship.IntegrationTests
         public static T Resolve<T>()
         {
             return new ServiceCollection()
-            .AddSingleton<Weather>()
+            .AddSingleton<MainJob>()
+            .AddSingleton<IWeather, Weather>()
+            .AddSingleton<IRWOperation, ConsoleOperation>()
             .AddHttpClient()
             .BuildServiceProvider()
             .GetRequiredService<T>();
