@@ -12,9 +12,11 @@ namespace ExadelMentorship.BusinessLogic
     public class MainJob
     {
         IRWOperation _rwOperation;
-        public MainJob(IRWOperation rwOperation)
+        Weather _weather;
+        public MainJob(IRWOperation rwOperation, Weather weather)
         {
             _rwOperation = rwOperation;
+            _weather = weather;
         }
 
         public City GetCityFromInput()
@@ -26,7 +28,7 @@ namespace ExadelMentorship.BusinessLogic
             };
         }
 
-        public async Task Execute(Weather weather)
+        public async Task Execute()
         {
             while (true)
             {
@@ -35,8 +37,8 @@ namespace ExadelMentorship.BusinessLogic
 
                 try
                 {
-                    weather.ValidateCityName(city);
-                    city.Temperature = await weather.GetTemperatureByCityName(city.Name);
+                    _weather.ValidateCityName(city);
+                    city.Temperature = await _weather.GetTemperatureByCityName(city.Name);
                     city.Comment = WeatherHelper.GetCommentByTemperature(city.Temperature);
                     _rwOperation.WriteLine($"In {city.Name} temperature is: {city.Temperature}, {city.Comment}");
                 }
