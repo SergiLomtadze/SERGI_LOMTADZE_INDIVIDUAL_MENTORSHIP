@@ -1,4 +1,5 @@
 ﻿using ExadelMentorship.BusinessLogic.Exceptions;
+using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
 using ExadelMentorship.BusinessLogic.Validators;
 using FluentValidation.Results;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
 {
-    public class Weather
+    public class Weather : IWeather
     {
 
         private readonly IHttpClientFactory _httpClientFactory;

@@ -1,5 +1,7 @@
 ﻿
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
+using ExadelMentorship.BusinessLogic.Interfaces;
+using ExadelMentorship.BusinessLogic.Models;
 using Microsoft.Extensions.Options;
 using Moq;
 using Moq.Protected;
@@ -11,7 +13,7 @@ using Xunit;
 
 namespace ExadelMentorship.UnitTests.Features
 {
-    public class WeatherTest
+    public class WeatherTest 
     {
         [Fact]
         public void GetCommentByTemperature_WhenTemperatureLessThenZero_ReturnsDressWarmly()
