@@ -32,7 +32,7 @@ namespace ExadelMentorship.UnitTests.Features
             rwMock.Setup(p => p.WriteLine("In Tbilisi temperature is: 10, It's fresh"))
                 .Callback<string>(b => secondOutput = b);
 
-            var weatherMock = new Mock<IWeather>();
+            var weatherMock = new Mock<ICurrentWeather>();
 
             weatherMock.Setup(x => x.ValidateCityName(It.IsAny<City>()))
                 .Callback<City>(b => city = b);

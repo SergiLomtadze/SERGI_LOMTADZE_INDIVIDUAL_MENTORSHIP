@@ -13,14 +13,15 @@ using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
 {
-    public class Weather : IWeather
+    public class CurrentWeather : ICurrentWeather, ICommand
     {
-
+        IRWOperation _rwOperation;
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public Weather(IHttpClientFactory httpClientFactory)
+        public CurrentWeather(IHttpClientFactory httpClientFactory, IRWOperation rwOperation)
         {
             _httpClientFactory = httpClientFactory;
+            _rwOperation = rwOperation;
         }
 
 
@@ -60,5 +61,27 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             }
         }
 
+        public async Task Execute()
+        {
+            _rwOperation.WriteLine("Please enter the city Name:");
+            var inputedLine = _rwOperation.ReadLine();
+            var city = new City
+            {
+                Name = inputedLine
+            };
+
+            try
+            {
+                this.ValidateCityName(city);
+                city.Temperature = await this.GetTemperatureByCityName(city.Name);
+                city.Comment = WeatherHelper.GetCommentByTemperature(city.Temperature);
+                _rwOperation.WriteLine($"In {city.Name} temperature is: {city.Temperature}, {city.Comment}");
+            }
+
+            catch (NotFoundException exception)
+            {
+                _rwOperation.WriteLine(exception.Message);
+            }
+        }
     }
 }
