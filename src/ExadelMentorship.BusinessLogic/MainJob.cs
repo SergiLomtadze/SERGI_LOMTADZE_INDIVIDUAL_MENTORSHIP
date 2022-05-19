@@ -36,6 +36,7 @@ namespace ExadelMentorship.BusinessLogic
             } while (!(inputedLine.Equals("0")||inputedLine.Equals("1")||inputedLine.Equals("2")));
             return Convert.ToInt32(inputedLine);
         }
+
         public async Task Do()
         {
             var action = this.GetActionFromUser();

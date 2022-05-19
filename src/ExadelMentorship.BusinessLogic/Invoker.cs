@@ -1,4 +1,5 @@
 ﻿using ExadelMentorship.BusinessLogic.Features;
+
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Interfaces;
 using System;
@@ -28,6 +29,9 @@ namespace ExadelMentorship.BusinessLogic
 
             //if (action == 2)
             //    command = new FutureWeather(_httpClientFactory, _rwOperation);
+
+            if (action == 0)
+                command = new ConsoleOperation();
 
             return command;
         }
