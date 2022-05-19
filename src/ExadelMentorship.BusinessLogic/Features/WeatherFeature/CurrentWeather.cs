@@ -13,18 +13,18 @@ using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
 {
-    public class Weather : IWeather
+    public class CurrentWeather : ICurrentWeather
     {
 
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public Weather(IHttpClientFactory httpClientFactory)
+        public CurrentWeather(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
 
 
-        public void ValidateCityName(City city)
+        public void ValidateCityName1(City city)
         {
             CityValidator validator = new CityValidator();
             ValidationResult results = validator.Validate(city);

@@ -13,11 +13,11 @@ namespace ExadelMentorship.BusinessLogic
     public class MainJob
     {
         IRWOperation _rwOperation;
-        IWeather _weather;
-        public MainJob(IRWOperation rwOperation, IWeather weather)
+        ICurrentWeather _currentWeather;
+        public MainJob(IRWOperation rwOperation, ICurrentWeather currentWeather)
         {
             _rwOperation = rwOperation;
-            _weather = weather;
+            _currentWeather = currentWeather;
         }
 
         private City GetCityFromInput()
@@ -31,15 +31,9 @@ namespace ExadelMentorship.BusinessLogic
 
         public async Task Execute()
         {
-            _rwOperation.WriteLine("Please enter the city Name:");
-            var city = this.GetCityFromInput();
-
             try
             {
-                _weather.ValidateCityName(city);
-                city.Temperature = await _weather.GetTemperatureByCityName(city.Name);
-                city.Comment = WeatherHelper.GetCommentByTemperature(city.Temperature);
-                _rwOperation.WriteLine($"In {city.Name} temperature is: {city.Temperature}, {city.Comment}");
+                await this.CurrentWeatherExecutor();
             }
 
             catch (NotFoundException exception)
@@ -48,6 +42,17 @@ namespace ExadelMentorship.BusinessLogic
             }
 
             _rwOperation.ReadLine();
+        }
+
+        public async Task CurrentWeatherExecutor()
+        {
+            _rwOperation.WriteLine("Please enter the city Name:");
+            var city = this.GetCityFromInput();
+
+            WeatherHelper.ValidateCityName(city);
+            city.Temperature = await _currentWeather.GetTemperatureByCityName(city.Name);
+            city.Comment = WeatherHelper.GetCommentByTemperature(city.Temperature);
+            _rwOperation.WriteLine($"In {city.Name} temperature is: {city.Temperature}, {city.Comment}");
         }
     }
 }

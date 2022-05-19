@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Interfaces
 {
-    public interface IWeather
+    public interface ICurrentWeather
     {
-        public void ValidateCityName(City city);
+        //public void ValidateCityName(City city);
         public Task<double> GetTemperatureByCityName(string name);
     }
 }

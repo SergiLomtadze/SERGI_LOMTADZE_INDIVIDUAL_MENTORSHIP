@@ -1,6 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ExadelMentorship.BusinessLogic.Exceptions;
+using ExadelMentorship.BusinessLogic.Models;
+using ExadelMentorship.BusinessLogic.Validators;
+using FluentValidation.Results;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
 {
@@ -23,6 +24,19 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             else
             {
                 return "Dress warmly";
+            }
+        }
+
+        public static void ValidateCityName(City city)
+        {
+            CityValidator validator = new CityValidator();
+            ValidationResult results = validator.Validate(city);
+            if (!results.IsValid)
+            {
+                foreach (var failure in results.Errors)
+                {
+                    throw new NotFoundException($"City was not inputed");
+                }
             }
         }
     }
