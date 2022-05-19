@@ -9,11 +9,6 @@ namespace ExadelMentorship.IntegrationTests
 {
     public class DI
     {
-
-        public DI()
-        {
-
-        }
         public static T Resolve<T>()
         {
             IConfiguration config = new ConfigurationBuilder()
