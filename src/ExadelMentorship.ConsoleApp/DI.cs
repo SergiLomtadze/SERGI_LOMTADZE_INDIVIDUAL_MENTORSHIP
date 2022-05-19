@@ -2,13 +2,8 @@
 using ExadelMentorship.BusinessLogic.Features;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ExadelMentorship.IntegrationTests
 {
@@ -16,13 +11,18 @@ namespace ExadelMentorship.IntegrationTests
     {
         public static T Resolve<T>()
         {
+            IConfiguration config = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
             return new ServiceCollection()
-            .AddSingleton<MainJob>()
-            .AddSingleton<IWeather, Weather>()
-            .AddSingleton<IRWOperation, ConsoleOperation>()
-            .AddHttpClient()
-            .BuildServiceProvider()
-            .GetRequiredService<T>();
+                .AddSingleton(config)
+                .AddSingleton<MainJob>()
+                .AddSingleton<IWeather, Weather>()
+                .AddSingleton<IRWOperation, ConsoleOperation>()
+                .AddHttpClient()
+                .BuildServiceProvider()
+                .GetRequiredService<T>();
         }
     }
 }
