@@ -24,7 +24,6 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             _rwOperation = rwOperation;
         }
 
-
         public void ValidateCityName(City city)
         {
             CityValidator validator = new CityValidator();

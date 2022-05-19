@@ -14,12 +14,10 @@ namespace ExadelMentorship.BusinessLogic
     public class MainJob
     {
         IRWOperation _rwOperation;
-        ICurrentWeather _weather;
         IHttpClientFactory _httpClientFactory;
-        public MainJob(IRWOperation rwOperation, ICurrentWeather weather, IHttpClientFactory httpClientFactory)
+        public MainJob(IRWOperation rwOperation, IHttpClientFactory httpClientFactory)
         {
             _rwOperation = rwOperation;
-            _weather = weather;
             _httpClientFactory = httpClientFactory; 
         }
        

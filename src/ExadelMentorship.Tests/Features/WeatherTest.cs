@@ -1,4 +1,5 @@
 ﻿
+using ExadelMentorship.BusinessLogic.Features;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
@@ -34,13 +35,58 @@ namespace ExadelMentorship.UnitTests.Features
             var httpClientFactoryMock = new Mock<IHttpClientFactory>();
             httpClientFactoryMock.Setup(p => p.CreateClient(Options.DefaultName)).Returns(FakeHttpClient("{'main':{'temp':30.0}}"));
 
-            CurrentWeather weather = new CurrentWeather(httpClientFactoryMock.Object);
+            var rwMock = new Mock<IRWOperation>();
+
+
+            CurrentWeather weather = new CurrentWeather(httpClientFactoryMock.Object, rwMock.Object);
 
             //Act
             var result = await weather.GetTemperatureByCityName(It.IsAny<string>());
 
             //Assert
             Assert.Equal(30.0, result);
+        }
+
+        [Fact]
+        public async Task Execute_WhenCityNameIsCorrect_ReturnsWeatherInfo()
+        {
+            //Arrange
+            var httpClientFactoryMock = new Mock<IHttpClientFactory>();
+            httpClientFactoryMock.Setup(p => p.CreateClient(Options.DefaultName)).Returns(FakeHttpClient("{'main':{'temp':10.0}}"));
+
+            string firstOutput = string.Empty;
+            string secondOutput = string.Empty;
+            City city = new City();
+
+            var rwMock = new Mock<IRWOperation>();
+
+            rwMock.Setup(p => p.ReadLine()).Returns("Tbilisi");
+
+            rwMock.Setup(p => p.WriteLine("Please enter the city Name:"))
+                .Callback<string>(b => firstOutput = b);
+
+            rwMock.Setup(p => p.WriteLine("In Tbilisi temperature is: 10, It's fresh"))
+                .Callback<string>(b => secondOutput = b);
+
+            var weatherMock = new Mock<ICurrentWeather>();
+
+            weatherMock.Setup(x => x.ValidateCityName(It.IsAny<City>()))
+                .Callback<City>(b => city = b);
+
+            weatherMock.Setup(x => x.GetTemperatureByCityName(It.IsAny<string>())).Returns(Task.FromResult(10.0));
+
+
+            //Act
+            //MainJob job = new MainJob(rwMock.Object, weatherMock.Object);
+            //var result = job.Do();
+
+            CurrentWeather weather = new CurrentWeather(httpClientFactoryMock.Object, rwMock.Object);
+            await weather.Execute();
+
+            //Assert
+            //Assert.Equal("Tbilisi", city.Name);
+            Assert.Equal("Please enter the city Name:", firstOutput);
+            Assert.Equal("In Tbilisi temperature is: 10, It's fresh", secondOutput);
         }
 
         public static HttpClient FakeHttpClient(string response) 
