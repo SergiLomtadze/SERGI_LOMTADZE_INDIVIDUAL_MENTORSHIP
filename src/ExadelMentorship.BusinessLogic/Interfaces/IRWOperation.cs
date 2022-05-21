@@ -8,5 +8,7 @@ namespace ExadelMentorship.BusinessLogic.Features
     {
         void WriteLine(string text);
         string ReadLine();
+
+        void Close();
     }
 }

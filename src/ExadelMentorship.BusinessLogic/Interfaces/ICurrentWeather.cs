@@ -8,7 +8,6 @@ namespace ExadelMentorship.BusinessLogic.Interfaces
 {
     public interface ICurrentWeather
     {
-        //public void ValidateCityName(City city);
         public Task<double> GetTemperatureByCityName(string name);
     }
 }

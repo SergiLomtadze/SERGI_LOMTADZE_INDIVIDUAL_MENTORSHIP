@@ -17,8 +17,9 @@ namespace ExadelMentorship.IntegrationTests
 
             return new ServiceCollection()
                 .AddSingleton(config)
-                .AddSingleton<MainJob>()
-                .AddSingleton<ICurrentWeather, CurrentWeather>()
+                .AddSingleton<CommandInvoker>()
+                .AddSingleton<ICommandHandler<CurrentWeatherCommand>, CurrentWeatherCommandHandler>()
+                .AddSingleton<ICommandHandler<FutureWeatherCommand>, FutureWeatherCommandHandler>()                
                 .AddSingleton<IRWOperation, ConsoleOperation>()
                 .AddHttpClient()
                 .BuildServiceProvider()

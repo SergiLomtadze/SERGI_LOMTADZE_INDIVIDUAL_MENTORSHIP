@@ -34,7 +34,7 @@ namespace ExadelMentorship.UnitTests.Features
             var httpClientFactoryMock = new Mock<IHttpClientFactory>();
             httpClientFactoryMock.Setup(p => p.CreateClient(Options.DefaultName)).Returns(FakeHttpClient("{'main':{'temp':30.0}}"));
 
-            CurrentWeather weather = new CurrentWeather(httpClientFactoryMock.Object);
+            CurrentWeatherCommand weather = new CurrentWeatherCommand(httpClientFactoryMock.Object);
 
             //Act
             var result = await weather.GetTemperatureByCityName(It.IsAny<string>());

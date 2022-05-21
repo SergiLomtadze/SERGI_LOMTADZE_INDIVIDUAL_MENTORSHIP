@@ -7,6 +7,11 @@ namespace ExadelMentorship.BusinessLogic
 {
     public class ConsoleOperation : IRWOperation
     {
+        public void Close()
+        {
+            Environment.Exit(0);
+        }
+
         public string ReadLine()
         {
             return Console.ReadLine();

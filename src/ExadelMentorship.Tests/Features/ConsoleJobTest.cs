@@ -36,7 +36,7 @@ namespace ExadelMentorship.UnitTests.Features
             weatherMock.Setup(x => x.GetTemperatureByCityName(It.IsAny<string>())).Returns(Task.FromResult(10.0));
 
             //Act
-            MainJob job = new MainJob(rwMock.Object, weatherMock.Object);
+            CommandInvoker job = new CommandInvoker(rwMock.Object, weatherMock.Object);
             var result = job.CurrentWeatherExecutor();
 
             //Assert
