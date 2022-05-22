@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
 {
-    public class CurrentWeatherCommandHandler : ICommandHandler<CurrentWeatherCommand>
+    public class CurrentWeatherCommandHandler : ICommandHandler<ICurrentWeatherCommand>
     {
         IRWOperation _rwOperation;
         public CurrentWeatherCommandHandler(IRWOperation rwOperation)
@@ -15,7 +15,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             _rwOperation = rwOperation;
         }
 
-        public async Task Handle(CurrentWeatherCommand currentWeather)
+        public async Task Handle(ICurrentWeatherCommand currentWeather)
         {
             _rwOperation.WriteLine("Please enter the city Name:");
             var city = this.GetCityFromInput();
@@ -28,7 +28,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
 
         private City GetCityFromInput()
         {
-            var inputedLine = Console.ReadLine();
+            var inputedLine = _rwOperation.ReadLine();
             return new City
             {
                 Name = inputedLine
