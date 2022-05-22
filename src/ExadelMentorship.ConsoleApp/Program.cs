@@ -5,7 +5,7 @@ using ExadelMentorship.IntegrationTests;
 using Microsoft.Extensions.Configuration;
 using System;
 
-var job = DI.Resolve<MainJob>();
+var job = DI.Resolve<CommandInvoker>();
 
 await job.Execute();
 

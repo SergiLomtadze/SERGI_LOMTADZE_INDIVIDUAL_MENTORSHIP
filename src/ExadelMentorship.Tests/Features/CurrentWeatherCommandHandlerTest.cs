@@ -1,5 +1,6 @@
 ﻿using ExadelMentorship.BusinessLogic;
 using ExadelMentorship.BusinessLogic.Features;
+using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
 using Moq;
@@ -12,10 +13,10 @@ using Xunit;
 
 namespace ExadelMentorship.UnitTests.Features
 {
-    public class ConsoleJobTest
+    public class CurrentWeatherCommandHandlerTest
     {
         [Fact]
-        public void Execute_WhenCityNameIsCorrect_ReturnsWeatherInfo()
+        public void Handle_WhenCityNameIsCorrect_ReturnsWeatherInfo()
         {
             //Arrange
             string firstOutput = string.Empty;
@@ -32,19 +33,14 @@ namespace ExadelMentorship.UnitTests.Features
             rwMock.Setup(p => p.WriteLine("In Tbilisi temperature is: 10, It's fresh"))
                 .Callback<string>(b => secondOutput = b);
 
-            var weatherMock = new Mock<IWeather>();
-
-            weatherMock.Setup(x => x.ValidateCityName(It.IsAny<City>()))
-                .Callback<City>(b => city = b);
-
+            var weatherMock = new Mock<ICurrentWeatherCommand>();
             weatherMock.Setup(x => x.GetTemperatureByCityName(It.IsAny<string>())).Returns(Task.FromResult(10.0));
 
             //Act
-            MainJob job = new MainJob(rwMock.Object, weatherMock.Object);
-            var result = job.Execute();
+            CurrentWeatherCommandHandler command = new CurrentWeatherCommandHandler(rwMock.Object);
+            var result = command.Handle(weatherMock.Object);
 
             //Assert
-            Assert.Equal("Tbilisi", city.Name);
             Assert.Equal("Please enter the city Name:", firstOutput);
             Assert.Equal("In Tbilisi temperature is: 10, It's fresh", secondOutput);
         }

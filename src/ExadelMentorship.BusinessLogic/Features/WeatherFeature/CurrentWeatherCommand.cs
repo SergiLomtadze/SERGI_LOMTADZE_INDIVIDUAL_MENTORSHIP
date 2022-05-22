@@ -13,28 +13,14 @@ using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
 {
-    public class Weather : IWeather
+    public class CurrentWeatherCommand : ICurrentWeatherCommand, ICommand
     {
 
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public Weather(IHttpClientFactory httpClientFactory)
+        public CurrentWeatherCommand(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
-        }
-
-
-        public void ValidateCityName(City city)
-        {
-            CityValidator validator = new CityValidator();
-            ValidationResult results = validator.Validate(city);
-            if (!results.IsValid)
-            {
-                foreach (var failure in results.Errors)
-                {
-                    throw new NotFoundException($"City was not inputed");
-                }
-            }            
         }
 
         public async Task<double> GetTemperatureByCityName(string name)
