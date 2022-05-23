@@ -1,5 +1,4 @@
 ﻿using ExadelMentorship.BusinessLogic.Exceptions;
-using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Interfaces;
 using System.Threading.Tasks;
 using Xunit;

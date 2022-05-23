@@ -1,12 +1,5 @@
-﻿using ExadelMentorship.BusinessLogic.Exceptions;
-using ExadelMentorship.BusinessLogic.Interfaces;
+﻿using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
