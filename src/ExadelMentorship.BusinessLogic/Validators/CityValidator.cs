@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
-using ExadelMentorship.BusinessLogic.Models;
+﻿using ExadelMentorship.BusinessLogic.Models;
 using FluentValidation;
 
 namespace ExadelMentorship.BusinessLogic.Validators

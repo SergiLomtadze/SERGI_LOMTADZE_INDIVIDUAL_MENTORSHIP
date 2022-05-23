@@ -1,7 +1,5 @@
 ﻿
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
-using ExadelMentorship.BusinessLogic.Interfaces;
-using ExadelMentorship.BusinessLogic.Models;
 using Microsoft.Extensions.Options;
 using Moq;
 using Moq.Protected;
@@ -13,7 +11,7 @@ using Xunit;
 
 namespace ExadelMentorship.UnitTests.Features
 {
-    public class WeatherTest 
+    public class CurrentWeatherServiceTest 
     {
         [Fact]
         public void GetCommentByTemperature_WhenTemperatureLessThenZero_ReturnsDressWarmly()
@@ -34,7 +32,7 @@ namespace ExadelMentorship.UnitTests.Features
             var httpClientFactoryMock = new Mock<IHttpClientFactory>();
             httpClientFactoryMock.Setup(p => p.CreateClient(Options.DefaultName)).Returns(FakeHttpClient("{'main':{'temp':30.0}}"));
 
-            Weather weather = new Weather(httpClientFactoryMock.Object);
+            CurrentWeatherService weather = new CurrentWeatherService(httpClientFactoryMock.Object);
 
             //Act
             var result = await weather.GetTemperatureByCityName(It.IsAny<string>());

@@ -1,42 +1,19 @@
 ﻿using ExadelMentorship.BusinessLogic.Exceptions;
 using ExadelMentorship.BusinessLogic.Interfaces;
-using ExadelMentorship.BusinessLogic.Models;
-using ExadelMentorship.BusinessLogic.Validators;
-using FluentValidation.Results;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-
 using System.Net.Http;
-
 using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
 {
-    public class Weather : IWeather
+    public class CurrentWeatherService : ICurrentWeatherService
     {
-
         private readonly IHttpClientFactory _httpClientFactory;
-
-        public Weather(IHttpClientFactory httpClientFactory)
+        public CurrentWeatherService(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
-
-
-        public void ValidateCityName(City city)
-        {
-            CityValidator validator = new CityValidator();
-            ValidationResult results = validator.Validate(city);
-            if (!results.IsValid)
-            {
-                foreach (var failure in results.Errors)
-                {
-                    throw new NotFoundException($"City was not inputed");
-                }
-            }            
-        }
-
         public async Task<double> GetTemperatureByCityName(string name)
         {
             var url = $"https://api.openweathermap.org/data/2.5/weather?q={name}&appid=7e66067382ed6a093c3e4b6c22940505&units=metric";
@@ -59,6 +36,5 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
                 throw new NotFoundException($"Error: {(int)result.StatusCode}");
             }
         }
-
     }
 }
