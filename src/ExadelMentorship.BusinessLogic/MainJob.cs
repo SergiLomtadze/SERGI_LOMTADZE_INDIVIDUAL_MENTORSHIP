@@ -1,9 +1,6 @@
 ﻿using ExadelMentorship.BusinessLogic.Features;
-using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic
@@ -12,13 +9,11 @@ namespace ExadelMentorship.BusinessLogic
     {
         readonly IRWOperation _rwOperation;
         readonly CommandInvoker _commandInvoker;
-        readonly IServiceProvider  _serviceProvider;
         readonly ICurrentWeatherCommand _currentWeatherCommand;
-        public MainJob(IRWOperation rwOperation, CommandInvoker commandInvoker, IServiceProvider serviceProvider, ICurrentWeatherCommand currentWeatherCommand)
+        public MainJob(IRWOperation rwOperation, CommandInvoker commandInvoker, ICurrentWeatherCommand currentWeatherCommand)
         {
             _rwOperation = rwOperation;
             _commandInvoker = commandInvoker;
-            _serviceProvider = serviceProvider;
             _currentWeatherCommand = currentWeatherCommand;
         }
 
@@ -51,7 +46,6 @@ namespace ExadelMentorship.BusinessLogic
             if (commnad == 1)
             {
                 return _currentWeatherCommand;
-                //return new CurrentWeatherCommand(_serviceProvider.GetRequiredService<IHttpClientFactory>());
             }
             throw new NotImplementedException();
         }
