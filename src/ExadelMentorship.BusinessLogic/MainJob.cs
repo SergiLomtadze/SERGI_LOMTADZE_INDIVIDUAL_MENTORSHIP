@@ -13,11 +13,13 @@ namespace ExadelMentorship.BusinessLogic
         readonly IRWOperation _rwOperation;
         readonly CommandInvoker _commandInvoker;
         readonly IServiceProvider  _serviceProvider;
-        public MainJob(IRWOperation rwOperation, CommandInvoker commandInvoker, IServiceProvider serviceProvider)
+        readonly ICurrentWeatherCommand _currentWeatherCommand;
+        public MainJob(IRWOperation rwOperation, CommandInvoker commandInvoker, IServiceProvider serviceProvider, ICurrentWeatherCommand currentWeatherCommand)
         {
             _rwOperation = rwOperation;
             _commandInvoker = commandInvoker;
             _serviceProvider = serviceProvider;
+            _currentWeatherCommand = currentWeatherCommand;
         }
 
         public Task Execute()
@@ -48,7 +50,8 @@ namespace ExadelMentorship.BusinessLogic
         {
             if (commnad == 1)
             {
-                return new CurrentWeatherCommand(_serviceProvider.GetRequiredService<IHttpClientFactory>());
+                return _currentWeatherCommand;
+                //return new CurrentWeatherCommand(_serviceProvider.GetRequiredService<IHttpClientFactory>());
             }
             throw new NotImplementedException();
         }

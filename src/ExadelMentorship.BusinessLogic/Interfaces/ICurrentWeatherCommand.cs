@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Interfaces
 {
-    public interface ICurrentWeatherCommand
+    public interface ICurrentWeatherCommand: ICommand
     {
         public Task<double> GetTemperatureByCityName(string name);
     }

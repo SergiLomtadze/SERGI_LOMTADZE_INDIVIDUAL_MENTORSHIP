@@ -19,7 +19,7 @@ namespace ExadelMentorship.IntegrationTests
                 .AddSingleton(config)
                 .AddSingleton<MainJob>()
                 .AddSingleton<CommandInvoker>()
-                .AddSingleton<ICommandHandler<CurrentWeatherCommand>, CurrentWeatherCommandHandler>()
+                .AddSingleton<ICommandHandler<ICurrentWeatherCommand>, CurrentWeatherCommandHandler>()
                 .AddSingleton<ICurrentWeatherCommand, CurrentWeatherCommand>()
                 .AddSingleton<IRWOperation, ConsoleOperation>()
                 .AddHttpClient()
