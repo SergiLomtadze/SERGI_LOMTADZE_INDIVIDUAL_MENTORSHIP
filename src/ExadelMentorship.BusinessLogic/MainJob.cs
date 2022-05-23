@@ -1,7 +1,9 @@
 ﻿using ExadelMentorship.BusinessLogic.Features;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic
@@ -46,7 +48,7 @@ namespace ExadelMentorship.BusinessLogic
         {
             if (commnad == 1)
             {
-                return new CurrentWeatherCommand();
+                return new CurrentWeatherCommand(_serviceProvider.GetRequiredService<IHttpClientFactory>());
             }
             throw new NotImplementedException();
         }
