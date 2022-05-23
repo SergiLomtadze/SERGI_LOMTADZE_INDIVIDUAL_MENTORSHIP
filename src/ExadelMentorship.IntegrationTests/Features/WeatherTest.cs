@@ -13,7 +13,7 @@ namespace ExadelMentorship.IntegrationTests.Features
         public async Task GetTemperatureByCityName_WhenCityNameIsCorrect_ReturnsTemperature()
         {
             //Arrange
-            var weather = DI.Resolve<IWeather>();
+            var weather = DI.Resolve<ICurrentWeatherCommand>();
 
             //Act 
             var result = await weather.GetTemperatureByCityName("Tbilisi");
@@ -26,7 +26,7 @@ namespace ExadelMentorship.IntegrationTests.Features
         public async Task GetTemperatureByCityName_WhenCityNameIsNotCorrect_ThrowsException()
         {
             //Arrange
-            var weather = DI.Resolve<IWeather>();
+            var weather = DI.Resolve<ICurrentWeatherCommand>();
 
             //Act and Assert
             await Assert.ThrowsAsync<NotFoundException>(() => weather.GetTemperatureByCityName("AAA"));
