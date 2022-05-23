@@ -15,7 +15,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             _rwOperation = rwOperation;
         }
 
-        public async Task Handle(ICurrentWeatherCommand currentWeather)
+        public async Task Handle(CurrentWeatherCommand currentWeather)
         {
             _rwOperation.WriteLine("Please enter the city Name:");
             var city = this.GetCityFromInput();
