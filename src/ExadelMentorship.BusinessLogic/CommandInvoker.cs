@@ -22,7 +22,12 @@ namespace ExadelMentorship.BusinessLogic
 
         public Task Invoke(ICommand command) 
         {
-            var handler = _serviceProvider.GetRequiredService<ICommandHandler<ICommand>>();
+            return Invoke((dynamic)command);
+        }
+
+        private Task Invoke<T>(T command) where T : ICommand
+        {
+            var handler = _serviceProvider.GetRequiredService<ICommandHandler<T>>();
             return handler.Handle(command);
         }
 
