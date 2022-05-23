@@ -1,53 +1,48 @@
-﻿using ExadelMentorship.BusinessLogic.Exceptions;
-using ExadelMentorship.BusinessLogic.Features;
-using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
+﻿using ExadelMentorship.BusinessLogic.Features;
 using ExadelMentorship.BusinessLogic.Interfaces;
-using ExadelMentorship.BusinessLogic.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic
 {
     public class MainJob
     {
-        IRWOperation _rwOperation;
-        IWeather _weather;
-        public MainJob(IRWOperation rwOperation, IWeather weather)
+        readonly IRWOperation _rwOperation;
+        readonly CommandInvoker _commandInvoker;
+        public MainJob(IRWOperation rwOperation, CommandInvoker commandInvoker)
         {
             _rwOperation = rwOperation;
-            _weather = weather;
+            _commandInvoker = commandInvoker;
         }
 
-        private City GetCityFromInput()
+        public Task Execute()
         {
-            var inputedLine = _rwOperation.ReadLine();
-            return new City
+            while (true)
             {
-                Name = inputedLine
-            };
+                var command = this.GetActionFromUser();
+                _commandInvoker.Invoke(ParseCommand(command));
+                _rwOperation.ReadLine();
+            }
         }
 
-        public async Task Execute()
+        private int GetActionFromUser()
         {
-            _rwOperation.WriteLine("Please enter the city Name:");
-            var city = this.GetCityFromInput();
-
-            try
+            string inputedLine;
+            do
             {
-                _weather.ValidateCityName(city);
-                city.Temperature = await _weather.GetTemperatureByCityName(city.Name);
-                city.Comment = WeatherHelper.GetCommentByTemperature(city.Temperature);
-                _rwOperation.WriteLine($"In {city.Name} temperature is: {city.Temperature}, {city.Comment}");
-            }
-
-            catch (NotFoundException exception)
-            {
-                _rwOperation.WriteLine(exception.Message);
-            }
-
-            _rwOperation.ReadLine();
+                Console.WriteLine("Please enter Number \n" +
+                    "1 - Current weather \n" +
+                    "2 - Future weather \n" +
+                    "0 - Close");
+                inputedLine = Console.ReadLine();
+            } while (!(inputedLine.Equals("0") || inputedLine.Equals("1") || inputedLine.Equals("2")));
+            return Convert.ToInt32(inputedLine);
         }
+
+        private ICommand ParseCommand(int commnad)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
