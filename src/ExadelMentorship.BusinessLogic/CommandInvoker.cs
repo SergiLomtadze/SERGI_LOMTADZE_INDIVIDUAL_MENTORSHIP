@@ -20,11 +20,12 @@ namespace ExadelMentorship.BusinessLogic
             _serviceProvider = serviceProvider;
         }
 
-        public Task Invoke<T>(T command) where T : ICommand
+        public Task Invoke(ICommand command) 
         {
-            var handler = _serviceProvider.GetRequiredService<ICommandHandler<T>>();
+            var handler = _serviceProvider.GetRequiredService<ICommandHandler<ICommand>>();
             return handler.Handle(command);
         }
+
 
     }
 }
