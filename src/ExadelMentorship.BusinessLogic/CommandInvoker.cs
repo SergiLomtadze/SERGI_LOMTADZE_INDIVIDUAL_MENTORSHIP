@@ -1,13 +1,6 @@
-﻿using ExadelMentorship.BusinessLogic.Exceptions;
-using ExadelMentorship.BusinessLogic.Features;
-using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
-using ExadelMentorship.BusinessLogic.Interfaces;
-using ExadelMentorship.BusinessLogic.Models;
+﻿using ExadelMentorship.BusinessLogic.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic
@@ -22,10 +15,10 @@ namespace ExadelMentorship.BusinessLogic
 
         public Task Invoke(ICommand command) 
         {
-            return Invoke((dynamic)command);
+            return InvokeCommand((dynamic)command);
         }
 
-        private Task Invoke<T>(T command) where T : ICommand
+        private Task InvokeCommand<T>(T command) where T : ICommand
         {
             var handler = _serviceProvider.GetRequiredService<ICommandHandler<T>>();
             return handler.Handle(command);
