@@ -48,7 +48,7 @@ namespace ExadelMentorship.BusinessLogic
         {
             if (commnad == 1)
             {
-                return new CurrentWeatherCommand(_serviceProvider.GetRequiredService<IHttpClientFactory>());
+                return new CurrentWeatherCommand();
             }
             throw new NotImplementedException();
         }
