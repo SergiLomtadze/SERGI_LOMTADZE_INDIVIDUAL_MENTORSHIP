@@ -4,6 +4,8 @@ using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Threading.Tasks;
 
 namespace ExadelMentorship.IntegrationTests
 {
@@ -18,6 +20,7 @@ namespace ExadelMentorship.IntegrationTests
             return new ServiceCollection()
                 .AddSingleton(config)
                 .AddSingleton<MainJob>()
+                .AddSingleton<CommandInvoker>()
                 .AddSingleton<IWeather, Weather>()
                 .AddSingleton<IRWOperation, ConsoleOperation>()
                 .AddHttpClient()

@@ -12,12 +12,12 @@ namespace ExadelMentorship.BusinessLogic
 {
     public class MainJob
     {
-        IRWOperation _rwOperation;
-        IWeather _weather;
-        public MainJob(IRWOperation rwOperation, IWeather weather)
+        readonly IRWOperation _rwOperation;
+        readonly CommandInvoker _commandInvoker;
+        public MainJob(IRWOperation rwOperation, CommandInvoker commandInvoker)
         {
             _rwOperation = rwOperation;
-            _weather = weather;
+            _commandInvoker = commandInvoker;
         }
 
         private City GetCityFromInput()
