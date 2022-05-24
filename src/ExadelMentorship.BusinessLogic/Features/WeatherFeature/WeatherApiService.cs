@@ -1,25 +1,44 @@
 ﻿using ExadelMentorship.BusinessLogic.Exceptions;
-using ExadelMentorship.BusinessLogic.Interfaces.Weather;
+using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
+namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
 {
-    public class FutureWeatherService : IFutureWeatherService
+    public class WeatherApiService : IWeatherApiService
     {
         private readonly IHttpClientFactory _httpClientFactory;
-
-        public FutureWeatherService(IHttpClientFactory httpClientFactory)
+        public WeatherApiService(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
+        public async Task<double> GetTemperatureByCityName(string name)
+        {
+            var url = $"https://api.openweathermap.org/data/2.5/weather?q={name}&appid=7e66067382ed6a093c3e4b6c22940505&units=metric";
+            var httpClient = _httpClientFactory.CreateClient();
+            HttpResponseMessage result = await httpClient.GetAsync(url);
 
+            if ((int)result.StatusCode == 404)
+            {
+                throw new NotFoundException($"City: {name} was not found");
+            }
+            else if (result.IsSuccessStatusCode)
+            {
+                var json = result.Content.ReadAsStringAsync().Result;
+                JObject obj = JsonConvert.DeserializeObject<JObject>(json);
+                JObject mainObj = obj["main"] as JObject;
+                return (double)mainObj["temp"];
+            }
+            else
+            {
+                throw new NotFoundException($"Error: {(int)result.StatusCode}");
+            }
+        }
         public async Task<Coordinate> GetCoordinateByCityName(string name)
         {
             await WeatherHelper.CityNameExistenceValidation(name, _httpClientFactory);
@@ -50,7 +69,6 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
                 throw new NotFoundException($"Error: {(int)result.StatusCode}");
             }
         }
-
         public async Task<List<City>> GetFutureTemperatureByCoordinateAndDayQuantity(Coordinate coordinate, int day)
         {
             var url = $"https://api.openweathermap.org/data/2.5/onecall?lat={coordinate.Latitude}&lon={coordinate.Longitude}&exclude=current,minutely,hourly,alerts&appid=7e66067382ed6a093c3e4b6c22940505&units=metric";

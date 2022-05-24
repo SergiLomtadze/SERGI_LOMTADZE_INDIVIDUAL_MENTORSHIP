@@ -1,6 +1,5 @@
 ﻿using ExadelMentorship.BusinessLogic.Exceptions;
 using ExadelMentorship.BusinessLogic.Interfaces;
-using ExadelMentorship.BusinessLogic.Interfaces.Weather;
 using ExadelMentorship.BusinessLogic.Models;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -11,12 +10,12 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
     public class FutureWeatherCommandHandler : ICommandHandler<FutureWeatherCommand>
     {
         IRWOperation _rwOperation;
-        private readonly IFutureWeatherService _futureWeatherService;
+        private readonly IWeatherApiService _weatherApiService;
         private readonly IConfiguration _configuration;
-        public FutureWeatherCommandHandler(IRWOperation rwOperation, IFutureWeatherService futureWeatherService, IConfiguration configuration)
+        public FutureWeatherCommandHandler(IRWOperation rwOperation, IWeatherApiService weatherApiService, IConfiguration configuration)
         {
             _rwOperation = rwOperation;
-            _futureWeatherService = futureWeatherService;
+            _weatherApiService = weatherApiService;
             _configuration = configuration;
         }
 
@@ -26,13 +25,13 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
                 var inputedCity = this.GetCityFromInput();
                 WeatherHelper.ValidateCityName(inputedCity);
 
-                var coordinate = await _futureWeatherService.GetCoordinateByCityName(inputedCity.Name);
+                var coordinate = await _weatherApiService.GetCoordinateByCityName(inputedCity.Name);
 
                 _rwOperation.WriteLine("Please enter interested days quantity:");
                 var inputedDayQuantity = _rwOperation.ReadLine();
                 var dayQuantity = DayQuantityValidation(inputedDayQuantity);
                 
-                var cityList = await _futureWeatherService.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, dayQuantity);
+                var cityList = await _weatherApiService.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, dayQuantity);
 
                 _rwOperation.WriteLine($"{inputedCity.Name} weather forecast:");
                 foreach (var city in cityList)
