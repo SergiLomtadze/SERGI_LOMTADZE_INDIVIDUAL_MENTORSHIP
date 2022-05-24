@@ -9,6 +9,6 @@ namespace ExadelMentorship.BusinessLogic.Interfaces.Weather
     public interface IFutureWeatherService
     {
         public Task <Coordinate> GetCoordinateByCityName(string name);
-        public Task <List<City>> GetFutureTemperatureByCoordinate(Coordinate coordinate, int day);
+        public Task <List<City>> GetFutureTemperatureByCoordinateAndDayQuantity(Coordinate coordinate, int day);
     }
 }
