@@ -32,7 +32,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
                 var inputedDayQuantity = _rwOperation.ReadLine();
                 var dayQuantity = DayQuantityValidation(inputedDayQuantity);
                 
-                var cityList = await _futureWeatherService.GetFutureTemperatureByCoordinate(coordinate, dayQuantity);
+                var cityList = await _futureWeatherService.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, dayQuantity);
 
                 _rwOperation.WriteLine($"{inputedCity.Name} weather forecast:");
                 foreach (var city in cityList)

@@ -51,7 +51,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
             }
         }
 
-        public async Task<List<City>> GetFutureTemperatureByCoordinate(Coordinate coordinate, int day)
+        public async Task<List<City>> GetFutureTemperatureByCoordinateAndDayQuantity(Coordinate coordinate, int day)
         {
             var url = $"https://api.openweathermap.org/data/2.5/onecall?lat={coordinate.Latitude}&lon={coordinate.Longitude}&exclude=current,minutely,hourly,alerts&appid=7e66067382ed6a093c3e4b6c22940505&units=metric";
             var httpClient = _httpClientFactory.CreateClient();
