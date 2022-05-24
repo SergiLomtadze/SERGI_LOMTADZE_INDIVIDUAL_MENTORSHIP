@@ -2,6 +2,8 @@
 using ExadelMentorship.BusinessLogic.Models;
 using ExadelMentorship.BusinessLogic.Validators;
 using FluentValidation.Results;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
 {
@@ -37,6 +39,18 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
                 {
                     throw new NotFoundException($"City was not inputed");
                 }
+            }
+        }
+
+        public static async Task CityNameExistenceValidation(string name, IHttpClientFactory httpClientFactory)
+        {
+            var url = $"https://api.openweathermap.org/data/2.5/weather?q={name}&appid=7e66067382ed6a093c3e4b6c22940505&units=metric";
+            var httpClient = httpClientFactory.CreateClient();
+            HttpResponseMessage result = await httpClient.GetAsync(url);
+
+            if ((int)result.StatusCode == 404)
+            {
+                throw new NotFoundException($"City: {name} was not found");
             }
         }
     }
