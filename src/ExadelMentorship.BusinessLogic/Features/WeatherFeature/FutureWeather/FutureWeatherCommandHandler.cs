@@ -2,6 +2,7 @@
 using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Interfaces.Weather;
 using ExadelMentorship.BusinessLogic.Models;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Threading.Tasks;
 
@@ -11,25 +12,27 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
     {
         IRWOperation _rwOperation;
         private readonly IFutureWeatherService _futureWeatherService;
-        public FutureWeatherCommandHandler(IRWOperation rwOperation, IFutureWeatherService futureWeatherService)
+        private readonly IConfiguration _configuration;
+        public FutureWeatherCommandHandler(IRWOperation rwOperation, IFutureWeatherService futureWeatherService, IConfiguration configuration)
         {
             _rwOperation = rwOperation;
             _futureWeatherService = futureWeatherService;
+            _configuration = configuration;
         }
 
         public async Task Handle(FutureWeatherCommand futureWeather)
             {
                 _rwOperation.WriteLine("Please enter the city Name:");
                 var inputedCity = this.GetCityFromInput();
-                await _futureWeatherService.GetCoordinateByCityName(inputedCity.Name);
+                WeatherHelper.ValidateCityName(inputedCity);
+
+                var coordinate = await _futureWeatherService.GetCoordinateByCityName(inputedCity.Name);
 
                 _rwOperation.WriteLine("Please enter interested days quantity:");
-                var day = _rwOperation.ReadLine();
-                DayQuantityValidation(day);
-
-
-                await _futureWeatherService.GetFutureTemperatureByCoordinate(Int32.Parse(day));
-                var cityList = _futureWeatherService.GetCityList();
+                var inputedDayQuantity = _rwOperation.ReadLine();
+                var dayQuantity = DayQuantityValidation(inputedDayQuantity);
+                
+                var cityList = await _futureWeatherService.GetFutureTemperatureByCoordinate(coordinate, dayQuantity);
 
                 _rwOperation.WriteLine($"{inputedCity.Name} weather forecast:");
                 foreach (var city in cityList)
@@ -40,31 +43,34 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
             }
 
         private City GetCityFromInput()
+        {
+            var inputedLine = _rwOperation.ReadLine();
+            return new City
             {
-                var inputedLine = Console.ReadLine();
-                return new City
-                {
-                    Name = inputedLine
-                };
+                Name = inputedLine
+            };
+        }
+
+        private int DayQuantityValidation(string dayQuantity)
+        {
+            int day = 0;
+            try
+            {
+                day = Int32.Parse(dayQuantity);
+            }
+            catch (Exception)
+            {
+                throw new FormatException("Day quantity should be number");
             }
 
-        private void DayQuantityValidation(string dayQuantity)
+            int min = Int32.Parse(_configuration["MinForecastDay"]);
+            int max = Int32.Parse(_configuration["MaxForecastDay"]);
+            if (min > day || max < day)
             {
-                try
-                {
-                    var day = Int32.Parse(dayQuantity);
-                    int min = Int32.Parse(_configuration["MinForecastDay"]);
-                    int max = Int32.Parse(_configuration["MaxForecastDay"]);
-                    if (min > day || max < day)
-                    {
-                        throw new NotFoundException("Requested day quantity is not in configuration range");
-                    }
-                }
-                catch (Exception ex)
-                {
-
-                    throw new NotFoundException(ex.ToString());
-                }
+                throw new NotFoundException("Requested day quantity is not in configuration range");
             }
+            return day;
+
+        }
     }
 }

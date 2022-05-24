@@ -1,5 +1,7 @@
-﻿using ExadelMentorship.BusinessLogic.Features;
+﻿using ExadelMentorship.BusinessLogic.Exceptions;
+using ExadelMentorship.BusinessLogic.Features;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
+using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
 using ExadelMentorship.BusinessLogic.Interfaces;
 using System;
 using System.Threading.Tasks;
@@ -10,22 +12,39 @@ namespace ExadelMentorship.BusinessLogic
     {
         readonly IRWOperation _rwOperation;
         readonly CommandInvoker _commandInvoker;
-        readonly IServiceProvider  _serviceProvider;
-        public MainJob(IRWOperation rwOperation, CommandInvoker commandInvoker, IServiceProvider serviceProvider)
+        public MainJob(IRWOperation rwOperation, CommandInvoker commandInvoker)
         {
             _rwOperation = rwOperation;
             _commandInvoker = commandInvoker;
-            _serviceProvider = serviceProvider;
         }
 
-        public Task Execute()
+        public async Task Execute()
         {
-            while (true)
+            bool condition = true;
+            do
             {
                 var command = this.GetActionFromUser();
-                _commandInvoker.Invoke(ParseCommand(command));
-                _rwOperation.ReadLine();
-            }
+                if (command == 0)
+                {
+                    condition = false;
+                }
+                else
+                {
+                     try
+                     {
+                        await _commandInvoker.Invoke(ParseCommand(command));
+                        _rwOperation.ReadLine();
+                     } 
+                      catch (NotFoundException ex)
+                     {
+                        _rwOperation.WriteLine($"{ex.Message.ToString()} \n");
+                     }
+                    catch (FormatException ex)
+                    {
+                        _rwOperation.WriteLine($"{ex.Message} \n");
+                    }
+                }
+            } while (condition);
         }
 
         private int GetActionFromUser()
@@ -33,20 +52,24 @@ namespace ExadelMentorship.BusinessLogic
             string inputedLine;
             do
             {
-                Console.WriteLine("Please enter Number \n" +
+                _rwOperation.WriteLine("Please enter Number \n" +
                     "1 - Current weather \n" +
                     "2 - Future weather \n" +
                     "0 - Close");
-                inputedLine = Console.ReadLine();
+                inputedLine = _rwOperation.ReadLine();
             } while (!(inputedLine.Equals("0") || inputedLine.Equals("1") || inputedLine.Equals("2")));
             return Convert.ToInt32(inputedLine);
         }
 
         private ICommand ParseCommand(int commnad)
-        {
+         {
             if (commnad == 1)
             {
                 return new CurrentWeatherCommand();
+            }
+            if (commnad == 2)
+            {
+                return new FutureWeatherCommand();
             }
             throw new NotImplementedException();
         }

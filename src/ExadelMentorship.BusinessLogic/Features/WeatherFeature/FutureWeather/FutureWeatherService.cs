@@ -11,61 +11,47 @@ using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
 {
-    internal class FutureWeatherService : IFutureWeatherService
+    public class FutureWeatherService : IFutureWeatherService
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        public List<City> cityList;
-        private Coordinate coordinate;
-        private string cityName;
 
         public FutureWeatherService(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
-            cityList = new List<City>();
-            coordinate = new Coordinate();
         }
 
-        public List<City> GetCityList()
+        public async Task<Coordinate> GetCoordinateByCityName(string name)
         {
-            return cityList;
-        }
-
-        public async Task GetCoordinateByCityName(string name)
-        {
-            cityName = name;
-            await CityNameValidation(cityName);
+            await WeatherHelper.CityNameExistenceValidation(name, _httpClientFactory);
 
             var url = $"http://api.openweathermap.org/geo/1.0/direct?q={name}&limit=1&appid=7e66067382ed6a093c3e4b6c22940505";
             var httpClient = _httpClientFactory.CreateClient();
             HttpResponseMessage result = await httpClient.GetAsync(url);
 
-            if ((int)result.StatusCode == 404)
-            {
-                throw new NotFoundException($"City: {name} was not found");
-            }
-            else if (result.IsSuccessStatusCode)
+            if (result.IsSuccessStatusCode)
             {
                 var json = result.Content.ReadAsStringAsync().Result;
                 JObject[] obj = JsonConvert.DeserializeObject<JObject[]>(json);
                 if (obj.Length > 0)
                 {
-                    coordinate.Latitude = (double)obj[0]["lat"];
-                    coordinate.Longitude = (double)obj[0]["lon"];
+                    return new Coordinate
+                    {
+                        Latitude = (double)obj[0]["lat"],
+                        Longitude = (double)obj[0]["lon"]
+                    };
                 }
                 else
                 {
                     throw new NotFoundException("Incorrect Name");
                 }
-
             }
             else
             {
                 throw new NotFoundException($"Error: {(int)result.StatusCode}");
             }
-
         }
 
-        public async Task GetFutureTemperatureByCoordinate(int day)
+        public async Task<List<City>> GetFutureTemperatureByCoordinate(Coordinate coordinate, int day)
         {
             var url = $"https://api.openweathermap.org/data/2.5/onecall?lat={coordinate.Latitude}&lon={coordinate.Longitude}&exclude=current,minutely,hourly,alerts&appid=7e66067382ed6a093c3e4b6c22940505&units=metric";
             var httpClient = _httpClientFactory.CreateClient();
@@ -73,6 +59,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
 
             if (result.IsSuccessStatusCode)
             {
+                var cityList = new List<City>();
                 var json = result.Content.ReadAsStringAsync().Result;
                 JObject obj = JsonConvert.DeserializeObject<JObject>(json);
                 for (int i = 0; i < day; i++)
@@ -87,28 +74,16 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
 
                     cityList.Add(new City
                     {
-                        Name = cityName,
                         Temperature = temp,
                         Comment = WeatherHelper.GetCommentByTemperature(temp),
                         Date = start
                     });
                 }
+                return cityList;
             }
             else
             {
                 throw new NotFoundException($"Error: {(int)result.StatusCode}");
-            }
-        }
-
-        private async Task CityNameValidation(string name)
-        {
-            var url = $"https://api.openweathermap.org/data/2.5/weather?q={name}&appid=7e66067382ed6a093c3e4b6c22940505&units=metric";
-            var httpClient = _httpClientFactory.CreateClient();
-            HttpResponseMessage result = await httpClient.GetAsync(url);
-
-            if ((int)result.StatusCode == 404)
-            {
-                throw new NotFoundException($"City: {name} was not found");
             }
         }
     }
