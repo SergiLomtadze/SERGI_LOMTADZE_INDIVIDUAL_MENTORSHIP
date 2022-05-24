@@ -28,7 +28,7 @@ namespace ExadelMentorship.UnitTests.Features
             rwMock.Setup(p => p.WriteLine("In Tbilisi temperature is: 10, It's fresh"))
                 .Callback<string>(b => secondOutput = b);
 
-            var currentWeatherServiceMock = new Mock<ICurrentWeatherService>();
+            var currentWeatherServiceMock = new Mock<IWeatherApiService>();
 
             currentWeatherServiceMock.Setup(x => x.GetTemperatureByCityName(It.IsAny<string>())).Returns(Task.FromResult(10.0));
 

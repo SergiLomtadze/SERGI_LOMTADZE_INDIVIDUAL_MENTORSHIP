@@ -7,11 +7,11 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
     public class CurrentWeatherCommandHandler : ICommandHandler<CurrentWeatherCommand>
     {
         private readonly IRWOperation _rwOperation;
-        private readonly ICurrentWeatherService _currentWeatherService;
-        public CurrentWeatherCommandHandler(IRWOperation rwOperation, ICurrentWeatherService currentWeatherService)
+        private readonly IWeatherApiService _weatherApiService;
+        public CurrentWeatherCommandHandler(IRWOperation rwOperation, IWeatherApiService weatherApiService)
         {
             _rwOperation = rwOperation;
-            _currentWeatherService = currentWeatherService;
+            _weatherApiService = weatherApiService;
         }
 
         public async Task Handle(CurrentWeatherCommand currentWeatherCommand)
@@ -20,7 +20,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             var city = this.GetCityFromInput();
 
             WeatherHelper.ValidateCityName(city);
-            city.Temperature = await _currentWeatherService.GetTemperatureByCityName(city.Name);
+            city.Temperature = await _weatherApiService.GetTemperatureByCityName(city.Name);
             city.Comment = WeatherHelper.GetCommentByTemperature(city.Temperature);
             _rwOperation.WriteLine($"In {city.Name} temperature is: {city.Temperature}, {city.Comment}");
         }

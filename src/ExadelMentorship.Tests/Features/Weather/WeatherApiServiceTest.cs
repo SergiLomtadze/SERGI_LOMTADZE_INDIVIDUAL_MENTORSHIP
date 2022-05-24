@@ -1,19 +1,44 @@
-﻿using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
+﻿
+using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Models;
 using Microsoft.Extensions.Options;
 using Moq;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace ExadelMentorship.UnitTests.Features.FutureWeather
+namespace ExadelMentorship.UnitTests.Features
 {
-    public class FutureWeatherServiceTest
+    public class WeatherApiServiceTest 
     {
+        [Fact]
+        public void GetCommentByTemperature_WhenTemperatureLessThenZero_ReturnsDressWarmly()
+        {
+            //Arrange
+
+            //Act
+            var result = WeatherHelper.GetCommentByTemperature(-5);
+
+            //Assert
+            Assert.Equal("Dress warmly",result);
+        }
+
+        [Fact]
+        public async Task GetTemperatureByCityName_WhenCityNameIsCorrect_ReturnsTemperature()
+        {
+            //Arrange
+            var httpClientFactoryMock = new Mock<IHttpClientFactory>();
+            httpClientFactoryMock.Setup(p => p.CreateClient(Options.DefaultName)).Returns(HttpMock.FakeHttpClient("{'main':{'temp':30.0}}"));
+
+            //Act
+            WeatherApiService currentWeather = new WeatherApiService(httpClientFactoryMock.Object);
+            var result = await currentWeather.GetTemperatureByCityName(It.IsAny<string>());
+
+            //Assert
+            Assert.Equal(30.0, result);
+        }
+
         [Fact]
         public async Task GetCoordinateByCityName_WhenCityNameIsCorrect_ReturnsCoordinate()
         {
@@ -26,8 +51,8 @@ namespace ExadelMentorship.UnitTests.Features.FutureWeather
                 Longitude = 44.8014495,
             };
             //Act
-            FutureWeatherService futureWeather = new FutureWeatherService(httpClientFactoryMock.Object);
-            var result = await futureWeather.GetCoordinateByCityName(It.IsAny<string>());
+            WeatherApiService weatherApiService = new WeatherApiService(httpClientFactoryMock.Object);
+            var result = await weatherApiService.GetCoordinateByCityName(It.IsAny<string>());
 
 
             //Assert
@@ -55,17 +80,19 @@ namespace ExadelMentorship.UnitTests.Features.FutureWeather
             {
                 Temperature = 10,
                 Comment = "It's fresh",
-            }) ;
+            });
 
             //Act
-            FutureWeatherService futureWeather = new FutureWeatherService(httpClientFactoryMock.Object);
-            var result = await futureWeather.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, 1);
+            WeatherApiService weatherApiService = new WeatherApiService(httpClientFactoryMock.Object);
+            var result = await weatherApiService.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, 1);
 
 
             //Assert
             Assert.Equal(cityList[0].Temperature, result[0].Temperature);
             Assert.Equal(cityList[0].Comment, result[0].Comment);
         }
+
+
 
     }
 }
