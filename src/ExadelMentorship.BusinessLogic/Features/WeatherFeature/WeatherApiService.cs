@@ -30,7 +30,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             }
             else if (result.IsSuccessStatusCode)
             {
-                var json = result.Content.ReadAsStringAsync().Result;
+                var json = await result.Content.ReadAsStringAsync();
                 JObject obj = JsonConvert.DeserializeObject<JObject>(json);
                 JObject mainObj = obj["main"] as JObject;
                 return (double)mainObj["temp"];
@@ -50,7 +50,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
 
             if (result.IsSuccessStatusCode)
             {
-                var json = result.Content.ReadAsStringAsync().Result;
+                var json = await result.Content.ReadAsStringAsync();
                 JObject[] obj = JsonConvert.DeserializeObject<JObject[]>(json);
                 if (obj.Length > 0)
                 {
@@ -79,7 +79,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             if (result.IsSuccessStatusCode)
             {
                 var cityList = new List<City>();
-                var json = result.Content.ReadAsStringAsync().Result;
+                var json = await result.Content.ReadAsStringAsync();
                 JObject obj = JsonConvert.DeserializeObject<JObject>(json);
                 for (int i = 0; i < day; i++)
                 {
@@ -116,17 +116,11 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             if ((int)result.StatusCode == 404)
             {
                 watch.Stop();
-                return new MaxTempCityInfo
-                {
-                    Name = name,
-                    ErrorMessage = $"City: {name} was not found",
-                    DurationTime = watch.ElapsedMilliseconds
-                };
-                //throw new NotFoundException($"City: {name} was not found");
+                throw new NotFoundException($"City: {name}. Error: City {name} was not found. Timer:{watch.ElapsedMilliseconds}");
             }
             else if (result.IsSuccessStatusCode)
             {
-                var json = result.Content.ReadAsStringAsync().Result;
+                var json = await result.Content.ReadAsStringAsync();
                 JObject obj = JsonConvert.DeserializeObject<JObject>(json);
                 JObject mainObj = obj["main"] as JObject;
                 watch.Stop();
@@ -140,13 +134,8 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             else
             {
                 watch.Stop();
-                return new MaxTempCityInfo
-                {
-                    Name = name,
-                    ErrorMessage = $"Error: {(int)result.StatusCode}",
-                    DurationTime = watch.ElapsedMilliseconds
-                };
-                //throw new NotFoundException($"Error: {(int)result.StatusCode}");
+                throw new NotFoundException($"City: {name}. Error: {(int)result.StatusCode}. Timer:{watch.ElapsedMilliseconds}");
+
             }
         }
     }

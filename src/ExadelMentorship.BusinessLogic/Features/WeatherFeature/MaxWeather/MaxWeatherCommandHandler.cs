@@ -1,4 +1,5 @@
-﻿using ExadelMentorship.BusinessLogic.Interfaces;
+﻿using ExadelMentorship.BusinessLogic.Exceptions;
+using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -26,40 +27,40 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather
         {
             _rwOperation.WriteLine("Please enter the cities:");
             var cities = this.GetCitiesFromInput();
-
-            var tasks = new List<Task<MaxTempCityInfo>>();
-            foreach (var city in cities)
+            try
             {
-                tasks.Add(_weatherApiService.GetTemperatureByCityNameForMaxTemp(city));
-            }
+                var tasks = new List<Task<MaxTempCityInfo>>();
+                foreach (var city in cities)
+                {
+                    tasks.Add(_weatherApiService.GetTemperatureByCityNameForMaxTemp(city));
+                }
 
-            await Task.WhenAll(tasks);
-            var maxTempCityInfoList = new List<MaxTempCityInfo>();
-            foreach (var task in tasks)
-            {
-                maxTempCityInfoList.Add(task.Result);
-            }
-            
-            var maxTempCityInfo = maxTempCityInfoList.OrderByDescending(x => x.Temperature).First();
+                await Task.WhenAll(tasks);
+                var maxTempCityInfoList = new List<MaxTempCityInfo>();
+                foreach (var task in tasks)
+                {
+                    maxTempCityInfoList.Add(await task);
+                }
 
-            _rwOperation.WriteLine($"City with the highest temperature {maxTempCityInfo.Temperature} C: {maxTempCityInfo.Name}");
-            
-            var statistic = bool.Parse(_configuration["Statistic"]);
-            if (statistic)
-            {
-                if (maxTempCityInfo.ErrorMessage is null)
+                var maxTempCityInfo = maxTempCityInfoList.OrderByDescending(x => x.Temperature).First();
+
+                _rwOperation.WriteLine($"City with the highest temperature {maxTempCityInfo.Temperature} C: {maxTempCityInfo.Name}");
+
+                var statistic = bool.Parse(_configuration["Statistic"]);
+                if (statistic)
                 {
                     _rwOperation.WriteLine($"City: {maxTempCityInfo.Name}. {maxTempCityInfo.Temperature}. Timer:{maxTempCityInfo.DurationTime}");
                 }
-                else
-                {
-                    _rwOperation.WriteLine($"City: {maxTempCityInfo.Name}. Error: {maxTempCityInfo.ErrorMessage}. Timer:{maxTempCityInfo.DurationTime}");
-                }
             }
+            catch (NotFoundException ex)
+            {
+                _rwOperation.WriteLine(ex.Message);
+            }
+
                 
         }
 
-        private List<string> GetCitiesFromInput()
+        private IEnumerable<string> GetCitiesFromInput()
         {
             var cities = new List<string>();
             var inputedLine = _rwOperation.ReadLine();
