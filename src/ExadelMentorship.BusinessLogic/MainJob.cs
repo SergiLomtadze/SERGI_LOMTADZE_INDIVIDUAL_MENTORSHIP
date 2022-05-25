@@ -2,6 +2,7 @@
 using ExadelMentorship.BusinessLogic.Features;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
+using ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather;
 using ExadelMentorship.BusinessLogic.Interfaces;
 using System;
 using System.Threading.Tasks;
@@ -39,10 +40,10 @@ namespace ExadelMentorship.BusinessLogic
                      {
                         _rwOperation.WriteLine($"{ex.Message.ToString()} \n");
                      }
-                    catch (FormatException ex)
-                    {
+                     catch (FormatException ex)
+                     {
                         _rwOperation.WriteLine($"{ex.Message} \n");
-                    }
+                     }
                 }
             } while (condition);
         }
@@ -55,9 +56,10 @@ namespace ExadelMentorship.BusinessLogic
                 _rwOperation.WriteLine("Please enter Number \n" +
                     "1 - Current weather \n" +
                     "2 - Future weather \n" +
+                    "3 - Max weather \n" +
                     "0 - Close");
                 inputedLine = _rwOperation.ReadLine();
-            } while (!(inputedLine.Equals("0") || inputedLine.Equals("1") || inputedLine.Equals("2")));
+            } while (!(inputedLine.Equals("0") || inputedLine.Equals("1") || inputedLine.Equals("2") || inputedLine.Equals("3")));
             return Convert.ToInt32(inputedLine);
         }
 
@@ -70,6 +72,10 @@ namespace ExadelMentorship.BusinessLogic
             if (commnad == 2)
             {
                 return new FutureWeatherCommand();
+            }
+            if (commnad == 3)
+            {
+                return new MaxWeatherCommand();
             }
             throw new NotImplementedException();
         }
