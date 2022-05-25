@@ -53,7 +53,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather
                 }
                 else
                 {
-                    _rwOperation.WriteLine($"City: {maxTempCityInfo.Name}. Error: {maxTempCityInfo.ErrorMessage}");
+                    _rwOperation.WriteLine($"City: {maxTempCityInfo.Name}. Error: {maxTempCityInfo.ErrorMessage}. Timer:{maxTempCityInfo.DurationTime}");
                 }
             }
                 

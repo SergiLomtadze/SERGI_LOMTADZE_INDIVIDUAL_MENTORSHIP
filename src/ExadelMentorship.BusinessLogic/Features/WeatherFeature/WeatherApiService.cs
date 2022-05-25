@@ -115,10 +115,12 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
 
             if ((int)result.StatusCode == 404)
             {
+                watch.Stop();
                 return new MaxTempCityInfo
                 {
                     Name = name,
-                    ErrorMessage = $"City: {name} was not found"
+                    ErrorMessage = $"City: {name} was not found",
+                    DurationTime = watch.ElapsedMilliseconds
                 };
                 //throw new NotFoundException($"City: {name} was not found");
             }
@@ -137,12 +139,14 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             }
             else
             {
+                watch.Stop();
                 return new MaxTempCityInfo
                 {
                     Name = name,
-                    ErrorMessage = $"Error: {(int)result.StatusCode}"
+                    ErrorMessage = $"Error: {(int)result.StatusCode}",
+                    DurationTime = watch.ElapsedMilliseconds
                 };
-                //3throw new NotFoundException($"Error: {(int)result.StatusCode}");
+                //throw new NotFoundException($"Error: {(int)result.StatusCode}");
             }
         }
     }
