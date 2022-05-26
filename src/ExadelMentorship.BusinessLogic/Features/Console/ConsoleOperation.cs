@@ -12,9 +12,9 @@ namespace ExadelMentorship.BusinessLogic
             return Console.ReadLine();
         }
 
-        public void WriteLine(string text)
+        public void WriteLine(string format, params object[] arg)
         {
-            Console.WriteLine(text);
+            Console.WriteLine(format, arg);
         }
     }
 }
