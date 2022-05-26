@@ -61,7 +61,7 @@ namespace ExadelMentorship.BusinessLogic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to City with the highest temperature {0} C: {1}.
+        ///   Looks up a localized string similar to City with the highest temperature {0} C: {1}, Successful request count: {2}, failed: {3}.”.
         /// </summary>
         internal static string S1 {
             get {
