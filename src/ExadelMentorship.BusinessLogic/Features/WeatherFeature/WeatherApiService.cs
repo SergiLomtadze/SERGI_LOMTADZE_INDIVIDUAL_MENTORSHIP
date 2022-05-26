@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -29,7 +30,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             }
             else if (result.IsSuccessStatusCode)
             {
-                var json = result.Content.ReadAsStringAsync().Result;
+                var json = await result.Content.ReadAsStringAsync();
                 JObject obj = JsonConvert.DeserializeObject<JObject>(json);
                 JObject mainObj = obj["main"] as JObject;
                 return (double)mainObj["temp"];
@@ -49,7 +50,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
 
             if (result.IsSuccessStatusCode)
             {
-                var json = result.Content.ReadAsStringAsync().Result;
+                var json = await result.Content.ReadAsStringAsync();
                 JObject[] obj = JsonConvert.DeserializeObject<JObject[]>(json);
                 if (obj.Length > 0)
                 {
@@ -78,7 +79,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             if (result.IsSuccessStatusCode)
             {
                 var cityList = new List<City>();
-                var json = result.Content.ReadAsStringAsync().Result;
+                var json = await result.Content.ReadAsStringAsync();
                 JObject obj = JsonConvert.DeserializeObject<JObject>(json);
                 for (int i = 0; i < day; i++)
                 {
@@ -102,6 +103,39 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             else
             {
                 throw new NotFoundException($"Error: {(int)result.StatusCode}");
+            }
+        }
+        public async Task<MaxTempCityInfo> GetTemperatureByCityNameForMaxTemp(string name)
+        {
+            var watch = new Stopwatch();
+            watch.Start();
+            var url = $"https://api.openweathermap.org/data/2.5/weather?q={name}&appid=7e66067382ed6a093c3e4b6c22940505&units=metric";
+            var httpClient = _httpClientFactory.CreateClient();
+            HttpResponseMessage result = await httpClient.GetAsync(url);
+
+            if ((int)result.StatusCode == 404)
+            {
+                watch.Stop();
+                throw new NotFoundException($"City: {name}. Error: City {name} was not found. Timer:{watch.ElapsedMilliseconds}");
+            }
+            else if (result.IsSuccessStatusCode)
+            {
+                var json = await result.Content.ReadAsStringAsync();
+                JObject obj = JsonConvert.DeserializeObject<JObject>(json);
+                JObject mainObj = obj["main"] as JObject;
+                watch.Stop();
+                return new MaxTempCityInfo
+                {
+                    Name = name,
+                    Temperature = (double)mainObj["temp"],
+                    DurationTime  = watch.ElapsedMilliseconds
+                };
+            }
+            else
+            {
+                watch.Stop();
+                throw new NotFoundException($"City: {name}. Error: {(int)result.StatusCode}. Timer:{watch.ElapsedMilliseconds}");
+
             }
         }
     }

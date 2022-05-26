@@ -24,6 +24,5 @@ namespace ExadelMentorship.BusinessLogic
             return handler.Handle(command);
         }
 
-
     }
 }
