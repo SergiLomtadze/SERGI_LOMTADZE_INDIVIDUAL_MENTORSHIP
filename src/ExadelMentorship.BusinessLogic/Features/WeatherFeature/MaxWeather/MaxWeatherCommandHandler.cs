@@ -4,6 +4,7 @@ using ExadelMentorship.BusinessLogic.Models;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather
         IRWOperation _rwOperation;
         private readonly IWeatherApiService _weatherApiService;
         private readonly IConfiguration _configuration;
-        CancellationTokenSource _tokenSource = new CancellationTokenSource();
+        CancellationTokenSource _tokenSource;
 
         public MaxWeatherCommandHandler(IRWOperation rwOperation, IWeatherApiService weatherApiService, IConfiguration configuration)
         {
@@ -25,13 +26,24 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather
         }
         public async Task Handle(MaxWeatherCommand command)
         {
+            _tokenSource = new CancellationTokenSource();
             var token = _tokenSource.Token;
+
+            var watch = new Stopwatch();
+            watch.Start();
+            
             var executionTime = long.Parse(_configuration["ExecutionMaxTime"]);
+
             _rwOperation.WriteLine("Please enter the cities:");
 
             var tasks = _rwOperation.ReadLine().Split(',').Select(s => s.Trim())
-                .Select(s => _weatherApiService.GetTemperatureByCityNameForMaxTemp(s, executionTime, token))
+                .Select(s => _weatherApiService.GetTemperatureByCityNameForMaxTemp(s, token))
                 .Select(async task => await TaskHandling(task));
+
+            if (watch.ElapsedMilliseconds > executionTime)
+            {
+                _tokenSource.Cancel();
+            }
 
             await Task.WhenAll(tasks);
 
@@ -40,7 +52,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather
                 .OrderByDescending(x => x.Temperature).FirstOrDefault();
 
             var successfulRequests = tasks.Select(t => t.Result)
-                .Where(x => x.ErrorMessage is null).Count();
+                .Where(x => x.ErrorMessage is null && x.IsCancelled is false).Count();
 
             var failedRequests = tasks.Select(t => t.Result)
                 .Where(x => x.ErrorMessage is not null).Count();
@@ -62,6 +74,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather
             {
                 _rwOperation.WriteLine(Texts.NoSuccessful, failedRequests, cancelledRequests);               
             }
+            _tokenSource.Dispose();
         }
         private async Task<MaxTempCityInfo> TaskHandling(Task<MaxTempCityInfo> task)
         {

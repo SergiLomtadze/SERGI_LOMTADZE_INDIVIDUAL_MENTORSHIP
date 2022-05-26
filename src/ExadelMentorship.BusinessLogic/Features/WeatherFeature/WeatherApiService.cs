@@ -106,7 +106,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
                 throw new NotFoundException($"Error: {(int)result.StatusCode}");
             }
         }
-        public async Task<MaxTempCityInfo> GetTemperatureByCityNameForMaxTemp(string name,long executionTime, CancellationToken token)
+        public async Task<MaxTempCityInfo> GetTemperatureByCityNameForMaxTemp(string name,CancellationToken token)
         {
             var watch = new Stopwatch();
             watch.Start();
@@ -114,7 +114,10 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
 
             var httpClient = _httpClientFactory.CreateClient();
             HttpResponseMessage result = await httpClient.GetAsync(url);
-
+            if (token.IsCancellationRequested)
+            {
+                token.ThrowIfCancellationRequested();
+            }
             if (result.IsSuccessStatusCode)
             {
                 var json = await result.Content.ReadAsStringAsync();
@@ -122,17 +125,11 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
                 JObject mainObj = obj["main"] as JObject;
                
                 watch.Stop();
-                var time = watch.ElapsedMilliseconds;
-                if (time > executionTime)
-                {
-                    token.ThrowIfCancellationRequested();
-                }
-
                 return new MaxTempCityInfo
                 {
                     Name = name,
                     Temperature = (double)mainObj["temp"],
-                    DurationTime  = time
+                    DurationTime  = watch.ElapsedMilliseconds
                 };
             }
             else

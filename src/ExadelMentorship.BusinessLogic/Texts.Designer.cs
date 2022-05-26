@@ -61,7 +61,7 @@ namespace ExadelMentorship.BusinessLogic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No successful requests. Failed requests count: {0}, canceled: {1}, {cancelledRequests}.
+        ///   Looks up a localized string similar to No successful requests. Failed requests count: {0}, canceled: {1}, .
         /// </summary>
         internal static string NoSuccessful {
             get {
