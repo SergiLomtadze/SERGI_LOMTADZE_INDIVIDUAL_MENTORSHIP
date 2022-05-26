@@ -26,29 +26,49 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather
         {
             _rwOperation.WriteLine("Please enter the cities:");
 
-            try
+            var tasks = _rwOperation.ReadLine().Split(',').Select(s => s.Trim())
+                .Select(s => _weatherApiService.GetTemperatureByCityNameForMaxTemp(s))
+                .Select(async task =>
+                    {
+                        try
+                        {
+                            return await task;
+                        }
+                        catch (NotFoundException ex)
+                        {
+                            return new MaxTempCityInfo()
+                            {
+                                ErrorMessage = ex.Message,
+                            };
+                        }
+                    });
+
+            await Task.WhenAll(tasks);
+
+            var maxTempCityInfo = tasks.Select(t => t.Result)
+                .Where(x => x.Name is not null)
+                .OrderByDescending(x => x.Temperature).FirstOrDefault();
+
+            var successfulRequests = tasks.Select(t => t.Result)
+                .Where(x => x.ErrorMessage is null).Count();
+
+            var failedRequests = tasks.Select(t => t.Result)
+                .Where(x => x.ErrorMessage is not null).Count();
+
+            if (successfulRequests > 0)
             {
-                var tasks = _rwOperation.ReadLine().Split(',').Select(s => s.Trim())
-                    .Select(s => _weatherApiService.GetTemperatureByCityNameForMaxTemp(s));
-
-                await Task.WhenAll(tasks);
-
-                var maxTempCityInfo = tasks.Select( t =>  t.Result).OrderByDescending(x => x.Temperature).First();
-
-                _rwOperation.WriteLine(Texts.S1, maxTempCityInfo.Temperature, maxTempCityInfo.Name);
-
+                _rwOperation.WriteLine(Texts.S1, maxTempCityInfo.Temperature, maxTempCityInfo.Name, successfulRequests, failedRequests);
+                
                 var statistic = bool.Parse(_configuration["Statistic"]);
                 if (statistic)
                 {
                     _rwOperation.WriteLine($"City: {maxTempCityInfo.Name}. {maxTempCityInfo.Temperature}. Timer:{maxTempCityInfo.DurationTime}");
                 }
             }
-            catch (NotFoundException ex)
+            else 
             {
-                _rwOperation.WriteLine(ex.Message);
+                _rwOperation.WriteLine($" Error, no successful requests.Failed requests count: {failedRequests}");               
             }
-
-
         }
     }
 }
