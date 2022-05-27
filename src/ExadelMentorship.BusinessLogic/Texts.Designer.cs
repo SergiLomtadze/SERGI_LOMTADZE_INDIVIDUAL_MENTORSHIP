@@ -61,11 +61,29 @@ namespace ExadelMentorship.BusinessLogic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to City: {0}. {1}. Timer:{2}.
+        /// </summary>
+        internal static string DebugInfo {
+            get {
+                return ResourceManager.GetString("DebugInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error, no successful requests.Failed requests count: {0}.
+        /// </summary>
+        internal static string NoSuccessful {
+            get {
+                return ResourceManager.GetString("NoSuccessful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City with the highest temperature {0} C: {1}, Successful request count: {2}, failed: {3}.”.
         /// </summary>
-        internal static string S1 {
+        internal static string SuccessfulRequest {
             get {
-                return ResourceManager.GetString("S1", resourceCulture);
+                return ResourceManager.GetString("SuccessfulRequest", resourceCulture);
             }
         }
     }
