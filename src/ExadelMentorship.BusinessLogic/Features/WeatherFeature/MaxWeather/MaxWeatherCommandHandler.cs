@@ -63,12 +63,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather
             if (successfulRequests > 0)
             {
                 _rwOperation.WriteLine(Texts.SuccessfulRequest, maxTempCityInfo.Temperature, maxTempCityInfo.Name, successfulRequests, failedRequests, cancelledRequests);
-                
-                var statistic = bool.Parse(_configuration["Statistic"]);
-                if (statistic)
-                {
-                    DebugInfo(tasks.Select(t => t.Result));      
-                }
+                DebugInfoProvider(tasks);
             }
             else 
             {
@@ -97,19 +92,24 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather
                 };
             }
         }
-        private void DebugInfo(IEnumerable<MaxTempCityInfo> tasks)
+        private void DebugInfoProvider(IEnumerable<Task<MaxTempCityInfo>> tasks)
         {
-            foreach (var item in tasks)
+            var statistic = bool.Parse(_configuration["Statistic"]);
+            if (statistic)
             {
-                if (item.Name != null)
+                foreach (var item in tasks.Select(t => t.Result))
                 {
-                    _rwOperation.WriteLine($"City: {item.Name}. {item.Temperature}. Timer:{item.DurationTime}");
-                }
-                if (item.ErrorMessage != null)
-                {
-                    _rwOperation.WriteLine(item.ErrorMessage);
+                    if (item.Name != null)
+                    {
+                        _rwOperation.WriteLine($"City: {item.Name}. {item.Temperature}. Timer:{item.DurationTime}");
+                    }
+                    if (item.ErrorMessage != null)
+                    {
+                        _rwOperation.WriteLine(item.ErrorMessage);
+                    }
                 }
             }
+
         }
     }
 }
