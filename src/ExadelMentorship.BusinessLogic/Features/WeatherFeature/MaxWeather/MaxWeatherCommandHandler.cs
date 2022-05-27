@@ -57,17 +57,17 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather
 
             if (successfulRequests > 0)
             {
-                _rwOperation.WriteLine(Texts.S1, maxTempCityInfo.Temperature, maxTempCityInfo.Name, successfulRequests, failedRequests);
+                _rwOperation.WriteLine(Texts.SuccessfulRequest, maxTempCityInfo.Temperature, maxTempCityInfo.Name, successfulRequests, failedRequests);
                 
                 var statistic = bool.Parse(_configuration["Statistic"]);
                 if (statistic)
                 {
-                    _rwOperation.WriteLine($"City: {maxTempCityInfo.Name}. {maxTempCityInfo.Temperature}. Timer:{maxTempCityInfo.DurationTime}");
+                    _rwOperation.WriteLine(Texts.DebugInfo, maxTempCityInfo.Name, maxTempCityInfo.Temperature,maxTempCityInfo.DurationTime);
                 }
             }
             else 
             {
-                _rwOperation.WriteLine($" Error, no successful requests.Failed requests count: {failedRequests}");               
+                _rwOperation.WriteLine(Texts.NoSuccessful, failedRequests);               
             }
         }
     }
