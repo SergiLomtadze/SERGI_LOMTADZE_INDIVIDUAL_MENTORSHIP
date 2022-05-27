@@ -113,11 +113,8 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             var url = $"https://api.openweathermap.org/data/2.5/weather?q={name}&appid=7e66067382ed6a093c3e4b6c22940505&units=metric";
 
             var httpClient = _httpClientFactory.CreateClient();
-            HttpResponseMessage result = await httpClient.GetAsync(url);
-            if (token.IsCancellationRequested)
-            {
-                token.ThrowIfCancellationRequested();
-            }
+            HttpResponseMessage result = await httpClient.GetAsync(url, token);
+
             if (result.IsSuccessStatusCode)
             {
                 var json = await result.Content.ReadAsStringAsync();
