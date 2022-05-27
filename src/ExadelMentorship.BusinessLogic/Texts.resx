@@ -121,9 +121,9 @@
     <value>City: {0}. {1}. Timer:{2}</value>
   </data>
   <data name="NoSuccessful" xml:space="preserve">
-    <value>Error, no successful requests.Failed requests count: {0}</value>
+    <value>No successful requests. Failed requests count: {0}, canceled: {1}, </value>
   </data>
   <data name="SuccessfulRequest" xml:space="preserve">
-    <value>City with the highest temperature {0} C: {1}, Successful request count: {2}, failed: {3}.”</value>
+    <value>City with the highest temperature {0} C: {1}, Successful request count: {2}, failed: {3}, cancelled: {4}</value>
   </data>
 </root>

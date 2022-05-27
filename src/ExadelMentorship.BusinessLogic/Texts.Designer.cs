@@ -70,7 +70,7 @@ namespace ExadelMentorship.BusinessLogic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Error, no successful requests.Failed requests count: {0}.
+        ///   Looks up a localized string similar to No successful requests. Failed requests count: {0}, canceled: {1}, .
         /// </summary>
         internal static string NoSuccessful {
             get {
@@ -79,7 +79,7 @@ namespace ExadelMentorship.BusinessLogic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to City with the highest temperature {0} C: {1}, Successful request count: {2}, failed: {3}.”.
+        ///   Looks up a localized string similar to City with the highest temperature {0} C: {1}, Successful request count: {2}, failed: {3}, cancelled: {4}.
         /// </summary>
         internal static string SuccessfulRequest {
             get {

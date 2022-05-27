@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
@@ -105,24 +106,21 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
                 throw new NotFoundException($"Error: {(int)result.StatusCode}");
             }
         }
-        public async Task<MaxTempCityInfo> GetTemperatureByCityNameForMaxTemp(string name)
+        public async Task<MaxTempCityInfo> GetTemperatureByCityNameForMaxTemp(string name,CancellationToken token)
         {
             var watch = new Stopwatch();
             watch.Start();
             var url = $"https://api.openweathermap.org/data/2.5/weather?q={name}&appid=7e66067382ed6a093c3e4b6c22940505&units=metric";
-            var httpClient = _httpClientFactory.CreateClient();
-            HttpResponseMessage result = await httpClient.GetAsync(url);
 
-            if ((int)result.StatusCode == 404)
-            {
-                watch.Stop();
-                throw new NotFoundException($"City: {name}. Error: City {name} was not found. Timer:{watch.ElapsedMilliseconds}");
-            }
-            else if (result.IsSuccessStatusCode)
+            var httpClient = _httpClientFactory.CreateClient();
+            HttpResponseMessage result = await httpClient.GetAsync(url, token);
+
+            if (result.IsSuccessStatusCode)
             {
                 var json = await result.Content.ReadAsStringAsync();
                 JObject obj = JsonConvert.DeserializeObject<JObject>(json);
                 JObject mainObj = obj["main"] as JObject;
+               
                 watch.Stop();
                 return new MaxTempCityInfo
                 {
@@ -135,7 +133,6 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             {
                 watch.Stop();
                 throw new NotFoundException($"City: {name}. Error: {(int)result.StatusCode}. Timer:{watch.ElapsedMilliseconds}");
-
             }
         }
     }
