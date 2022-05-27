@@ -13,14 +13,14 @@ namespace ExadelMentorship.BusinessLogic
             _serviceProvider = serviceProvider;
         }
 
-        public Task Invoke(ICommand command) 
+        public Task<TResult> Invoke<TResult>(ICommand<TResult> command)
         {
-            return InvokeCommand((dynamic)command);
+            return InvokeCore((dynamic)command, default(TResult));
         }
 
-        private Task InvokeCommand<T>(T command) where T : ICommand
+        private Task<TResult> InvokeCore<TCommand, TResult>(TCommand command, TResult result) where TCommand : ICommand<TResult>
         {
-            var handler = _serviceProvider.GetRequiredService<ICommandHandler<T>>();
+            var handler = _serviceProvider.GetRequiredService<ICommandHandler<TCommand, TResult>>();
             return handler.Handle(command);
         }
 

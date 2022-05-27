@@ -1,8 +1,7 @@
 ﻿using ExadelMentorship.BusinessLogic;
 using ExadelMentorship.BusinessLogic.Features;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
-using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
-using ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather;
+using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using ExadelMentorship.BusinessLogic.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,9 +21,10 @@ namespace ExadelMentorship.IntegrationTests
                 .AddSingleton<MainJob>()
                 .AddSingleton<CommandInvoker>()
                 .AddSingleton<IWeatherApiService, WeatherApiService>()
-                .AddSingleton<ICommandHandler<CurrentWeatherCommand>, CurrentWeatherCommandHandler>()
-                .AddSingleton<ICommandHandler<FutureWeatherCommand>, FutureWeatherCommandHandler>()
-                .AddSingleton<ICommandHandler<MaxWeatherCommand>, MaxWeatherCommandHandler>()
+                .AddSingleton<ICommandHandler<CurrentWeatherCommand, CurrentWeatherCommandResponse>, CurrentWeatherCommandHandler>()
+                //                .AddSingleton<ICommandHandler<CurrentWeatherCommand>, CurrentWeatherCommandHandler>()
+                //                .AddSingleton<ICommandHandler<FutureWeatherCommand>, FutureWeatherCommandHandler>()
+                //                .AddSingleton<ICommandHandler<MaxWeatherCommand>, MaxWeatherCommandHandler>()
                 .AddSingleton<IRWOperation, ConsoleOperation>()
                 .AddHttpClient()
                 .BuildServiceProvider()

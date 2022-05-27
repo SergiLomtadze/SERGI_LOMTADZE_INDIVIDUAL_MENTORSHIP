@@ -1,5 +1,5 @@
 ﻿using ExadelMentorship.BusinessLogic.Exceptions;
-using ExadelMentorship.BusinessLogic.Models;
+using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using ExadelMentorship.BusinessLogic.Validators;
 using FluentValidation.Results;
 using System.Net.Http;
@@ -29,10 +29,10 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             }
         }
 
-        public static void ValidateCityName(City city)
+        public static void ValidateCityName(CurrentWeatherCommandResponse response)
         {
             CityValidator validator = new CityValidator();
-            ValidationResult results = validator.Validate(city);
+            ValidationResult results = validator.Validate(response);
             if (!results.IsValid)
             {
                 foreach (var failure in results.Errors)

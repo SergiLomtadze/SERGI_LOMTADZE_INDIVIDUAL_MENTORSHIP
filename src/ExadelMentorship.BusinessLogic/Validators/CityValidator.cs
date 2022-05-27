@@ -1,9 +1,9 @@
-﻿using ExadelMentorship.BusinessLogic.Models;
+﻿using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using FluentValidation;
 
 namespace ExadelMentorship.BusinessLogic.Validators
 {
-    public class CityValidator : AbstractValidator <City>
+    public class CityValidator : AbstractValidator <CurrentWeatherCommandResponse>
     {
         public CityValidator()
         {

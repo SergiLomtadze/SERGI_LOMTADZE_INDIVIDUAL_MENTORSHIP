@@ -1,10 +1,10 @@
-﻿using ExadelMentorship.BusinessLogic.Interfaces;
-using ExadelMentorship.BusinessLogic.Models;
+﻿using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
+using ExadelMentorship.BusinessLogic.Interfaces;
 using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
 {
-    public class CurrentWeatherCommandHandler : ICommandHandler<CurrentWeatherCommand>
+    public class CurrentWeatherCommandHandler : ICommandHandler<CurrentWeatherCommand, CurrentWeatherCommandResponse>
     {
         private readonly IRWOperation _rwOperation;
         private readonly IWeatherApiService _weatherApiService;
@@ -14,26 +14,16 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             _weatherApiService = weatherApiService;
         }
 
-        public async Task Handle(CurrentWeatherCommand currentWeatherCommand)
+        public async Task<CurrentWeatherCommandResponse> Handle(CurrentWeatherCommand currentWeatherCommand)
         {
-            _rwOperation.WriteLine("Please enter the city Name:");
-            var city = this.GetCityFromInput();
+            CurrentWeatherCommandResponse response = new CurrentWeatherCommandResponse();
+            response.Name = currentWeatherCommand.CityName;
 
-            WeatherHelper.ValidateCityName(city);
-            city.Temperature = await _weatherApiService.GetTemperatureByCityName(city.Name);
-            city.Comment = WeatherHelper.GetCommentByTemperature(city.Temperature);
-            _rwOperation.WriteLine($"In {city.Name} temperature is: {city.Temperature}, {city.Comment}");
-        }
-
-
-
-        private City GetCityFromInput()
-        {
-            var inputedLine = _rwOperation.ReadLine();
-            return new City
-            {
-                Name = inputedLine
-            };
+            WeatherHelper.ValidateCityName(response);
+            response.Temperature = await _weatherApiService.GetTemperatureByCityName(response.Name);
+            response.Comment = WeatherHelper.GetCommentByTemperature(response.Temperature);            
+            
+            return response;
         }
     }
 }
