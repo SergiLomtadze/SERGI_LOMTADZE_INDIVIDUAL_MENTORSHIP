@@ -1,6 +1,7 @@
 ﻿using ExadelMentorship.BusinessLogic.Exceptions;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
-using ExadelMentorship.BusinessLogic.Validators;
+using ExadelMentorship.BusinessLogic.Models;
+using FluentValidation;
 using FluentValidation.Results;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -29,9 +30,22 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             }
         }
 
-        public static void ValidateCityName(CurrentWeatherCommandResponse response)
+        public static void ValidateCityName(City city)
         {
-            CityValidator validator = new CityValidator();
+            Validators.CityValidator validator = new Validators.CityValidator();
+            ValidationResult results = validator.Validate(city);
+            if (!results.IsValid)
+            {
+                foreach (var failure in results.Errors)
+                {
+                    throw new NotFoundException($"City was not inputed");
+                }
+            }
+        }
+
+        public static void ValidateCurrentWeather(CurrentWeatherCommandResponse response)
+        {
+            Validators.CurrentWeather validator = new Validators.CurrentWeather();
             ValidationResult results = validator.Validate(response);
             if (!results.IsValid)
             {

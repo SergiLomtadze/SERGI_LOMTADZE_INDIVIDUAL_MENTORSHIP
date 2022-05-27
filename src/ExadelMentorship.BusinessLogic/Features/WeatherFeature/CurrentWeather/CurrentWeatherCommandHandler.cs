@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
 {
-    public class CurrentWeatherCommandHandler : ICommandHandler<CurrentWeatherCommand, CurrentWeatherCommandResponse>
+    public class CurrentWeatherCommandHandler : ICommandHandler2<CurrentWeatherCommand, CurrentWeatherCommandResponse>
     {
         private readonly IRWOperation _rwOperation;
         private readonly IWeatherApiService _weatherApiService;
@@ -19,7 +19,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             CurrentWeatherCommandResponse response = new CurrentWeatherCommandResponse();
             response.Name = currentWeatherCommand.CityName;
 
-            WeatherHelper.ValidateCityName(response);
+            WeatherHelper.ValidateCurrentWeather(response);
             response.Temperature = await _weatherApiService.GetTemperatureByCityName(response.Name);
             response.Comment = WeatherHelper.GetCommentByTemperature(response.Temperature);            
             

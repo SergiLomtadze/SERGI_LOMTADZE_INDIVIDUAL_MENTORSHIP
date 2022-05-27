@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Interfaces
 {
-    public interface ICommandHandler<in TCommand, TResult> where TCommand : ICommand<TResult>
+    public interface ICommandHandler2<in TCommand, TResult> where TCommand : ICommand2<TResult>
     {
         Task<TResult> Handle(TCommand command);
     }
