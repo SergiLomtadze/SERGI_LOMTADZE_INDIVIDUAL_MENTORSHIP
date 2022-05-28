@@ -20,26 +20,26 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
         }
 
         public async Task Handle(FutureWeatherCommand futureWeather)
-        {
-            _rwOperation.WriteLine("Please enter the city Name:");
-            var inputedCity = this.GetCityFromInput();
-            WeatherHelper.ValidateCityName(inputedCity);
-
-            var coordinate = await _weatherApiService.GetCoordinateByCityName(inputedCity.Name);
-
-            _rwOperation.WriteLine("Please enter interested days quantity:");
-            var inputedDayQuantity = _rwOperation.ReadLine();
-            var dayQuantity = DayQuantityValidation(inputedDayQuantity);
-
-            var cityList = await _weatherApiService.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, dayQuantity);
-
-            _rwOperation.WriteLine($"{inputedCity.Name} weather forecast:");
-            foreach (var city in cityList)
             {
-                _rwOperation.WriteLine($"Day {city.Date.ToString("dd/MM/yyyy")}: " +
-                    $"{city.Temperature}. {city.Comment}");
+                _rwOperation.WriteLine("Please enter the city Name:");
+                var inputedCity = this.GetCityFromInput();
+                WeatherHelper.ValidateCityName(inputedCity);
+
+                var coordinate = await _weatherApiService.GetCoordinateByCityName(inputedCity.Name);
+
+                _rwOperation.WriteLine("Please enter interested days quantity:");
+                var inputedDayQuantity = _rwOperation.ReadLine();
+                var dayQuantity = DayQuantityValidation(inputedDayQuantity);
+
+                var cityList = await _weatherApiService.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, dayQuantity);
+
+                _rwOperation.WriteLine($"{inputedCity.Name} weather forecast:");
+                foreach (var city in cityList)
+                {
+                    _rwOperation.WriteLine($"Day {city.Date.ToString("dd/MM/yyyy")}: " +
+                        $"{city.Temperature}. {city.Comment}");
+                }
             }
-        }
 
         private City GetCityFromInput()
         {
