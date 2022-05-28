@@ -7,7 +7,6 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
 {
     public class FutureWeatherCommandResponse
     {
-        public List<City> cityList { get; set; }
-        public string Error{ get; set; }
+        public IEnumerable<City> cityList { get; set; }
     }
 }
