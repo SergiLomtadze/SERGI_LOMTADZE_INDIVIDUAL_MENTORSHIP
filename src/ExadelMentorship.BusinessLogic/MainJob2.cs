@@ -3,7 +3,9 @@ using ExadelMentorship.BusinessLogic.Features;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
+using ExadelMentorship.BusinessLogic.Models;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic
@@ -55,7 +57,7 @@ namespace ExadelMentorship.BusinessLogic
                 _rwOperation.WriteLine(Texts.CurrentWeatherCommandResponse,result.Name, result.Temperature, result.Comment);
             }
 
-            if (result is FutureWeatherCommandResponse)
+            if (result is IEnumerable<City>)
             {
                 foreach (var city in result.cityList)
                 {

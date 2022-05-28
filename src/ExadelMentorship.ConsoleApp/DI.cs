@@ -5,8 +5,10 @@ using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather;
 using ExadelMentorship.BusinessLogic.Interfaces;
+using ExadelMentorship.BusinessLogic.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Collections.Generic;
 
 namespace ExadelMentorship.IntegrationTests
 {
@@ -24,7 +26,7 @@ namespace ExadelMentorship.IntegrationTests
                 .AddSingleton<CommandInvoker2>()
                 .AddSingleton<IWeatherApiService, WeatherApiService>()
                 .AddSingleton<ICommandHandler2<CurrentWeatherCommand, CurrentWeatherCommandResponse>, CurrentWeatherCommandHandler>()               
-                .AddSingleton<ICommandHandler2<FutureWeatherCommand, FutureWeatherCommandResponse>, FutureWeatherCommandHandler>()
+                .AddSingleton<ICommandHandler2<FutureWeatherCommand, IEnumerable<City>>, FutureWeatherCommandHandler>()
                 .AddSingleton<ICommandHandler<MaxWeatherCommand>, MaxWeatherCommandHandler>()
                 .AddSingleton<IRWOperation, ConsoleOperation>()
                 .AddHttpClient()

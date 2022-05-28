@@ -3,11 +3,12 @@ using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
 {
-    public class FutureWeatherCommandHandler : ICommandHandler2<FutureWeatherCommand, FutureWeatherCommandResponse>
+    public class FutureWeatherCommandHandler : ICommandHandler2<FutureWeatherCommand, IEnumerable<City>>
     {
         IRWOperation _rwOperation;
         private readonly IWeatherApiService _weatherApiService;
@@ -19,16 +20,13 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
             _configuration = configuration;
         }
 
-        public async Task<FutureWeatherCommandResponse> Handle(FutureWeatherCommand futureWeather)
+        public async Task<IEnumerable<City>> Handle(FutureWeatherCommand futureWeather)
         {
             WeatherHelper.ValidateCityName(new City { Name = futureWeather.CityName });
             var coordinate = await _weatherApiService.GetCoordinateByCityName(futureWeather.CityName);
             var dayQuantity = DayQuantityValidation(futureWeather.DayQuantity);
-            
-            return new FutureWeatherCommandResponse
-            { 
-                cityList = await _weatherApiService.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, dayQuantity)
-            };
+
+            return await _weatherApiService.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, dayQuantity);
         }
 
         private City GetCityFromInput()
