@@ -4,6 +4,7 @@ using ExadelMentorship.BusinessLogic.Models;
 using Microsoft.Extensions.Options;
 using Moq;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
@@ -84,8 +85,7 @@ namespace ExadelMentorship.UnitTests.Features
 
             //Act
             WeatherApiService weatherApiService = new WeatherApiService(httpClientFactoryMock.Object);
-            var result = await weatherApiService.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, 1);
-
+            var result = (await weatherApiService.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, 1)).ToList();
 
             //Assert
             Assert.Equal(cityList[0].Temperature, result[0].Temperature);
