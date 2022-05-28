@@ -47,7 +47,6 @@ namespace ExadelMentorship.BusinessLogic
                 }
             } while (condition);
         }
-
         private int GetActionFromUser()
         {
             string inputedLine;
@@ -62,7 +61,6 @@ namespace ExadelMentorship.BusinessLogic
             } while (!(inputedLine.Equals("0") || inputedLine.Equals("1") || inputedLine.Equals("2") || inputedLine.Equals("3")));
             return Convert.ToInt32(inputedLine);
         }
-
         private ICommand ParseCommand(int commnad)
          {
             //if (commnad == 1)
@@ -73,10 +71,10 @@ namespace ExadelMentorship.BusinessLogic
             //{
             //    return new FutureWeatherCommand();
             //}
-            if (commnad == 3)
-            {
-                return new MaxWeatherCommand();
-            }
+            //if (commnad == 3)
+            //{
+            //    return new MaxWeatherCommand();
+            //}
             throw new NotImplementedException();
         }
 
