@@ -30,7 +30,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
                 _rwOperation.WriteLine("Please enter interested days quantity:");
                 var inputedDayQuantity = _rwOperation.ReadLine();
                 var dayQuantity = DayQuantityValidation(inputedDayQuantity);
-
+                
                 var cityList = await _weatherApiService.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, dayQuantity);
 
                 _rwOperation.WriteLine($"{inputedCity.Name} weather forecast:");
