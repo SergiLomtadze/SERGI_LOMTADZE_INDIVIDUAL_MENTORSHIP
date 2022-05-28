@@ -13,7 +13,7 @@ namespace ExadelMentorship.BusinessLogic
             _serviceProvider = serviceProvider;
         }
 
-        public Task Invoke(ICommand command)
+        public Task Invoke(ICommand command) 
         {
             return InvokeCommand((dynamic)command);
         }
