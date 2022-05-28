@@ -26,8 +26,8 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather
         public async Task Handle(MaxWeatherCommand command)
         {
             var executionTime = _configuration.GetValue<int>("ExecutionMaxTime");
-            using CancellationTokenSource tokenSource = new CancellationTokenSource(executionTime * 1000);
-
+            using CancellationTokenSource tokenSource = new CancellationTokenSource(executionTime*1000);
+            
             _rwOperation.WriteLine("Please enter the cities:");
 
             var tasks = _rwOperation.ReadLine().Split(',').Select(s => s.Trim())
@@ -54,7 +54,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather
                 _rwOperation.WriteLine(Texts.SuccessfulRequest, maxTempCityInfo.Temperature, maxTempCityInfo.Name, successfulRequests, failedRequests, cancelledRequests);
                 DebugInfoProvider(tasks);
             }
-            else
+            else 
             {
                 _rwOperation.WriteLine(Texts.NoSuccessful, failedRequests, cancelledRequests);
             }
