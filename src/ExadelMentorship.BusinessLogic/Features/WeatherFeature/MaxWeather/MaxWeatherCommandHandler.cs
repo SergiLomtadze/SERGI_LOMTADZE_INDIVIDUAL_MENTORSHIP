@@ -56,7 +56,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather
             }
             else 
             {
-                _rwOperation.WriteLine(Texts.NoSuccessful, failedRequests, cancelledRequests);              
+                _rwOperation.WriteLine(Texts.NoSuccessful, failedRequests, cancelledRequests);               
             }
         }
         private async Task<MaxTempCityInfo> TaskHandling(Task<MaxTempCityInfo> task)
