@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace ExadelMentorship.BusinessLogic.Validators
 {
-    public class CityValidator : AbstractValidator<City>
+    public class CityValidator : AbstractValidator <City>
     {
         public CityValidator()
         {
