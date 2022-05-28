@@ -24,7 +24,7 @@ namespace ExadelMentorship.IntegrationTests
                 .AddSingleton<CommandInvoker2>()
                 .AddSingleton<IWeatherApiService, WeatherApiService>()
                 .AddSingleton<ICommandHandler2<CurrentWeatherCommand, CurrentWeatherCommandResponse>, CurrentWeatherCommandHandler>()               
-                .AddSingleton<ICommandHandler<FutureWeatherCommand>, FutureWeatherCommandHandler>()
+                .AddSingleton<ICommandHandler2<FutureWeatherCommand, FutureWeatherCommandResponse>, FutureWeatherCommandHandler>()
                 .AddSingleton<ICommandHandler<MaxWeatherCommand>, MaxWeatherCommandHandler>()
                 .AddSingleton<IRWOperation, ConsoleOperation>()
                 .AddHttpClient()
