@@ -1,19 +1,17 @@
 ﻿using ExadelMentorship.BusinessLogic.Exceptions;
 using ExadelMentorship.BusinessLogic.Features;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
-using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
-using ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather;
-using ExadelMentorship.BusinessLogic.Interfaces;
+using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using System;
 using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic
 {
-    public class MainJob
+    public class MainJob2
     {
         readonly IRWOperation _rwOperation;
-        readonly CommandInvoker _commandInvoker;
-        public MainJob(IRWOperation rwOperation, CommandInvoker commandInvoker)
+        readonly CommandInvoker2 _commandInvoker;
+        public MainJob2(IRWOperation rwOperation, CommandInvoker2 commandInvoker)
         {
             _rwOperation = rwOperation;
             _commandInvoker = commandInvoker;
@@ -33,7 +31,8 @@ namespace ExadelMentorship.BusinessLogic
                 {
                      try
                      {
-                        await _commandInvoker.Invoke(ParseCommand(command));
+                        var result = await _commandInvoker.Invoke(ParseCommand(command));
+                        PrintResult(result);
                         _rwOperation.ReadLine();
                      } 
                       catch (NotFoundException ex)
@@ -46,6 +45,34 @@ namespace ExadelMentorship.BusinessLogic
                      }
                 }
             } while (condition);
+        }
+
+        private void PrintResult(dynamic result)
+        {
+            if (result is CurrentWeatherCommandResponse)
+            {
+                _rwOperation.WriteLine(Texts.CurrentWeatherCommandResponse,result.Name, result.Temperature, result.Comment);
+            }
+        }
+        private dynamic ParseCommand(int commnad)
+         {
+            if (commnad == 1)
+            {
+                _rwOperation.WriteLine("Please enter the city Name:");
+                return new CurrentWeatherCommand
+                {
+                    CityName = _rwOperation.ReadLine()
+                };
+            }
+            if (commnad == 2)
+            {
+                //return new FutureWeatherCommand();
+            }
+            if (commnad == 3)
+            {
+                //return new MaxWeatherCommand();
+            }
+            throw new NotImplementedException();
         }
 
         private int GetActionFromUser()
@@ -61,23 +88,6 @@ namespace ExadelMentorship.BusinessLogic
                 inputedLine = _rwOperation.ReadLine();
             } while (!(inputedLine.Equals("0") || inputedLine.Equals("1") || inputedLine.Equals("2") || inputedLine.Equals("3")));
             return Convert.ToInt32(inputedLine);
-        }
-
-        private ICommand ParseCommand(int commnad)
-         {
-            //if (commnad == 1)
-            //{
-            //    return new CurrentWeatherCommand();
-            //}
-            if (commnad == 2)
-            {
-                return new FutureWeatherCommand();
-            }
-            if (commnad == 3)
-            {
-                return new MaxWeatherCommand();
-            }
-            throw new NotImplementedException();
         }
 
     }

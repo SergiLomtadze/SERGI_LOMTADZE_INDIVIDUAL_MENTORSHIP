@@ -1,6 +1,7 @@
 ﻿using ExadelMentorship.BusinessLogic;
 using ExadelMentorship.BusinessLogic.Features;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
+using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather;
 using ExadelMentorship.BusinessLogic.Interfaces;
@@ -19,10 +20,10 @@ namespace ExadelMentorship.IntegrationTests
 
             return new ServiceCollection()
                 .AddSingleton(config)
-                .AddSingleton<MainJob>()
-                .AddSingleton<CommandInvoker>()
+                .AddSingleton<MainJob2>()
+                .AddSingleton<CommandInvoker2>()
                 .AddSingleton<IWeatherApiService, WeatherApiService>()
-                .AddSingleton<ICommandHandler<CurrentWeatherCommand>, CurrentWeatherCommandHandler>()
+                .AddSingleton<ICommandHandler2<CurrentWeatherCommand, CurrentWeatherCommandResponse>, CurrentWeatherCommandHandler>()               
                 .AddSingleton<ICommandHandler<FutureWeatherCommand>, FutureWeatherCommandHandler>()
                 .AddSingleton<ICommandHandler<MaxWeatherCommand>, MaxWeatherCommandHandler>()
                 .AddSingleton<IRWOperation, ConsoleOperation>()

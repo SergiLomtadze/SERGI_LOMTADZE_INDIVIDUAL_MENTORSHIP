@@ -61,6 +61,15 @@ namespace ExadelMentorship.BusinessLogic {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to In {0} temperature is: {1}, {2}.
+        /// </summary>
+        internal static string CurrentWeatherCommandResponse {
+            get {
+                return ResourceManager.GetString("CurrentWeatherCommandResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City: {0}. {1}. Timer:{2}.
         /// </summary>
         internal static string DebugInfo {
