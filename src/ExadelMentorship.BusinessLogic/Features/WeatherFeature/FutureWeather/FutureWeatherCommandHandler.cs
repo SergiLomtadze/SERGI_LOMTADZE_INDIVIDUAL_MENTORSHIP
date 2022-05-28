@@ -10,12 +10,10 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
 {
     public class FutureWeatherCommandHandler : ICommandHandler<FutureWeatherCommand, IEnumerable<City>>
     {
-        IRWOperation _rwOperation;
         private readonly IWeatherApiService _weatherApiService;
         private readonly IConfiguration _configuration;
-        public FutureWeatherCommandHandler(IRWOperation rwOperation, IWeatherApiService weatherApiService, IConfiguration configuration)
+        public FutureWeatherCommandHandler(IWeatherApiService weatherApiService, IConfiguration configuration)
         {
-            _rwOperation = rwOperation;
             _weatherApiService = weatherApiService;
             _configuration = configuration;
         }
@@ -29,14 +27,6 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
             return await _weatherApiService.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, dayQuantity);
         }
 
-        private City GetCityFromInput()
-        {
-            var inputedLine = _rwOperation.ReadLine();
-            return new City
-            {
-                Name = inputedLine
-            };
-        }
         private int DayQuantityValidation(string dayQuantity)
         {
             int day = 0;
