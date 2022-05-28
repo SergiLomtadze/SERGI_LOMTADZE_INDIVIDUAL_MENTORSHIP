@@ -3,11 +3,12 @@ using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
 {
-    public class FutureWeatherCommandHandler : ICommandHandler<FutureWeatherCommand>
+    public class FutureWeatherCommandHandler : ICommandHandler2<FutureWeatherCommand, IEnumerable<City>>
     {
         IRWOperation _rwOperation;
         private readonly IWeatherApiService _weatherApiService;
@@ -19,27 +20,14 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
             _configuration = configuration;
         }
 
-        public async Task Handle(FutureWeatherCommand futureWeather)
-            {
-                _rwOperation.WriteLine("Please enter the city Name:");
-                var inputedCity = this.GetCityFromInput();
-                WeatherHelper.ValidateCityName(inputedCity);
+        public async Task<IEnumerable<City>> Handle(FutureWeatherCommand futureWeather)
+        {
+            WeatherHelper.ValidateCityName(new City { Name = futureWeather.CityName });
+            var coordinate = await _weatherApiService.GetCoordinateByCityName(futureWeather.CityName);
+            var dayQuantity = DayQuantityValidation(futureWeather.DayQuantity);
 
-                var coordinate = await _weatherApiService.GetCoordinateByCityName(inputedCity.Name);
-
-                _rwOperation.WriteLine("Please enter interested days quantity:");
-                var inputedDayQuantity = _rwOperation.ReadLine();
-                var dayQuantity = DayQuantityValidation(inputedDayQuantity);
-                
-                var cityList = await _weatherApiService.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, dayQuantity);
-
-                _rwOperation.WriteLine($"{inputedCity.Name} weather forecast:");
-                foreach (var city in cityList)
-                {
-                    _rwOperation.WriteLine($"Day {city.Date.ToString("dd/MM/yyyy")}: " +
-                        $"{city.Temperature}. {city.Comment}");
-                }
-            }
+            return await _weatherApiService.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, dayQuantity);
+        }
 
         private City GetCityFromInput()
         {
@@ -49,7 +37,6 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
                 Name = inputedLine
             };
         }
-
         private int DayQuantityValidation(string dayQuantity)
         {
             int day = 0;

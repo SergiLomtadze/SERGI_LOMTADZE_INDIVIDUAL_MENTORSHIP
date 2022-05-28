@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExadelMentorship.UnitTests"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExadelMentorship.IntegrationTests", "ExadelMentorship.IntegrationTests\ExadelMentorship.IntegrationTests.csproj", "{EAFFCECD-619F-45C7-BC27-63784D98026E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExadelMentorship.WebApi", "ExadelMentorship.WebApi\ExadelMentorship.WebApi.csproj", "{E3540152-76CF-4112-AF0C-D405C82D2FA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExadelMentorship.WebApi", "ExadelMentorship.WebApi\ExadelMentorship.WebApi.csproj", "{E3540152-76CF-4112-AF0C-D405C82D2FA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

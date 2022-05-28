@@ -69,10 +69,10 @@ namespace ExadelMentorship.BusinessLogic
             //{
             //    return new CurrentWeatherCommand();
             //}
-            if (commnad == 2)
-            {
-                return new FutureWeatherCommand();
-            }
+            //if (commnad == 2)
+            //{
+            //    return new FutureWeatherCommand();
+            //}
             if (commnad == 3)
             {
                 return new MaxWeatherCommand();

@@ -2,7 +2,10 @@
 using ExadelMentorship.BusinessLogic.Features;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
+using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
+using ExadelMentorship.BusinessLogic.Models;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic
@@ -53,6 +56,15 @@ namespace ExadelMentorship.BusinessLogic
             {
                 _rwOperation.WriteLine(Texts.CurrentWeatherCommandResponse,result.Name, result.Temperature, result.Comment);
             }
+
+            if (result is IEnumerable<City>)
+            {
+                foreach (var city in result.cityList)
+                {
+                    _rwOperation.WriteLine($"Day {city.Date.ToString("dd/MM/yyyy")}: {city.Temperature}. {city.Comment}");
+                }
+              
+            }
         }
         private dynamic ParseCommand(int commnad)
          {
@@ -66,7 +78,15 @@ namespace ExadelMentorship.BusinessLogic
             }
             if (commnad == 2)
             {
-                //return new FutureWeatherCommand();
+                FutureWeatherCommand futureWeatherCommand = new FutureWeatherCommand();
+                
+                _rwOperation.WriteLine("Please enter the city Name:");
+                futureWeatherCommand.CityName = _rwOperation.ReadLine();
+
+                _rwOperation.WriteLine("Please enter interested days quantity:");
+                futureWeatherCommand.DayQuantity = _rwOperation.ReadLine();
+                
+                return futureWeatherCommand;
             }
             if (commnad == 3)
             {
