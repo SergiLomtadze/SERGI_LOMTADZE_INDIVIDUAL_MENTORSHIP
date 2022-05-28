@@ -5,7 +5,8 @@ using System.Text;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather
 {
-    public class MaxWeatherCommand : ICommand
+    public class MaxWeatherCommand : ICommand2<MaxWeatherCommandResponse>
     {
+        public string Cities { get; set; }
     }
 }
