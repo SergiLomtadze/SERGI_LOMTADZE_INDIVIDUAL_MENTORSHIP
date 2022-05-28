@@ -31,19 +31,19 @@ namespace ExadelMentorship.BusinessLogic
                 }
                 else
                 {
-                    try
-                    {
+                     try
+                     {
                         await _commandInvoker.Invoke(ParseCommand(command));
                         _rwOperation.ReadLine();
-                    }
-                    catch (NotFoundException ex)
-                    {
+                     } 
+                      catch (NotFoundException ex)
+                     {
                         _rwOperation.WriteLine($"{ex.Message.ToString()} \n");
-                    }
-                    catch (FormatException ex)
-                    {
+                     }
+                     catch (FormatException ex)
+                     {
                         _rwOperation.WriteLine($"{ex.Message} \n");
-                    }
+                     }
                 }
             } while (condition);
         }
@@ -64,7 +64,7 @@ namespace ExadelMentorship.BusinessLogic
         }
 
         private ICommand ParseCommand(int commnad)
-        {
+         {
             //if (commnad == 1)
             //{
             //    return new CurrentWeatherCommand();
