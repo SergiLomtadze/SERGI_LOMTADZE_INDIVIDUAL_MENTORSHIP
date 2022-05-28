@@ -3,7 +3,7 @@
 using ExadelMentorship.BusinessLogic;
 using ExadelMentorship.IntegrationTests;
 
-var job = DI.Resolve<MainJob2>();
+var job = DI.Resolve<MainJob>();
 
 await job.Execute();
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
 {
-    public class FutureWeatherCommandHandler : ICommandHandler2<FutureWeatherCommand, IEnumerable<City>>
+    public class FutureWeatherCommandHandler : ICommandHandler<FutureWeatherCommand, IEnumerable<City>>
     {
         IRWOperation _rwOperation;
         private readonly IWeatherApiService _weatherApiService;

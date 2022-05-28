@@ -2,13 +2,7 @@
 
 namespace ExadelMentorship.BusinessLogic.Interfaces
 {
-    public interface ICommand
+    public interface ICommand<out TResult> 
     {
-
-    }
-
-    public interface ICommandHandler<in T> where T : ICommand
-    {
-        Task Handle(T command);
     }
 }

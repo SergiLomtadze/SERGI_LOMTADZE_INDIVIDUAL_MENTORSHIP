@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
 {
-    public class CurrentWeatherCommandHandler : ICommandHandler2<CurrentWeatherCommand, CurrentWeatherCommandResponse>
+    public class CurrentWeatherCommandHandler : ICommandHandler<CurrentWeatherCommand, CurrentWeatherCommandResponse>
     {
         private readonly IRWOperation _rwOperation;
         private readonly IWeatherApiService _weatherApiService;
