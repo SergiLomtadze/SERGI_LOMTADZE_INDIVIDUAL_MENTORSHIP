@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
 {
-    public class FutureWeatherCommand : ICommand2<IEnumerable<City>>
+    public class FutureWeatherCommand : ICommand<IEnumerable<City>>
     {
         public string CityName { get; set; }
         public string DayQuantity { get; set; }

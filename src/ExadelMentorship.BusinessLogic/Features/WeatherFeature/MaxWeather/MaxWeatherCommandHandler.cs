@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather
 {
-    public class MaxWeatherCommandHandler : ICommandHandler2<MaxWeatherCommand, MaxWeatherCommandResponse>
+    public class MaxWeatherCommandHandler : ICommandHandler<MaxWeatherCommand, MaxWeatherCommandResponse>
     {
         IRWOperation _rwOperation;
         private readonly IWeatherApiService _weatherApiService;
