@@ -21,9 +21,7 @@ namespace ExadelMentorship.BusinessLogic
         
             services.AddSingleton<ICommandHandler<CurrentWeatherCommand, CurrentWeatherCommandResponse>, CurrentWeatherCommandHandler>();
         
-            services.AddSingleton<ICommandHandler<FutureWeatherCommand, IEnumerable<City>>, FutureWeatherCommandHandler>();
-
-            services.AddSingleton<ICommandHandler<MaxWeatherCommand, MaxWeatherCommandResponse>, MaxWeatherCommandHandler>();
+            services.AddSingleton<ICommandHandler<FutureWeatherCommand, IEnumerable<City>>, FutureWeatherCommandHandler>();           
 
             services.AddHttpClient();
         }

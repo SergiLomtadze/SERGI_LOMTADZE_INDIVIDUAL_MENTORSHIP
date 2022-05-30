@@ -23,7 +23,8 @@ namespace ExadelMentorship.IntegrationTests
             ServiceCollection service = (ServiceCollection)new ServiceCollection()
                 .AddSingleton(config)
                 .AddSingleton<MainJob>()
-                .AddSingleton<IRWOperation, ConsoleOperation>();
+                .AddSingleton<IRWOperation, ConsoleOperation>()
+                .AddSingleton<ICommandHandler<MaxWeatherCommand, MaxWeatherCommandResponse>, MaxWeatherCommandHandler>();
 
             service.AddBlServices();
 
