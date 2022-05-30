@@ -1,4 +1,5 @@
 using ExadelMentorship.BusinessLogic;
+using ExadelMentorship.WebApi;
 using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,23 +17,7 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-app.UseExceptionHandler(new ExceptionHandlerOptions
-{
-    ExceptionHandler = (c) =>
-    {
-        var exception = c.Features.Get<IExceptionHandlerFeature>();
-        var statusCode = exception.Error.GetType().Name switch
-        {
-            "NotFoundException" => StatusCodes.Status404NotFound,
-            "FormatException" => StatusCodes.Status400BadRequest,
-            _ => StatusCodes.Status500InternalServerError
-        };
-        c.Response.StatusCode = statusCode;
-        c.Response.WriteAsync(exception.Error.Message);
-
-        return Task.CompletedTask;
-    }
-});
+app.UseExceptionHandler(ExceptionHandler.GetExceptionHandlerOptions());
 
 if (app.Environment.IsDevelopment())
 {
