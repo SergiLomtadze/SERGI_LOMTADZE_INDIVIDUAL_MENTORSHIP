@@ -1,10 +1,5 @@
 using ExadelMentorship.BusinessLogic;
-using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
-using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
-using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
-using ExadelMentorship.BusinessLogic.Interfaces;
-using ExadelMentorship.BusinessLogic.Models;
-using ExadelMentorship.WebApi.Middlewares;
+using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,12 +11,29 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddBlServices();
-builder.Services.AddTransient<ExceptionHandlingMiddleware>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+app.UseExceptionHandler(new ExceptionHandlerOptions
+{
+    ExceptionHandler = (c) =>
+    {
+        var exception = c.Features.Get<IExceptionHandlerFeature>();
+        var statusCode = exception.Error.GetType().Name switch
+        {
+            "NotFoundException" => StatusCodes.Status404NotFound,
+            "FormatException" => StatusCodes.Status400BadRequest,
+            _ => StatusCodes.Status500InternalServerError
+        };
+        c.Response.StatusCode = statusCode;
+        c.Response.WriteAsync(exception.Error.Message);
+
+        return Task.CompletedTask;
+    }
+});
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
