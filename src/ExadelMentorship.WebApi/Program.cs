@@ -1,9 +1,6 @@
 using ExadelMentorship.BusinessLogic;
-using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
-using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
-using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
-using ExadelMentorship.BusinessLogic.Interfaces;
-using ExadelMentorship.BusinessLogic.Models;
+using ExadelMentorship.WebApi;
+using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,10 +13,12 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddBlServices();
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+app.UseExceptionHandler(ExceptionHandler.GetExceptionHandlerOptions());
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
