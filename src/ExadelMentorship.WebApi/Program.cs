@@ -14,11 +14,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<CommandInvoker>();
-builder.Services.AddSingleton<IWeatherApiService, WeatherApiService>();
-builder.Services.AddSingleton<ICommandHandler<CurrentWeatherCommand, CurrentWeatherCommandResponse>, CurrentWeatherCommandHandler>();
-builder.Services.AddSingleton<ICommandHandler<FutureWeatherCommand, IEnumerable<City>>, FutureWeatherCommandHandler>();
-builder.Services.AddHttpClient();
+builder.Services.AddBlServices();
+
 
 var app = builder.Build();
 

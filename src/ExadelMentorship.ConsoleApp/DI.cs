@@ -20,18 +20,14 @@ namespace ExadelMentorship.IntegrationTests
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            return new ServiceCollection()
+            ServiceCollection service = (ServiceCollection)new ServiceCollection()
                 .AddSingleton(config)
                 .AddSingleton<MainJob>()
-                .AddSingleton<CommandInvoker>()
-                .AddSingleton<IWeatherApiService, WeatherApiService>()
-                .AddSingleton<ICommandHandler<CurrentWeatherCommand, CurrentWeatherCommandResponse>, CurrentWeatherCommandHandler>()               
-                .AddSingleton<ICommandHandler<FutureWeatherCommand, IEnumerable<City>>, FutureWeatherCommandHandler>()
-                .AddSingleton<ICommandHandler<MaxWeatherCommand, MaxWeatherCommandResponse>, MaxWeatherCommandHandler>()
-                .AddSingleton<IRWOperation, ConsoleOperation>()
-                .AddHttpClient()
-                .BuildServiceProvider()
-                .GetRequiredService<T>();
+                .AddSingleton<IRWOperation, ConsoleOperation>();
+
+            service.AddBlServices();
+
+            return service.BuildServiceProvider().GetRequiredService<T>();
         }
     }
 }

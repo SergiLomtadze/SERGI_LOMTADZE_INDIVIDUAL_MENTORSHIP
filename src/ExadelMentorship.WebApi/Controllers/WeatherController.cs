@@ -17,16 +17,16 @@ namespace ExadelMentorship.WebApi.Controllers
         }
 
         [HttpGet("currentWeather/{cityName}")]
-        public async Task<ActionResult<CurrentWeatherCommandResponse>> GetCurrentWeather([FromRoute] string cityName)
+        public Task<CurrentWeatherCommandResponse> GetCurrentWeather([FromRoute] string cityName)
         {
-            var result = await _commandInvoker.Invoke
+            return _commandInvoker.Invoke
             (
                 new CurrentWeatherCommand
                 {
                     CityName = cityName
                 }
             );
-            return Ok(result);
+
         }
     }
 }
