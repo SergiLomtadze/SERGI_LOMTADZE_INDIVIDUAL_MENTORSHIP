@@ -61,7 +61,7 @@ namespace ExadelMentorship.BusinessLogic
 
             if (result is IEnumerable<City>)
             {
-                foreach (var city in result.cityList)
+                foreach (var city in result)
                 {
                     _rwOperation.WriteLine($"Day {city.Date.ToString("dd/MM/yyyy")}: {city.Temperature}. {city.Comment}");
                 }
