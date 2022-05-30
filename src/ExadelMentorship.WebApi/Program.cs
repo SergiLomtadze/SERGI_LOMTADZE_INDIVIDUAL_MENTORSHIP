@@ -1,6 +1,5 @@
 using ExadelMentorship.BusinessLogic;
 using ExadelMentorship.WebApi;
-using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddBlServices();
-
+builder.Configuration.AddJsonFile("appsettings.json");
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

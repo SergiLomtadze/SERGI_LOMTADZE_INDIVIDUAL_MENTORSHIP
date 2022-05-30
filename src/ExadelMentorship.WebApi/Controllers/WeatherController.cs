@@ -1,6 +1,8 @@
 ﻿using ExadelMentorship.BusinessLogic;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
+using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
+using ExadelMentorship.BusinessLogic.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +26,20 @@ namespace ExadelMentorship.WebApi.Controllers
                 new CurrentWeatherCommand
                 {
                     CityName = cityName
+                }
+            );
+
+        }
+
+        [HttpGet("currentWeather/{cityName}/days/{dayQuantity}")]
+        public Task<IEnumerable<City>> GetFutureWeather([FromRoute] string cityName, [FromRoute] string dayQuantity)
+        {
+            return _commandInvoker.Invoke
+            (
+                new FutureWeatherCommand
+                {
+                    CityName = cityName,
+                    DayQuantity = dayQuantity
                 }
             );
 

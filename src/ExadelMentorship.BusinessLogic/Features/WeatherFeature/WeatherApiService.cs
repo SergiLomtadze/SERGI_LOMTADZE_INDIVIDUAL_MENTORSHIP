@@ -71,7 +71,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
                 throw new NotFoundException($"Error: {(int)result.StatusCode}");
             }
         }
-        public async Task<IEnumerable<City>> GetFutureTemperatureByCoordinateAndDayQuantity(Coordinate coordinate, int day)
+        public async Task<IEnumerable<City>> GetFutureTemperatureByCoordinateAndDayQuantity(Coordinate coordinate, int day, string name)
         {
             var url = $"https://api.openweathermap.org/data/2.5/onecall?lat={coordinate.Latitude}&lon={coordinate.Longitude}&exclude=current,minutely,hourly,alerts&appid=7e66067382ed6a093c3e4b6c22940505&units=metric";
             var httpClient = _httpClientFactory.CreateClient();
@@ -94,6 +94,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
 
                     cityList.Add(new City
                     {
+                        Name = name,
                         Temperature = temp,
                         Comment = WeatherHelper.GetCommentByTemperature(temp),
                         Date = start

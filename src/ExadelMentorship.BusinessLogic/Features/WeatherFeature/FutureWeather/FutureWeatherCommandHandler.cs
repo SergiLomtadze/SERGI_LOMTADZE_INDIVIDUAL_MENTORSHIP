@@ -24,7 +24,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
             var coordinate = await _weatherApiService.GetCoordinateByCityName(futureWeather.CityName);
             var dayQuantity = DayQuantityValidation(futureWeather.DayQuantity);
 
-            return await _weatherApiService.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, dayQuantity);
+            return await _weatherApiService.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, dayQuantity, futureWeather.CityName);
         }
 
         private int DayQuantityValidation(string dayQuantity)
