@@ -32,7 +32,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
             int day = 0;
             try
             {
-                day = Int32.Parse(dayQuantity);
+                day = int.Parse(dayQuantity);
             }
             catch (Exception)
             {
