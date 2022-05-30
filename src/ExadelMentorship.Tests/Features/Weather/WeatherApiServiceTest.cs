@@ -81,11 +81,12 @@ namespace ExadelMentorship.UnitTests.Features
             {
                 Temperature = 10,
                 Comment = "It's fresh",
+                Name = "Tbilisi"
             });
 
             //Act
             WeatherApiService weatherApiService = new WeatherApiService(httpClientFactoryMock.Object);
-            var result = (await weatherApiService.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, 1)).ToList();
+            var result = (await weatherApiService.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, 1, "Tbilisi")).ToList();
 
             //Assert
             Assert.Equal(cityList[0].Temperature, result[0].Temperature);
