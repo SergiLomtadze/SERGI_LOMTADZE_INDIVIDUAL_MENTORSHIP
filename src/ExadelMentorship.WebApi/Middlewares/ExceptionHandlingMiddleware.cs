@@ -18,7 +18,7 @@ namespace ExadelMentorship.WebApi.Middlewares
             }
             catch (FormatException ex)
             {
-                context.Response.StatusCode = StatusCodes.Status417ExpectationFailed;
+                context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 await context.Response.WriteAsync(ex.Message);
             }
             catch (Exception ex)
