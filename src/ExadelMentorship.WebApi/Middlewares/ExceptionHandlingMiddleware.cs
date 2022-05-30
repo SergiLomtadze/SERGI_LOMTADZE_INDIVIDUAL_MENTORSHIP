@@ -13,17 +13,17 @@ namespace ExadelMentorship.WebApi.Middlewares
             }
             catch (NotFoundException ex)
             {
-                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                context.Response.StatusCode = StatusCodes.Status404NotFound;
                 await context.Response.WriteAsync(ex.Message);
             }
             catch (FormatException ex)
             {
-                context.Response.StatusCode = (int)HttpStatusCode.ExpectationFailed;
+                context.Response.StatusCode = StatusCodes.Status417ExpectationFailed;
                 await context.Response.WriteAsync(ex.Message);
             }
             catch (Exception ex)
             {
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                 await context.Response.WriteAsync(ex.Message);
             }
         }
