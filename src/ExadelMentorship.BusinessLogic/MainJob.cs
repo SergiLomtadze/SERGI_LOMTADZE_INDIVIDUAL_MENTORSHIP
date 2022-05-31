@@ -5,6 +5,7 @@ using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather;
 using ExadelMentorship.BusinessLogic.Models;
+using ExadelMentorship.BusinessLogic.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
