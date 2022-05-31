@@ -1,6 +1,7 @@
 ﻿using ExadelMentorship.BusinessLogic.Exceptions;
 using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
+using ExadelMentorship.ConsoleApp;
 using System.Threading.Tasks;
 using Xunit;
 
