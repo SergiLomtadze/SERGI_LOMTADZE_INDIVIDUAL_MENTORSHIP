@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExadelMentorship.BusinessLogic {
+namespace ExadelMentorship.BusinessLogic.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace ExadelMentorship.BusinessLogic {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ExadelMentorship.BusinessLogic.Texts", typeof(Texts).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ExadelMentorship.BusinessLogic.Resources.Texts", typeof(Texts).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
