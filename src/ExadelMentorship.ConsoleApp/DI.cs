@@ -1,16 +1,11 @@
 ﻿using ExadelMentorship.BusinessLogic;
 using ExadelMentorship.BusinessLogic.Features;
-using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
-using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
-using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather;
 using ExadelMentorship.BusinessLogic.Interfaces;
-using ExadelMentorship.BusinessLogic.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
 
-namespace ExadelMentorship.IntegrationTests
+namespace ExadelMentorship.ConsoleApp
 {
     public class DI
     {
