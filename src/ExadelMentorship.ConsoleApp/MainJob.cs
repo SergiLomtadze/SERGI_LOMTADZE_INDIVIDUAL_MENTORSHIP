@@ -4,6 +4,7 @@ using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather;
+using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
 using ExadelMentorship.ConsoleApp.Resources;
 using System;
@@ -37,8 +38,7 @@ namespace ExadelMentorship.BusinessLogic
                 {
                      try
                      {
-                        var result = await _commandInvoker.Invoke(ParseCommand(command));
-                        PrintResult(result);
+                        await ParseCommand(command);
                         _rwOperation.ReadLine();
                      } 
                       catch (NotFoundException ex)
@@ -53,54 +53,17 @@ namespace ExadelMentorship.BusinessLogic
             } while (condition);
         }
 
-        private void PrintResult(dynamic result)
+        private async Task ParseCommand (int commnad)
         {
-            if (result is CurrentWeatherCommandResponse)
-            {
-                _rwOperation.WriteLine(Texts.CurrentWeatherCommandResponse,result.Name, result.Temperature, result.Comment);
-            }
-
-            if (result is IEnumerable<City>)
-            {
-                foreach (var city in result)
-                {
-                    _rwOperation.WriteLine($"Day {city.Date.ToString("dd/MM/yyyy")}: {city.Temperature}. {city.Comment}");
-                }
-              
-            }
-
-            if (result is MaxWeatherCommandResponse)
-            {
-                if (result.SuccessfulRequests > 0)
-                {
-                    _rwOperation.WriteLine(Texts.SuccessfulRequest, 
-                        result.MaxTempCityInfo.Temperature, 
-                        result.MaxTempCityInfo.Name,
-                        result.SuccessfulRequests, 
-                        result.FailedRequests, 
-                        result.CancelledRequests);
-
-                    if (result.Statistic)
-                    {
-                        DebugInfoProvider(result.MaxTempCityInfoList);
-                    }                    
-                }
-                else
-                {
-                    _rwOperation.WriteLine(Texts.NoSuccessful, result.FailedRequests, result.CancelledRequests);
-                }
-            }
-        }
-
-        private dynamic ParseCommand(int commnad)
-         {
             if (commnad == 1)
             {
                 _rwOperation.WriteLine("Please enter the city Name:");
-                return new CurrentWeatherCommand
+                var result = new CurrentWeatherCommand
                 {
                     CityName = _rwOperation.ReadLine()
                 };
+                var response = await _commandInvoker.Invoke(result);
+                _rwOperation.WriteLine(Texts.CurrentWeatherCommandResponse, response.Name, response.Temperature, response.Comment);
             }
             if (commnad == 2)
             {
@@ -111,18 +74,41 @@ namespace ExadelMentorship.BusinessLogic
 
                 _rwOperation.WriteLine("Please enter interested days quantity:");
                 futureWeatherCommand.DayQuantity = _rwOperation.ReadLine();
-                
-                return futureWeatherCommand;
+
+                var responce = await _commandInvoker.Invoke(futureWeatherCommand);
+                foreach (var city in responce)
+                {
+                    _rwOperation.WriteLine($"Day {city.Date.ToString("dd/MM/yyyy")}: {city.Temperature}. {city.Comment}");
+                }
+
             }
             if (commnad == 3)
             {
                 _rwOperation.WriteLine("Please enter the cities:");
-                return new MaxWeatherCommand
+                var result = new MaxWeatherCommand
                 {
                     Cities = _rwOperation.ReadLine(),
                 };
+                var response = await _commandInvoker.Invoke(result);
+                if (response.SuccessfulRequests > 0)
+                {
+                    _rwOperation.WriteLine(Texts.SuccessfulRequest,
+                        response.MaxTempCityInfo.Temperature,
+                        response.MaxTempCityInfo.Name,
+                        response.SuccessfulRequests,
+                        response.FailedRequests,
+                        response.CancelledRequests);
+
+                    if (response.Statistic)
+                    {
+                        DebugInfoProvider(response.MaxTempCityInfoList);
+                    }
+                }
+                else
+                {
+                    _rwOperation.WriteLine(Texts.NoSuccessful, response.FailedRequests, response.CancelledRequests);
+                }
             }
-            throw new NotImplementedException();
         }
 
         private int GetActionFromUser()
@@ -158,4 +144,5 @@ namespace ExadelMentorship.BusinessLogic
         }
 
     }
+
 }
