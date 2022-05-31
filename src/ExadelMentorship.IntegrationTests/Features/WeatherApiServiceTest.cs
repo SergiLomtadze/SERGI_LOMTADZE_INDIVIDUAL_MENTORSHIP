@@ -57,7 +57,7 @@ namespace ExadelMentorship.IntegrationTests.Features
             };
 
             //Act 
-            var result = await weather.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, 1);
+            var result = await weather.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, 1, "Tbilisi");
 
             //Assert
             Assert.NotNull(result);

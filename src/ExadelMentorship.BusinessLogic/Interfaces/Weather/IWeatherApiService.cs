@@ -9,7 +9,7 @@ namespace ExadelMentorship.BusinessLogic.Interfaces
     {
         public Task<double> GetTemperatureByCityName(string name);
         public Task<Coordinate> GetCoordinateByCityName(string name);
-        public Task<IEnumerable<City>> GetFutureTemperatureByCoordinateAndDayQuantity(Coordinate coordinate, int day);
+        public Task<IEnumerable<City>> GetFutureTemperatureByCoordinateAndDayQuantity(Coordinate coordinate, int day, string name);
         public Task<MaxTempCityInfo> GetTemperatureByCityNameForMaxTemp(string name, CancellationToken token);
     }
 }

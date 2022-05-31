@@ -24,7 +24,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
             var coordinate = await _weatherApiService.GetCoordinateByCityName(futureWeather.CityName);
             var dayQuantity = DayQuantityValidation(futureWeather.DayQuantity);
 
-            return await _weatherApiService.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, dayQuantity);
+            return await _weatherApiService.GetFutureTemperatureByCoordinateAndDayQuantity(coordinate, dayQuantity, futureWeather.CityName);
         }
 
         private int DayQuantityValidation(string dayQuantity)
@@ -38,9 +38,9 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
             {
                 throw new FormatException("Day quantity should be number");
             }
-
-            int min = Int32.Parse(_configuration["MinForecastDay"]);
-            int max = Int32.Parse(_configuration["MaxForecastDay"]);
+            
+            int min = _configuration.GetValue<int>("MinForecastDay");
+            int max = _configuration.GetValue<int>("MaxForecastDay");
             if (min > day || max < day)
             {
                 throw new NotFoundException("Requested day quantity is not in configuration range");
