@@ -16,7 +16,6 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather
     {
         IRWOperation _rwOperation;
         private readonly IWeatherApiService _weatherApiService;
-        private readonly IConfiguration _configuration;
         private MaxWeatherSettings _maxWeatherSettings;
 
         public MaxWeatherCommandHandler(IRWOperation rwOperation, IWeatherApiService weatherApiService, IOptions<MaxWeatherSettings> maxWeatherSettings)
