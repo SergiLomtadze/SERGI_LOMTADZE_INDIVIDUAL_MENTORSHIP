@@ -1,4 +1,5 @@
 using ExadelMentorship.BusinessLogic;
+using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
 using ExadelMentorship.Persistence;
 using ExadelMentorship.WebApi;
 
@@ -7,8 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddBlServices();
-builder.Services.AddPersistence();
+builder.Services.AddBusinessLogicServices();
+builder.Services.AddPersistenceServices();
+builder.Services.Configure<ForecastDayInfo>(options => builder.Configuration.GetSection("ForecastDayInfo").Bind(options));
 
 var app = builder.Build();
 

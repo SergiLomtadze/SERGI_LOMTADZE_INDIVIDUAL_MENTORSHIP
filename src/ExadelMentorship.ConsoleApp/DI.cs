@@ -21,7 +21,7 @@ namespace ExadelMentorship.ConsoleApp
                 .AddSingleton<IRWOperation, ConsoleOperation>()
                 .AddSingleton<ICommandHandler<MaxWeatherCommand, MaxWeatherCommandResponse>, MaxWeatherCommandHandler>();
 
-            service.AddBlServices();
+            service.AddBusinessLogicServices();
 
             return service.BuildServiceProvider().GetRequiredService<T>();
         }

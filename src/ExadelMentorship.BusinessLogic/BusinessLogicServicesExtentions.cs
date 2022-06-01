@@ -10,7 +10,7 @@ namespace ExadelMentorship.BusinessLogic
 {
     public static class BusinessLogicServicesExtentions
     {
-        public static void AddBlServices(this IServiceCollection services)
+        public static void AddBusinessLogicServices(this IServiceCollection services)
         {
             services.AddSingleton<CommandInvoker>();
         
