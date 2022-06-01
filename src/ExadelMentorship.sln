@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExadelMentorship.Integratio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExadelMentorship.WebApi", "ExadelMentorship.WebApi\ExadelMentorship.WebApi.csproj", "{E3540152-76CF-4112-AF0C-D405C82D2FA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExadelMentorship.Persistence", "ExadelMentorship.Persistence\ExadelMentorship.Persistence.csproj", "{976473D4-F61E-455F-B307-2B29D702EFB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{E3540152-76CF-4112-AF0C-D405C82D2FA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3540152-76CF-4112-AF0C-D405C82D2FA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3540152-76CF-4112-AF0C-D405C82D2FA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{976473D4-F61E-455F-B307-2B29D702EFB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{976473D4-F61E-455F-B307-2B29D702EFB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{976473D4-F61E-455F-B307-2B29D702EFB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{976473D4-F61E-455F-B307-2B29D702EFB3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
