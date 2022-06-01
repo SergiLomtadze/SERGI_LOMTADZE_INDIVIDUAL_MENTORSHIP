@@ -1,10 +1,9 @@
-﻿using ExadelMentorship.BusinessLogic.Exceptions;
+﻿using ExadelMentorship.BusinessLogic;
+using ExadelMentorship.BusinessLogic.Exceptions;
 using ExadelMentorship.BusinessLogic.Features;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
-using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather;
-using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
 using ExadelMentorship.ConsoleApp.Resources;
 using System;
@@ -12,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ExadelMentorship.BusinessLogic
+namespace ExadelMentorship.ConsoleApp
 {
     public class MainJob
     {
