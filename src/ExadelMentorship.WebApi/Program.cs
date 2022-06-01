@@ -10,7 +10,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddBusinessLogicServices();
 builder.Services.AddPersistenceServices();
-builder.Services.Configure<ForecastDayInfo>(options => builder.Configuration.GetSection("ForecastDayInfo").Bind(options));
 
 var app = builder.Build();
 

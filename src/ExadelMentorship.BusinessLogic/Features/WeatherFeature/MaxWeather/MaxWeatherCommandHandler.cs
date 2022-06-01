@@ -2,6 +2,7 @@
 using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,17 +17,18 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather
         IRWOperation _rwOperation;
         private readonly IWeatherApiService _weatherApiService;
         private readonly IConfiguration _configuration;
+        private MaxWeatherSettings _maxWeatherSettings;
 
-        public MaxWeatherCommandHandler(IRWOperation rwOperation, IWeatherApiService weatherApiService, IConfiguration configuration)
+        public MaxWeatherCommandHandler(IRWOperation rwOperation, IWeatherApiService weatherApiService, IOptions<MaxWeatherSettings> maxWeatherSettings)
         {
             _rwOperation = rwOperation;
             _weatherApiService = weatherApiService;
-            _configuration = configuration;
+            _maxWeatherSettings = maxWeatherSettings.Value;
         }
         public async Task<MaxWeatherCommandResponse> Handle(MaxWeatherCommand maxWeather)
         {
             MaxWeatherCommandResponse response = new MaxWeatherCommandResponse();
-            var executionTime = _configuration.GetValue<int>("ExecutionMaxTime");
+            var executionTime = _maxWeatherSettings.ExecutionMaxTime;
             using CancellationTokenSource tokenSource = new CancellationTokenSource(executionTime * 1000);           
             
             var tasks = maxWeather.Cities.Split(',').Select(s => s.Trim())
@@ -50,7 +52,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather
 
             response.MaxTempCityInfoList = tasks.Select(t => t.Result);
 
-            response.Statistic = bool.Parse(_configuration["Statistic"]);
+            response.Statistic = _maxWeatherSettings.Statistic;
 
             return response;
         }

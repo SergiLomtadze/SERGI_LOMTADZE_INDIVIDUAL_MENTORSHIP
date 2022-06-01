@@ -12,8 +12,8 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
     public class FutureWeatherCommandHandler : ICommandHandler<FutureWeatherCommand, IEnumerable<City>>
     {
         private readonly IWeatherApiService _weatherApiService;
-        private ForecastDayInfo _forecastDayInfo;
-        public FutureWeatherCommandHandler(IWeatherApiService weatherApiService, IOptions<ForecastDayInfo> forecastDayInfo)
+        private ForecastDaySettings _forecastDayInfo;
+        public FutureWeatherCommandHandler(IWeatherApiService weatherApiService, IOptions<ForecastDaySettings> forecastDayInfo)
         {
             _weatherApiService = weatherApiService;
             _forecastDayInfo = forecastDayInfo.Value;
