@@ -11,6 +11,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddBusinessLogicServices();
 builder.Services.AddPersistenceServices();
 
+builder.Configuration.AddJsonFile("appsettings.local.json");
+
 var app = builder.Build();
 
 app.UseExceptionHandler(ExceptionHandler.GetExceptionHandlerOptions());

@@ -40,8 +40,8 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
                 throw new FormatException("Day quantity should be number");
             }
 
-            int min = _forecastDayInfo.MaxForecastDay;
-            int max = _forecastDayInfo.MinForecastDay;
+            int min = _forecastDayInfo.MinForecastDay;
+            int max = _forecastDayInfo.MaxForecastDay;
             if (min > day || max < day)
             {
                 throw new NotFoundException("Requested day quantity is not in configuration range");
