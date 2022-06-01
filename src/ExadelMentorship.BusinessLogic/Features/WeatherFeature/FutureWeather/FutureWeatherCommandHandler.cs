@@ -2,6 +2,7 @@
 using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,11 +12,11 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
     public class FutureWeatherCommandHandler : ICommandHandler<FutureWeatherCommand, IEnumerable<City>>
     {
         private readonly IWeatherApiService _weatherApiService;
-        private readonly IConfiguration _configuration;
-        public FutureWeatherCommandHandler(IWeatherApiService weatherApiService, IConfiguration configuration)
+        private ForecastDaySettings _forecastDayInfo;
+        public FutureWeatherCommandHandler(IWeatherApiService weatherApiService, IOptions<ForecastDaySettings> forecastDayInfo)
         {
             _weatherApiService = weatherApiService;
-            _configuration = configuration;
+            _forecastDayInfo = forecastDayInfo.Value;
         }
 
         public async Task<IEnumerable<City>> Handle(FutureWeatherCommand futureWeather)
@@ -38,9 +39,9 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
             {
                 throw new FormatException("Day quantity should be number");
             }
-            
-            int min = _configuration.GetValue<int>("MinForecastDay");
-            int max = _configuration.GetValue<int>("MaxForecastDay");
+
+            int min = _forecastDayInfo.MaxForecastDay;
+            int max = _forecastDayInfo.MinForecastDay;
             if (min > day || max < day)
             {
                 throw new NotFoundException("Requested day quantity is not in configuration range");

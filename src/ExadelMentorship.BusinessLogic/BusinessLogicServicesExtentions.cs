@@ -1,6 +1,7 @@
 ﻿using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
+using ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather;
 using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,7 +11,7 @@ namespace ExadelMentorship.BusinessLogic
 {
     public static class BusinessLogicServicesExtentions
     {
-        public static void AddBlServices(this IServiceCollection services)
+        public static void AddBusinessLogicServices(this IServiceCollection services)
         {
             services.AddSingleton<CommandInvoker>();
         
@@ -21,6 +22,10 @@ namespace ExadelMentorship.BusinessLogic
             services.AddSingleton<ICommandHandler<FutureWeatherCommand, IEnumerable<City>>, FutureWeatherCommandHandler>();           
 
             services.AddHttpClient();
+
+            services.AddOptions<ForecastDaySettings>().BindConfiguration(nameof(ForecastDaySettings));
+
+            services.AddOptions<MaxWeatherSettings>().BindConfiguration(nameof(MaxWeatherSettings));
         }
     }
 }

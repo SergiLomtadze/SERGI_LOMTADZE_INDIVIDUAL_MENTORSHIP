@@ -7,7 +7,7 @@ namespace ExadelMentorship.Persistence
 {
     public static class PersistenceServiceExtentions
     {
-        public static void AddPersistence(this IServiceCollection services)
+        public static void AddPersistenceServices(this IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>((s, option) =>
                 option.UseSqlServer(s.GetRequiredService<IConfiguration>().GetConnectionString("DefaultConnection")));
