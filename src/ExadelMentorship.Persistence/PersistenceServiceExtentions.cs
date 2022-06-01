@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace ExadelMentorship.Persistence
 {
-    public static class DependencyInjection
+    public static class PersistenceServiceExtentions
     {
         public static void AddPersistence(this IServiceCollection services, IConfiguration configuration)
         {

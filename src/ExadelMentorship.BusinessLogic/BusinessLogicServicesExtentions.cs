@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace ExadelMentorship.BusinessLogic
 {
-    public static class ServicesExtentions
+    public static class BusinessLogicServicesExtentions
     {
         public static void AddBlServices(this IServiceCollection services)
         {
