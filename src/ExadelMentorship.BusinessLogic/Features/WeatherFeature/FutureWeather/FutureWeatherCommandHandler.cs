@@ -1,11 +1,11 @@
 ﻿using ExadelMentorship.BusinessLogic.Exceptions;
 using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ExadelMentorship.BusinessLogic.Services;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
 {
@@ -21,7 +21,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
 
         public async Task<IEnumerable<City>> Handle(FutureWeatherCommand futureWeather)
         {
-            WeatherHelper.ValidateCityName(new City { Name = futureWeather.CityName });
+            WeatherHelperService.ValidateCityName(new City { Name = futureWeather.CityName });
             var coordinate = await _weatherApiService.GetCoordinateByCityName(futureWeather.CityName);
             var dayQuantity = DayQuantityValidation(futureWeather.DayQuantity);
 

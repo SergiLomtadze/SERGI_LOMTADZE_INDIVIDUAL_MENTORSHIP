@@ -1,6 +1,7 @@
 ﻿
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Models;
+using ExadelMentorship.BusinessLogic.Services;
 using Microsoft.Extensions.Options;
 using Moq;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace ExadelMentorship.UnitTests.Features
             //Arrange
 
             //Act
-            var result = WeatherHelper.GetCommentByTemperature(-5);
+            var result = WeatherHelperService.GetCommentByTemperature(-5);
 
             //Assert
             Assert.Equal("Dress warmly",result);
