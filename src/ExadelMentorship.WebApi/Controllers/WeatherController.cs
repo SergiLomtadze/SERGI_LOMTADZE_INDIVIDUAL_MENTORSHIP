@@ -12,14 +12,17 @@ namespace ExadelMentorship.WebApi.Controllers
     public class WeatherController : ControllerBase
     {
         private readonly CommandInvoker _commandInvoker;
-        public WeatherController(CommandInvoker commandInvoker)
+        private readonly ILogger<WeatherController> _logger;
+        public WeatherController(CommandInvoker commandInvoker, ILogger<WeatherController> logger)
         {
             _commandInvoker = commandInvoker;
+            _logger = logger;
         }
 
         [HttpGet("currentWeather/{cityName}")]
         public Task<CurrentWeatherCommandResponse> GetCurrentWeather([FromRoute] string cityName)
         {
+            _logger.LogInformation($"inputed city: {cityName}");
             return _commandInvoker.Invoke
             (
                 new CurrentWeatherCommand
