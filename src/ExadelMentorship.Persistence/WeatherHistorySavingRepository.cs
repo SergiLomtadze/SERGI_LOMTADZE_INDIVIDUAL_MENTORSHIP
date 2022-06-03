@@ -8,17 +8,14 @@ namespace ExadelMentorship.Persistence
     public class WeatherHistorySavingRepository : IWeatherHistorySavingRepository
     {
         private readonly ApplicationDbContext _dbContext;
-        private readonly IWeatherApiService _weatherApiService;
 
-        public WeatherHistorySavingRepository(ApplicationDbContext context, IWeatherApiService weatherApiService)
+        public WeatherHistorySavingRepository(ApplicationDbContext context)
         {
             _dbContext = context;
-            _weatherApiService = weatherApiService;
         }
 
-        public async Task SaveByCityNameAsync(string cityName)
+        public async Task SaveInDbAsync(string cityName, double temperature)
         {
-            var temperature = await _weatherApiService.GetTemperatureByCityName(cityName);
             await _dbContext.AddAsync(new WeatherHistory
             {
                 CityName = cityName,
