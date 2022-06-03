@@ -2,7 +2,6 @@
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
-using ExadelMentorship.BusinessLogic.Interfaces.Weather;
 using ExadelMentorship.BusinessLogic.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,11 +12,9 @@ namespace ExadelMentorship.WebApi.Controllers
     public class WeatherController : ControllerBase
     {
         private readonly CommandInvoker _commandInvoker;
-        private IWeatherSavingService _weatherSaving;
-        public WeatherController(CommandInvoker commandInvoker, IWeatherSavingService weatherSaving)
+        public WeatherController(CommandInvoker commandInvoker)
         {
             _commandInvoker = commandInvoker;
-            _weatherSaving = weatherSaving;
         }
 
         [HttpGet("currentWeather/{cityName}")]

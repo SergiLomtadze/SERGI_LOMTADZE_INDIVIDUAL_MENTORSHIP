@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ExadelMentorship.DataAccess\ExadelMentorship.DataAccess.csproj" />
+    <ProjectReference Include="..\ExadelMentorship.BusinessLogic\ExadelMentorship.BusinessLogic.csproj" />
   </ItemGroup>
 
 </Project>

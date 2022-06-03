@@ -13,7 +13,7 @@ namespace ExadelMentorship.Persistence
             services.AddDbContext<ApplicationDbContext>((s, option) =>
                 option.UseSqlServer(s.GetRequiredService<IConfiguration>().GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IWeatherHistoryRepository, WeatherHistoryRepository>();
+            services.AddScoped<IWeatherHistorySavingRepository, WeatherHistorySavingRepository>();
         }
     }
 }

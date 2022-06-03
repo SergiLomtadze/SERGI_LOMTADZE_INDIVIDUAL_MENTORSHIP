@@ -3,9 +3,8 @@ using System.Threading.Tasks;
 
 namespace ExadelMentorship.DataAccess
 {
-    public interface IWeatherHistoryRepository
+    public interface IWeatherHistorySavingRepository
     {
-        Task AddAsync(WeatherHistory entity);
-        Task SaveAsync();
+        Task SaveByCityNameAsync(string cityName);
     }
 }

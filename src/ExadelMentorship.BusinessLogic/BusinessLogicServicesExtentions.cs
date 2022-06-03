@@ -2,7 +2,6 @@
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
 using ExadelMentorship.BusinessLogic.Interfaces;
-using ExadelMentorship.BusinessLogic.Interfaces.Weather;
 using ExadelMentorship.BusinessLogic.Models;
 using ExadelMentorship.BusinessLogic.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,8 +26,6 @@ namespace ExadelMentorship.BusinessLogic
             services.AddOptions<ForecastDaySettings>().BindConfiguration(nameof(ForecastDaySettings));
 
             services.AddOptions<MaxWeatherSettings>().BindConfiguration(nameof(MaxWeatherSettings));
-
-            services.AddScoped<IWeatherSavingService, WeatherSavingService>();
         }
     }
 }
