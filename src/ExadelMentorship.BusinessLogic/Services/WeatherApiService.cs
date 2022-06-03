@@ -1,4 +1,5 @@
 ﻿using ExadelMentorship.BusinessLogic.Exceptions;
+using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
 using Newtonsoft.Json;
@@ -10,7 +11,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
+namespace ExadelMentorship.BusinessLogic.Services
 {
     public class WeatherApiService : IWeatherApiService
     {
@@ -43,7 +44,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
         }
         public async Task<Coordinate> GetCoordinateByCityName(string name)
         {
-            await WeatherHelper.CityNameExistenceValidation(name, _httpClientFactory);
+            await WeatherHelperService.CityNameExistenceValidation(name, _httpClientFactory);
 
             var url = $"http://api.openweathermap.org/geo/1.0/direct?q={name}&limit=1&appid=7e66067382ed6a093c3e4b6c22940505";
             var httpClient = _httpClientFactory.CreateClient();
@@ -96,7 +97,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
                     {
                         Name = name,
                         Temperature = temp,
-                        Comment = WeatherHelper.GetCommentByTemperature(temp),
+                        Comment = WeatherHelperService.GetCommentByTemperature(temp),
                         Date = start
                     });
                 }
@@ -107,7 +108,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
                 throw new NotFoundException($"Error: {(int)result.StatusCode}");
             }
         }
-        public async Task<MaxTempCityInfo> GetTemperatureByCityNameForMaxTemp(string name,CancellationToken token)
+        public async Task<MaxTempCityInfo> GetTemperatureByCityNameForMaxTemp(string name, CancellationToken token)
         {
             var watch = new Stopwatch();
             watch.Start();
@@ -121,13 +122,13 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
                 var json = await result.Content.ReadAsStringAsync();
                 JObject obj = JsonConvert.DeserializeObject<JObject>(json);
                 JObject mainObj = obj["main"] as JObject;
-               
+
                 watch.Stop();
                 return new MaxTempCityInfo
                 {
                     Name = name,
                     Temperature = (double)mainObj["temp"],
-                    DurationTime  = watch.ElapsedMilliseconds
+                    DurationTime = watch.ElapsedMilliseconds
                 };
             }
             else

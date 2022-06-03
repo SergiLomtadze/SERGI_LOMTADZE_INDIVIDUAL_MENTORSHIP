@@ -1,14 +1,13 @@
 ﻿using ExadelMentorship.BusinessLogic.Exceptions;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using ExadelMentorship.BusinessLogic.Models;
-using FluentValidation;
 using FluentValidation.Results;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
+namespace ExadelMentorship.BusinessLogic.Services
 {
-    public static class WeatherHelper
+    public static class WeatherHelperService
     {
         public static string GetCommentByTemperature(double temperature)
         {

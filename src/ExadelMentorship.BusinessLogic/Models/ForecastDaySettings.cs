@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
+namespace ExadelMentorship.BusinessLogic.Models
 {
     public class ForecastDaySettings
     {

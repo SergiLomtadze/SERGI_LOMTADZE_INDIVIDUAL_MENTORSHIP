@@ -1,4 +1,5 @@
-﻿using ExadelMentorship.Persistence.Context;
+﻿using ExadelMentorship.DataAccess;
+using ExadelMentorship.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,8 @@ namespace ExadelMentorship.Persistence
         {
             services.AddDbContext<ApplicationDbContext>((s, option) =>
                 option.UseSqlServer(s.GetRequiredService<IConfiguration>().GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IWeatherHistorySavingRepository, WeatherHistorySavingRepository>();
         }
     }
 }

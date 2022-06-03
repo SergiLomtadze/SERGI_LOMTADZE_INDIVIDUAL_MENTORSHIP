@@ -3,7 +3,6 @@ using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
 using ExadelMentorship.BusinessLogic.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExadelMentorship.WebApi.Controllers
@@ -28,7 +27,6 @@ namespace ExadelMentorship.WebApi.Controllers
                     CityName = cityName
                 }
             );
-
         }
 
         [HttpGet("currentWeather/{cityName}/days/{dayQuantity}")]
@@ -42,7 +40,6 @@ namespace ExadelMentorship.WebApi.Controllers
                     DayQuantity = dayQuantity
                 }
             );
-
         }
     }
 }

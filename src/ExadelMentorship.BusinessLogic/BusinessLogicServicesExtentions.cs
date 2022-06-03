@@ -1,9 +1,9 @@
 ﻿using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
-using ExadelMentorship.BusinessLogic.Features.WeatherFeature.MaxWeather;
 using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
+using ExadelMentorship.BusinessLogic.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 

@@ -1,5 +1,6 @@
 ﻿using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using ExadelMentorship.BusinessLogic.Interfaces;
+using ExadelMentorship.BusinessLogic.Services;
 using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
@@ -17,9 +18,9 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature
             CurrentWeatherCommandResponse response = new CurrentWeatherCommandResponse();
             response.Name = currentWeatherCommand.CityName;
 
-            WeatherHelper.ValidateCurrentWeather(response);
+            WeatherHelperService.ValidateCurrentWeather(response);
             response.Temperature = await _weatherApiService.GetTemperatureByCityName(response.Name);
-            response.Comment = WeatherHelper.GetCommentByTemperature(response.Temperature);            
+            response.Comment = WeatherHelperService.GetCommentByTemperature(response.Temperature);            
             
             return response;
         }
