@@ -12,14 +12,17 @@ namespace ExadelMentorship.WebApi.Controllers
     public class WeatherController : ControllerBase
     {
         private readonly CommandInvoker _commandInvoker;
-        public WeatherController(CommandInvoker commandInvoker)
+        private readonly ILogger<WeatherController> _logger;
+        public WeatherController(CommandInvoker commandInvoker, ILogger<WeatherController> logger)
         {
             _commandInvoker = commandInvoker;
+            _logger = logger;
         }
 
         [HttpGet("currentWeather/{cityName}")]
         public Task<CurrentWeatherCommandResponse> GetCurrentWeather([FromRoute] string cityName)
         {
+            _logger.LogInformation($"requested city for current weather: {cityName}");
             return _commandInvoker.Invoke
             (
                 new CurrentWeatherCommand
@@ -32,6 +35,7 @@ namespace ExadelMentorship.WebApi.Controllers
         [HttpGet("currentWeather/{cityName}/days/{dayQuantity}")]
         public Task<IEnumerable<City>> GetFutureWeather([FromRoute] string cityName, [FromRoute] string dayQuantity)
         {
+            _logger.LogInformation($"requested city for future weather: {cityName}, requested days quantity: {dayQuantity}");
             return _commandInvoker.Invoke
             (
                 new FutureWeatherCommand

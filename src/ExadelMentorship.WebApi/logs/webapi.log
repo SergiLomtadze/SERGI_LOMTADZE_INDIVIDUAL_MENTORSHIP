@@ -1,0 +1,25 @@
+2022-06-03 17:46:54.430 +04:00 [INF] Now listening on: https://localhost:7066
+2022-06-03 17:46:54.439 +04:00 [INF] Now listening on: http://localhost:5066
+2022-06-03 17:46:54.442 +04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-03 17:46:54.442 +04:00 [INF] Hosting environment: Development
+2022-06-03 17:46:54.442 +04:00 [INF] Content root path: D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship.WebApi\
+2022-06-03 17:46:55.053 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/swagger/index.html - -
+2022-06-03 17:46:55.279 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/swagger/index.html - - - 200 - text/html;charset=utf-8 228.7999ms
+2022-06-03 17:46:55.298 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_vs/browserLink - -
+2022-06-03 17:46:55.298 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - -
+2022-06-03 17:46:55.304 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - - - 200 12016 application/javascript;+charset=utf-8 5.5287ms
+2022-06-03 17:46:55.349 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 50.4646ms
+2022-06-03 17:46:55.429 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/swagger/v1/swagger.json - -
+2022-06-03 17:46:55.504 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 75.7005ms
+2022-06-03 17:47:09.699 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/api/Weather/currentWeather/poti - -
+2022-06-03 17:47:09.704 +04:00 [INF] Executing endpoint 'ExadelMentorship.WebApi.Controllers.WeatherController.GetCurrentWeather (ExadelMentorship.WebApi)'
+2022-06-03 17:47:09.728 +04:00 [INF] Route matched with {action = "GetCurrentWeather", controller = "Weather"}. Executing controller action with signature System.Threading.Tasks.Task`1[ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather.CurrentWeatherCommandResponse] GetCurrentWeather(System.String) on controller ExadelMentorship.WebApi.Controllers.WeatherController (ExadelMentorship.WebApi).
+2022-06-03 17:47:09.746 +04:00 [INF] inputed city: poti
+2022-06-03 17:47:09.837 +04:00 [INF] Start processing HTTP request GET "https://api.openweathermap.org/data/2.5/weather?q=poti&appid=7e66067382ed6a093c3e4b6c22940505&units=metric"
+2022-06-03 17:47:09.839 +04:00 [INF] Sending HTTP request GET "https://api.openweathermap.org/data/2.5/weather?q=poti&appid=7e66067382ed6a093c3e4b6c22940505&units=metric"
+2022-06-03 17:47:10.247 +04:00 [INF] Received HTTP response headers after 401.1254ms - 200
+2022-06-03 17:47:10.248 +04:00 [INF] End processing HTTP request after 415.5032ms - 200
+2022-06-03 17:47:10.348 +04:00 [INF] Executing ObjectResult, writing value of type 'ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather.CurrentWeatherCommandResponse'.
+2022-06-03 17:47:10.354 +04:00 [INF] Executed action ExadelMentorship.WebApi.Controllers.WeatherController.GetCurrentWeather (ExadelMentorship.WebApi) in 622.1162ms
+2022-06-03 17:47:10.354 +04:00 [INF] Executed endpoint 'ExadelMentorship.WebApi.Controllers.WeatherController.GetCurrentWeather (ExadelMentorship.WebApi)'
+2022-06-03 17:47:10.355 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/api/Weather/currentWeather/poti - - - 200 - application/json;+charset=utf-8 655.7785ms
