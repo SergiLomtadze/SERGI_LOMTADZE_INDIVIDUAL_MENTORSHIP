@@ -1,6 +1,9 @@
 using ExadelMentorship.BusinessLogic;
+using ExadelMentorship.BusinessLogic.Models;
 using ExadelMentorship.Persistence;
 using ExadelMentorship.WebApi;
+using ExadelMentorship.WebApi.Jobs;
+using Hangfire;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddPersistenceServices();
 builder.Services.AddBusinessLogicServices();
-
+builder.Services.AddJobServices();
 
 builder.Configuration.AddJsonFile("appsettings.local.json");
 
@@ -33,5 +36,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
+app.UseHangfireDashboard("/dashboard");
 app.MapControllers();
 app.Run();

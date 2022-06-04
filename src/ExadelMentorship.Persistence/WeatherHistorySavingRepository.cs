@@ -14,15 +14,15 @@ namespace ExadelMentorship.Persistence
             _dbContext = context;
         }
 
-        public async Task SaveInDbAsync(string cityName, double temperature)
+        public void SaveInDb(string cityName, double temperature)
         {
-            await _dbContext.AddAsync(new WeatherHistory
+            _dbContext.Add(new WeatherHistory
             {
                 CityName = cityName,
                 Temperature = temperature,
                 Time = DateTime.Now
             });
-            await _dbContext.SaveChangesAsync();
+            _dbContext.SaveChanges();
         }
     }
 }

@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ExadelMentorship.BackgroundJobs\ExadelMentorship.BackgroundJobs.csproj" />
     <ProjectReference Include="..\ExadelMentorship.BusinessLogic\ExadelMentorship.BusinessLogic.csproj" />
     <ProjectReference Include="..\ExadelMentorship.Persistence\ExadelMentorship.Persistence.csproj" />
   </ItemGroup>
