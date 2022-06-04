@@ -45,12 +45,5 @@ namespace ExadelMentorship.WebApi.Controllers
                 }
             );
         }
-
-        [HttpGet("Jobs")]
-        public async Task<string> EnableJobs()
-        {
-            await _weatherJob.HistorySaving();
-            return "Jobs Added";
-        }
     }
 }
