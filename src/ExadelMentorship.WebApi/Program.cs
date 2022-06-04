@@ -19,6 +19,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddPersistenceServices();
 builder.Services.AddBusinessLogicServices();
 
+
 builder.Configuration.AddJsonFile("appsettings.local.json");
 
 var app = builder.Build();
