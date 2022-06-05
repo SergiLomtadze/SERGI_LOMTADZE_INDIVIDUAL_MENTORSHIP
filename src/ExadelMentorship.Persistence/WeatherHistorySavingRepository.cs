@@ -14,7 +14,7 @@ namespace ExadelMentorship.Persistence
             _dbContext = context;
         }
 
-        public void SaveInDb(string cityName, double temperature)
+        public async Task SaveInDbAsync(string cityName, double temperature)
         {
             _dbContext.Add(new WeatherHistory
             {
@@ -22,7 +22,7 @@ namespace ExadelMentorship.Persistence
                 Temperature = temperature,
                 Time = DateTime.Now
             });
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
