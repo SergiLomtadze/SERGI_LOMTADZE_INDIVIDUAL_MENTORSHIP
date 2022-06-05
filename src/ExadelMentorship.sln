@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExadelMentorship.WebApi", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExadelMentorship.Persistence", "ExadelMentorship.Persistence\ExadelMentorship.Persistence.csproj", "{976473D4-F61E-455F-B307-2B29D702EFB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExadelMentorship.Jobs", "ExadelMentorship.Jobs\ExadelMentorship.Jobs.csproj", "{C44B8B87-4338-4C72-946E-29678D8AB84A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExadelMentorship.Jobs", "ExadelMentorship.Jobs\ExadelMentorship.Jobs.csproj", "{C44B8B87-4338-4C72-946E-29678D8AB84A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

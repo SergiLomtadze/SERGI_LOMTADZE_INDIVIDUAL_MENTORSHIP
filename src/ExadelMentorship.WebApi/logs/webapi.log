@@ -23,3 +23,452 @@
 2022-06-03 17:47:10.354 +04:00 [INF] Executed action ExadelMentorship.WebApi.Controllers.WeatherController.GetCurrentWeather (ExadelMentorship.WebApi) in 622.1162ms
 2022-06-03 17:47:10.354 +04:00 [INF] Executed endpoint 'ExadelMentorship.WebApi.Controllers.WeatherController.GetCurrentWeather (ExadelMentorship.WebApi)'
 2022-06-03 17:47:10.355 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/api/Weather/currentWeather/poti - - - 200 - application/json;+charset=utf-8 655.7785ms
+2022-06-06 00:21:51.758 +04:00 [INF] Start installing Hangfire SQL objects...
+2022-06-06 00:21:52.025 +04:00 [INF] Hangfire SQL objects installed.
+2022-06-06 00:21:52.147 +04:00 [INF] Starting Hangfire Server using job storage: 'SQL Server: S-LOMTADZE-NB@Hangfire'
+2022-06-06 00:21:52.147 +04:00 [INF] Using the following options for SQL Server job storage: Queue poll interval: 00:00:15.
+2022-06-06 00:21:52.147 +04:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2022-06-06 00:21:52.400 +04:00 [INF] Now listening on: https://localhost:7066
+2022-06-06 00:21:52.400 +04:00 [INF] Now listening on: http://localhost:5066
+2022-06-06 00:21:52.403 +04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-06 00:21:52.403 +04:00 [INF] Hosting environment: Development
+2022-06-06 00:21:52.403 +04:00 [INF] Content root path: D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship.WebApi\
+2022-06-06 00:21:52.426 +04:00 [INF] Server s-lomtadze-nb:6604:3cbe1e06 successfully announced in 261.4819 ms
+2022-06-06 00:21:52.429 +04:00 [INF] Server s-lomtadze-nb:6604:3cbe1e06 is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, SqlServerHeartbeatProcess, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2022-06-06 00:21:52.453 +04:00 [INF] 3 servers were removed due to timeout
+2022-06-06 00:21:52.506 +04:00 [INF] Server s-lomtadze-nb:6604:3cbe1e06 all the dispatchers started
+2022-06-06 00:21:52.950 +04:00 [WRN] Recurring job 'Job_For_Tbilisi' can't be scheduled due to an error and will be retried in 00:00:15.
+System.InvalidOperationException: Recurring job can't be scheduled, see inner exception for details.
+ ---> Hangfire.Common.JobLoadException: Could not load the job. See inner exception for the details.
+ ---> System.InvalidOperationException: The type `ExadelMentorship.Persistence.WeatherHistorySavingRepository` does not contain a method with signature `SaveInDb(String, Double)`
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   --- End of inner exception stack trace ---
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   at Hangfire.RecurringJobEntity..ctor(String recurringJobId, IDictionary`2 recurringJob, ITimeZoneResolver timeZoneResolver, DateTime now)
+   --- End of inner exception stack trace ---
+   at Hangfire.Server.RecurringJobScheduler.ScheduleRecurringJob(BackgroundProcessContext context, IStorageConnection connection, String recurringJobId, RecurringJobEntity recurringJob, DateTime now)
+2022-06-06 00:21:53.030 +04:00 [WRN] Recurring job 'Job_For_Tashkent' can't be scheduled due to an error and will be retried in 00:00:15.
+System.InvalidOperationException: Recurring job can't be scheduled, see inner exception for details.
+ ---> Hangfire.Common.JobLoadException: Could not load the job. See inner exception for the details.
+ ---> System.InvalidOperationException: The type `ExadelMentorship.Persistence.WeatherHistorySavingRepository` does not contain a method with signature `SaveInDb(String, Double)`
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   --- End of inner exception stack trace ---
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   at Hangfire.RecurringJobEntity..ctor(String recurringJobId, IDictionary`2 recurringJob, ITimeZoneResolver timeZoneResolver, DateTime now)
+   --- End of inner exception stack trace ---
+   at Hangfire.Server.RecurringJobScheduler.ScheduleRecurringJob(BackgroundProcessContext context, IStorageConnection connection, String recurringJobId, RecurringJobEntity recurringJob, DateTime now)
+2022-06-06 00:21:53.093 +04:00 [WRN] Recurring job 'Job_For_London' can't be scheduled due to an error and will be retried in 00:00:15.
+System.InvalidOperationException: Recurring job can't be scheduled, see inner exception for details.
+ ---> Hangfire.Common.JobLoadException: Could not load the job. See inner exception for the details.
+ ---> System.InvalidOperationException: The type `ExadelMentorship.Persistence.WeatherHistorySavingRepository` does not contain a method with signature `SaveInDb(String, Double)`
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   --- End of inner exception stack trace ---
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   at Hangfire.RecurringJobEntity..ctor(String recurringJobId, IDictionary`2 recurringJob, ITimeZoneResolver timeZoneResolver, DateTime now)
+   --- End of inner exception stack trace ---
+   at Hangfire.Server.RecurringJobScheduler.ScheduleRecurringJob(BackgroundProcessContext context, IStorageConnection connection, String recurringJobId, RecurringJobEntity recurringJob, DateTime now)
+2022-06-06 00:21:53.094 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/swagger/index.html - -
+2022-06-06 00:21:53.516 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/swagger/index.html - - - 200 - text/html;charset=utf-8 463.7406ms
+2022-06-06 00:21:53.535 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - -
+2022-06-06 00:21:53.539 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - - - 200 12016 application/javascript;+charset=utf-8 3.8171ms
+2022-06-06 00:21:53.677 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_vs/browserLink - -
+2022-06-06 00:21:53.781 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 103.3991ms
+2022-06-06 00:21:53.899 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/swagger/v1/swagger.json - -
+2022-06-06 00:21:53.980 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 81.0158ms
+2022-06-06 00:22:04.643 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/api/Weather/Jobs - -
+2022-06-06 00:22:04.650 +04:00 [INF] Executing endpoint 'ExadelMentorship.WebApi.Controllers.WeatherController.EnableJobs (ExadelMentorship.WebApi)'
+2022-06-06 00:22:04.661 +04:00 [INF] Route matched with {action = "EnableJobs", controller = "Weather"}. Executing controller action with signature System.String EnableJobs() on controller ExadelMentorship.WebApi.Controllers.WeatherController (ExadelMentorship.WebApi).
+2022-06-06 00:22:05.049 +04:00 [INF] Executed action ExadelMentorship.WebApi.Controllers.WeatherController.EnableJobs (ExadelMentorship.WebApi) in 382.3179ms
+2022-06-06 00:22:05.109 +04:00 [INF] Executed endpoint 'ExadelMentorship.WebApi.Controllers.WeatherController.EnableJobs (ExadelMentorship.WebApi)'
+2022-06-06 00:22:05.211 +04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NotSupportedException: Only public methods can be invoked in the background. Ensure your method has the `public` access modifier, and you aren't using explicit interface implementation.
+   at Hangfire.Common.Job.Validate(Type type, String typeParameterName, MethodInfo method, String methodParameterName, Int32 argumentCount, String argumentParameterName)
+   at Hangfire.Common.Job..ctor(Type type, MethodInfo method, Object[] args)
+   at Hangfire.Common.Job.FromExpression(LambdaExpression methodCall, Type explicitType)
+   at Hangfire.Common.Job.FromExpression(Expression`1 methodCall)
+   at Hangfire.RecurringJob.AddOrUpdate(String recurringJobId, Expression`1 methodCall, String cronExpression, TimeZoneInfo timeZone, String queue)
+   at ExadelMentorship.WebApi.Jobs.WeatherJob.HistorySaving() in D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship.Jobs\WeatherJob.cs:line 30
+   at ExadelMentorship.WebApi.Controllers.WeatherController.EnableJobs() in D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship.WebApi\Controllers\WeatherController.cs:line 55
+   at lambda_method15(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2022-06-06 00:22:05.231 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/api/Weather/Jobs - - - 500 - - 588.0067ms
+2022-06-06 00:22:08.167 +04:00 [WRN] Recurring job 'Job_For_London' can't be scheduled due to an error and will be retried in 00:00:15.
+System.InvalidOperationException: Recurring job can't be scheduled, see inner exception for details.
+ ---> Hangfire.Common.JobLoadException: Could not load the job. See inner exception for the details.
+ ---> System.InvalidOperationException: The type `ExadelMentorship.Persistence.WeatherHistorySavingRepository` does not contain a method with signature `SaveInDb(String, Double)`
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   --- End of inner exception stack trace ---
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   at Hangfire.RecurringJobEntity..ctor(String recurringJobId, IDictionary`2 recurringJob, ITimeZoneResolver timeZoneResolver, DateTime now)
+   --- End of inner exception stack trace ---
+   at Hangfire.Server.RecurringJobScheduler.ScheduleRecurringJob(BackgroundProcessContext context, IStorageConnection connection, String recurringJobId, RecurringJobEntity recurringJob, DateTime now)
+2022-06-06 00:22:08.209 +04:00 [WRN] Recurring job 'Job_For_Tashkent' can't be scheduled due to an error and will be retried in 00:00:15.
+System.InvalidOperationException: Recurring job can't be scheduled, see inner exception for details.
+ ---> Hangfire.Common.JobLoadException: Could not load the job. See inner exception for the details.
+ ---> System.InvalidOperationException: The type `ExadelMentorship.Persistence.WeatherHistorySavingRepository` does not contain a method with signature `SaveInDb(String, Double)`
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   --- End of inner exception stack trace ---
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   at Hangfire.RecurringJobEntity..ctor(String recurringJobId, IDictionary`2 recurringJob, ITimeZoneResolver timeZoneResolver, DateTime now)
+   --- End of inner exception stack trace ---
+   at Hangfire.Server.RecurringJobScheduler.ScheduleRecurringJob(BackgroundProcessContext context, IStorageConnection connection, String recurringJobId, RecurringJobEntity recurringJob, DateTime now)
+2022-06-06 00:22:08.248 +04:00 [WRN] Recurring job 'Job_For_Tbilisi' can't be scheduled due to an error and will be retried in 00:00:15.
+System.InvalidOperationException: Recurring job can't be scheduled, see inner exception for details.
+ ---> Hangfire.Common.JobLoadException: Could not load the job. See inner exception for the details.
+ ---> System.InvalidOperationException: The type `ExadelMentorship.Persistence.WeatherHistorySavingRepository` does not contain a method with signature `SaveInDb(String, Double)`
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   --- End of inner exception stack trace ---
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   at Hangfire.RecurringJobEntity..ctor(String recurringJobId, IDictionary`2 recurringJob, ITimeZoneResolver timeZoneResolver, DateTime now)
+   --- End of inner exception stack trace ---
+   at Hangfire.Server.RecurringJobScheduler.ScheduleRecurringJob(BackgroundProcessContext context, IStorageConnection connection, String recurringJobId, RecurringJobEntity recurringJob, DateTime now)
+2022-06-06 00:22:12.241 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/dashboard - -
+2022-06-06 00:22:12.379 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/dashboard - - - 200 - text/html 138.5887ms
+2022-06-06 00:22:12.489 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - -
+2022-06-06 00:22:12.489 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_vs/browserLink - -
+2022-06-06 00:22:12.489 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - - - 200 12016 application/javascript;+charset=utf-8 0.5854ms
+2022-06-06 00:22:12.552 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 63.0694ms
+2022-06-06 00:22:12.975 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - -
+2022-06-06 00:22:12.975 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - - - 200 12016 application/javascript;+charset=utf-8 0.4080ms
+2022-06-06 00:22:14.912 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/dashboard/recurring - -
+2022-06-06 00:22:15.194 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 228
+2022-06-06 00:22:15.224 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/dashboard/recurring - - - 200 - text/html 312.6676ms
+2022-06-06 00:22:15.226 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 228 - 200 - application/json 31.2679ms
+2022-06-06 00:22:15.236 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - -
+2022-06-06 00:22:15.236 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_vs/browserLink - -
+2022-06-06 00:22:15.236 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - - - 200 12016 application/javascript;+charset=utf-8 0.5546ms
+2022-06-06 00:22:15.277 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 40.7757ms
+2022-06-06 00:22:17.311 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:22:17.316 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 5.6713ms
+2022-06-06 00:22:19.345 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:22:19.349 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.2716ms
+2022-06-06 00:22:21.365 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:22:21.369 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.6607ms
+2022-06-06 00:22:23.309 +04:00 [WRN] Recurring job 'Job_For_London' can't be scheduled due to an error and will be retried in 00:00:15.
+System.InvalidOperationException: Recurring job can't be scheduled, see inner exception for details.
+ ---> Hangfire.Common.JobLoadException: Could not load the job. See inner exception for the details.
+ ---> System.InvalidOperationException: The type `ExadelMentorship.Persistence.WeatherHistorySavingRepository` does not contain a method with signature `SaveInDb(String, Double)`
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   --- End of inner exception stack trace ---
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   at Hangfire.RecurringJobEntity..ctor(String recurringJobId, IDictionary`2 recurringJob, ITimeZoneResolver timeZoneResolver, DateTime now)
+   --- End of inner exception stack trace ---
+   at Hangfire.Server.RecurringJobScheduler.ScheduleRecurringJob(BackgroundProcessContext context, IStorageConnection connection, String recurringJobId, RecurringJobEntity recurringJob, DateTime now)
+2022-06-06 00:22:23.350 +04:00 [WRN] Recurring job 'Job_For_Tashkent' can't be scheduled due to an error and will be retried in 00:00:15.
+System.InvalidOperationException: Recurring job can't be scheduled, see inner exception for details.
+ ---> Hangfire.Common.JobLoadException: Could not load the job. See inner exception for the details.
+ ---> System.InvalidOperationException: The type `ExadelMentorship.Persistence.WeatherHistorySavingRepository` does not contain a method with signature `SaveInDb(String, Double)`
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   --- End of inner exception stack trace ---
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   at Hangfire.RecurringJobEntity..ctor(String recurringJobId, IDictionary`2 recurringJob, ITimeZoneResolver timeZoneResolver, DateTime now)
+   --- End of inner exception stack trace ---
+   at Hangfire.Server.RecurringJobScheduler.ScheduleRecurringJob(BackgroundProcessContext context, IStorageConnection connection, String recurringJobId, RecurringJobEntity recurringJob, DateTime now)
+2022-06-06 00:22:23.382 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:22:23.391 +04:00 [WRN] Recurring job 'Job_For_Tbilisi' can't be scheduled due to an error and will be retried in 00:00:15.
+System.InvalidOperationException: Recurring job can't be scheduled, see inner exception for details.
+ ---> Hangfire.Common.JobLoadException: Could not load the job. See inner exception for the details.
+ ---> System.InvalidOperationException: The type `ExadelMentorship.Persistence.WeatherHistorySavingRepository` does not contain a method with signature `SaveInDb(String, Double)`
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   --- End of inner exception stack trace ---
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   at Hangfire.RecurringJobEntity..ctor(String recurringJobId, IDictionary`2 recurringJob, ITimeZoneResolver timeZoneResolver, DateTime now)
+   --- End of inner exception stack trace ---
+   at Hangfire.Server.RecurringJobScheduler.ScheduleRecurringJob(BackgroundProcessContext context, IStorageConnection connection, String recurringJobId, RecurringJobEntity recurringJob, DateTime now)
+2022-06-06 00:22:23.392 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 11.1276ms
+2022-06-06 00:22:25.401 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:22:25.405 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.1304ms
+2022-06-06 00:22:27.410 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:22:27.412 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 1.4506ms
+2022-06-06 00:22:29.417 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:22:29.419 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 2.3688ms
+2022-06-06 00:22:31.440 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:22:31.444 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.8538ms
+2022-06-06 00:22:33.460 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:22:33.465 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 5.0604ms
+2022-06-06 00:22:35.488 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:22:35.492 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.6046ms
+2022-06-06 00:22:37.514 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:22:37.518 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.1898ms
+2022-06-06 00:22:38.464 +04:00 [WRN] Recurring job 'Job_For_London' can't be scheduled due to an error and will be retried in 00:00:15.
+System.InvalidOperationException: Recurring job can't be scheduled, see inner exception for details.
+ ---> Hangfire.Common.JobLoadException: Could not load the job. See inner exception for the details.
+ ---> System.InvalidOperationException: The type `ExadelMentorship.Persistence.WeatherHistorySavingRepository` does not contain a method with signature `SaveInDb(String, Double)`
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   --- End of inner exception stack trace ---
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   at Hangfire.RecurringJobEntity..ctor(String recurringJobId, IDictionary`2 recurringJob, ITimeZoneResolver timeZoneResolver, DateTime now)
+   --- End of inner exception stack trace ---
+   at Hangfire.Server.RecurringJobScheduler.ScheduleRecurringJob(BackgroundProcessContext context, IStorageConnection connection, String recurringJobId, RecurringJobEntity recurringJob, DateTime now)
+2022-06-06 00:22:38.509 +04:00 [WRN] Recurring job 'Job_For_Tashkent' can't be scheduled due to an error and will be retried in 00:00:15.
+System.InvalidOperationException: Recurring job can't be scheduled, see inner exception for details.
+ ---> Hangfire.Common.JobLoadException: Could not load the job. See inner exception for the details.
+ ---> System.InvalidOperationException: The type `ExadelMentorship.Persistence.WeatherHistorySavingRepository` does not contain a method with signature `SaveInDb(String, Double)`
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   --- End of inner exception stack trace ---
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   at Hangfire.RecurringJobEntity..ctor(String recurringJobId, IDictionary`2 recurringJob, ITimeZoneResolver timeZoneResolver, DateTime now)
+   --- End of inner exception stack trace ---
+   at Hangfire.Server.RecurringJobScheduler.ScheduleRecurringJob(BackgroundProcessContext context, IStorageConnection connection, String recurringJobId, RecurringJobEntity recurringJob, DateTime now)
+2022-06-06 00:22:38.550 +04:00 [WRN] Recurring job 'Job_For_Tbilisi' can't be scheduled due to an error and will be retried in 00:00:15.
+System.InvalidOperationException: Recurring job can't be scheduled, see inner exception for details.
+ ---> Hangfire.Common.JobLoadException: Could not load the job. See inner exception for the details.
+ ---> System.InvalidOperationException: The type `ExadelMentorship.Persistence.WeatherHistorySavingRepository` does not contain a method with signature `SaveInDb(String, Double)`
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   --- End of inner exception stack trace ---
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   at Hangfire.RecurringJobEntity..ctor(String recurringJobId, IDictionary`2 recurringJob, ITimeZoneResolver timeZoneResolver, DateTime now)
+   --- End of inner exception stack trace ---
+   at Hangfire.Server.RecurringJobScheduler.ScheduleRecurringJob(BackgroundProcessContext context, IStorageConnection connection, String recurringJobId, RecurringJobEntity recurringJob, DateTime now)
+2022-06-06 00:22:39.527 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:22:39.530 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 2.9041ms
+2022-06-06 00:22:41.551 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:22:41.556 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 5.1049ms
+2022-06-06 00:22:43.577 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:22:43.581 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.3008ms
+2022-06-06 00:22:46.209 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:22:46.213 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.6866ms
+2022-06-06 00:22:49.209 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:22:49.213 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.4177ms
+2022-06-06 00:22:52.195 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:22:52.200 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.7456ms
+2022-06-06 00:22:53.603 +04:00 [WRN] Recurring job 'Job_For_London' can't be scheduled due to an error and will be retried in 00:00:15.
+System.InvalidOperationException: Recurring job can't be scheduled, see inner exception for details.
+ ---> Hangfire.Common.JobLoadException: Could not load the job. See inner exception for the details.
+ ---> System.InvalidOperationException: The type `ExadelMentorship.Persistence.WeatherHistorySavingRepository` does not contain a method with signature `SaveInDb(String, Double)`
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   --- End of inner exception stack trace ---
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   at Hangfire.RecurringJobEntity..ctor(String recurringJobId, IDictionary`2 recurringJob, ITimeZoneResolver timeZoneResolver, DateTime now)
+   --- End of inner exception stack trace ---
+   at Hangfire.Server.RecurringJobScheduler.ScheduleRecurringJob(BackgroundProcessContext context, IStorageConnection connection, String recurringJobId, RecurringJobEntity recurringJob, DateTime now)
+2022-06-06 00:22:53.645 +04:00 [WRN] Recurring job 'Job_For_Tashkent' can't be scheduled due to an error and will be retried in 00:00:15.
+System.InvalidOperationException: Recurring job can't be scheduled, see inner exception for details.
+ ---> Hangfire.Common.JobLoadException: Could not load the job. See inner exception for the details.
+ ---> System.InvalidOperationException: The type `ExadelMentorship.Persistence.WeatherHistorySavingRepository` does not contain a method with signature `SaveInDb(String, Double)`
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   --- End of inner exception stack trace ---
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   at Hangfire.RecurringJobEntity..ctor(String recurringJobId, IDictionary`2 recurringJob, ITimeZoneResolver timeZoneResolver, DateTime now)
+   --- End of inner exception stack trace ---
+   at Hangfire.Server.RecurringJobScheduler.ScheduleRecurringJob(BackgroundProcessContext context, IStorageConnection connection, String recurringJobId, RecurringJobEntity recurringJob, DateTime now)
+2022-06-06 00:22:53.685 +04:00 [WRN] Recurring job 'Job_For_Tbilisi' can't be scheduled due to an error and will be retried in 00:00:15.
+System.InvalidOperationException: Recurring job can't be scheduled, see inner exception for details.
+ ---> Hangfire.Common.JobLoadException: Could not load the job. See inner exception for the details.
+ ---> System.InvalidOperationException: The type `ExadelMentorship.Persistence.WeatherHistorySavingRepository` does not contain a method with signature `SaveInDb(String, Double)`
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   --- End of inner exception stack trace ---
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   at Hangfire.RecurringJobEntity..ctor(String recurringJobId, IDictionary`2 recurringJob, ITimeZoneResolver timeZoneResolver, DateTime now)
+   --- End of inner exception stack trace ---
+   at Hangfire.Server.RecurringJobScheduler.ScheduleRecurringJob(BackgroundProcessContext context, IStorageConnection connection, String recurringJobId, RecurringJobEntity recurringJob, DateTime now)
+2022-06-06 00:22:55.198 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:22:55.209 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 11.1694ms
+2022-06-06 00:22:58.203 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:22:58.207 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 3.7455ms
+2022-06-06 00:23:01.201 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:01.205 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.1038ms
+2022-06-06 00:23:04.207 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:04.211 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.0574ms
+2022-06-06 00:23:07.207 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:07.211 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 3.9771ms
+2022-06-06 00:23:08.747 +04:00 [ERR] Recurring job 'Job_For_London' can't be scheduled due to an error and will be disabled.
+System.InvalidOperationException: Recurring job can't be scheduled, see inner exception for details.
+ ---> Hangfire.Common.JobLoadException: Could not load the job. See inner exception for the details.
+ ---> System.InvalidOperationException: The type `ExadelMentorship.Persistence.WeatherHistorySavingRepository` does not contain a method with signature `SaveInDb(String, Double)`
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   --- End of inner exception stack trace ---
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   at Hangfire.RecurringJobEntity..ctor(String recurringJobId, IDictionary`2 recurringJob, ITimeZoneResolver timeZoneResolver, DateTime now)
+   --- End of inner exception stack trace ---
+   at Hangfire.Server.RecurringJobScheduler.ScheduleRecurringJob(BackgroundProcessContext context, IStorageConnection connection, String recurringJobId, RecurringJobEntity recurringJob, DateTime now)
+2022-06-06 00:23:08.783 +04:00 [ERR] Recurring job 'Job_For_Tashkent' can't be scheduled due to an error and will be disabled.
+System.InvalidOperationException: Recurring job can't be scheduled, see inner exception for details.
+ ---> Hangfire.Common.JobLoadException: Could not load the job. See inner exception for the details.
+ ---> System.InvalidOperationException: The type `ExadelMentorship.Persistence.WeatherHistorySavingRepository` does not contain a method with signature `SaveInDb(String, Double)`
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   --- End of inner exception stack trace ---
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   at Hangfire.RecurringJobEntity..ctor(String recurringJobId, IDictionary`2 recurringJob, ITimeZoneResolver timeZoneResolver, DateTime now)
+   --- End of inner exception stack trace ---
+   at Hangfire.Server.RecurringJobScheduler.ScheduleRecurringJob(BackgroundProcessContext context, IStorageConnection connection, String recurringJobId, RecurringJobEntity recurringJob, DateTime now)
+2022-06-06 00:23:08.817 +04:00 [ERR] Recurring job 'Job_For_Tbilisi' can't be scheduled due to an error and will be disabled.
+System.InvalidOperationException: Recurring job can't be scheduled, see inner exception for details.
+ ---> Hangfire.Common.JobLoadException: Could not load the job. See inner exception for the details.
+ ---> System.InvalidOperationException: The type `ExadelMentorship.Persistence.WeatherHistorySavingRepository` does not contain a method with signature `SaveInDb(String, Double)`
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   --- End of inner exception stack trace ---
+   at Hangfire.Storage.InvocationData.DeserializeJob()
+   at Hangfire.RecurringJobEntity..ctor(String recurringJobId, IDictionary`2 recurringJob, ITimeZoneResolver timeZoneResolver, DateTime now)
+   --- End of inner exception stack trace ---
+   at Hangfire.Server.RecurringJobScheduler.ScheduleRecurringJob(BackgroundProcessContext context, IStorageConnection connection, String recurringJobId, RecurringJobEntity recurringJob, DateTime now)
+2022-06-06 00:23:10.189 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:10.190 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 1.2003ms
+2022-06-06 00:23:13.197 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:13.202 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.3186ms
+2022-06-06 00:23:16.204 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:16.206 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 2.1604ms
+2022-06-06 00:23:19.197 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:19.201 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.4051ms
+2022-06-06 00:23:21.216 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:21.220 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.8247ms
+2022-06-06 00:23:23.245 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:23.249 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.7389ms
+2022-06-06 00:23:25.262 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:25.267 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.6297ms
+2022-06-06 00:23:27.282 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:27.286 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.8660ms
+2022-06-06 00:23:29.308 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:29.312 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.1837ms
+2022-06-06 00:23:31.332 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:31.335 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 2.7229ms
+2022-06-06 00:23:33.352 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:33.356 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.4875ms
+2022-06-06 00:23:35.377 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:35.380 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 3.0522ms
+2022-06-06 00:23:37.387 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:37.388 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 1.8827ms
+2022-06-06 00:23:39.402 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:39.405 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 3.7490ms
+2022-06-06 00:23:41.428 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:41.432 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 3.9182ms
+2022-06-06 00:23:43.443 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:43.447 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.2063ms
+2022-06-06 00:23:45.454 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:45.455 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 1.1389ms
+2022-06-06 00:23:47.463 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:47.468 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.7970ms
+2022-06-06 00:23:49.477 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:49.480 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 3.4151ms
+2022-06-06 00:23:51.490 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:51.494 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.5468ms
+2022-06-06 00:23:53.507 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:53.511 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.5978ms
+2022-06-06 00:23:55.531 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:55.534 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 3.0930ms
+2022-06-06 00:23:57.542 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:23:57.546 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 3.8018ms
+2022-06-06 00:24:01.147 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/recurring/remove application/x-www-form-urlencoded;+charset=UTF-8 80
+2022-06-06 00:24:01.150 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:24:01.160 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 10.5011ms
+2022-06-06 00:24:01.166 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/recurring/remove application/x-www-form-urlencoded;+charset=UTF-8 80 - 204 - - 19.2136ms
+2022-06-06 00:24:01.171 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/dashboard/recurring - -
+2022-06-06 00:24:01.180 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/dashboard/recurring - - - 200 - text/html 8.6703ms
+2022-06-06 00:24:01.193 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - -
+2022-06-06 00:24:01.193 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - - - 200 12016 application/javascript;+charset=utf-8 0.2487ms
+2022-06-06 00:24:01.193 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_vs/browserLink - -
+2022-06-06 00:24:01.227 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 33.4995ms
+2022-06-06 00:24:04.201 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:24:04.206 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 5.0654ms
+2022-06-06 00:24:04.560 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/api/Weather/Jobs - -
+2022-06-06 00:24:04.561 +04:00 [INF] Executing endpoint 'ExadelMentorship.WebApi.Controllers.WeatherController.EnableJobs (ExadelMentorship.WebApi)'
+2022-06-06 00:24:04.561 +04:00 [INF] Route matched with {action = "EnableJobs", controller = "Weather"}. Executing controller action with signature System.String EnableJobs() on controller ExadelMentorship.WebApi.Controllers.WeatherController (ExadelMentorship.WebApi).
+2022-06-06 00:24:04.735 +04:00 [INF] Executed action ExadelMentorship.WebApi.Controllers.WeatherController.EnableJobs (ExadelMentorship.WebApi) in 173.5476ms
+2022-06-06 00:24:04.798 +04:00 [INF] Executed endpoint 'ExadelMentorship.WebApi.Controllers.WeatherController.EnableJobs (ExadelMentorship.WebApi)'
+2022-06-06 00:24:04.875 +04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NotSupportedException: Only public methods can be invoked in the background. Ensure your method has the `public` access modifier, and you aren't using explicit interface implementation.
+   at Hangfire.Common.Job.Validate(Type type, String typeParameterName, MethodInfo method, String methodParameterName, Int32 argumentCount, String argumentParameterName)
+   at Hangfire.Common.Job..ctor(Type type, MethodInfo method, Object[] args)
+   at Hangfire.Common.Job.FromExpression(LambdaExpression methodCall, Type explicitType)
+   at Hangfire.Common.Job.FromExpression(Expression`1 methodCall)
+   at Hangfire.RecurringJob.AddOrUpdate(String recurringJobId, Expression`1 methodCall, String cronExpression, TimeZoneInfo timeZone, String queue)
+   at ExadelMentorship.WebApi.Jobs.WeatherJob.HistorySaving() in D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship.Jobs\WeatherJob.cs:line 30
+   at ExadelMentorship.WebApi.Controllers.WeatherController.EnableJobs() in D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship.WebApi\Controllers\WeatherController.cs:line 55
+   at lambda_method15(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2022-06-06 00:24:04.875 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/api/Weather/Jobs - - - 500 - - 315.7151ms
+2022-06-06 00:24:06.224 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:24:06.226 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 2.6699ms
+2022-06-06 00:24:08.035 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/dashboard/recurring - -
+2022-06-06 00:24:08.052 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/dashboard/recurring - - - 200 - text/html 17.2201ms
+2022-06-06 00:24:08.062 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - -
+2022-06-06 00:24:08.062 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_vs/browserLink - -
+2022-06-06 00:24:08.062 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - - - 200 12016 application/javascript;+charset=utf-8 0.3467ms
+2022-06-06 00:24:08.094 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 31.7484ms
+2022-06-06 00:24:10.115 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:24:10.120 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.9127ms
+2022-06-06 00:24:12.193 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:24:12.197 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.4312ms
+2022-06-06 00:24:13.232 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/api/Weather/Jobs - -
+2022-06-06 00:24:13.232 +04:00 [INF] Executing endpoint 'ExadelMentorship.WebApi.Controllers.WeatherController.EnableJobs (ExadelMentorship.WebApi)'
+2022-06-06 00:24:13.232 +04:00 [INF] Route matched with {action = "EnableJobs", controller = "Weather"}. Executing controller action with signature System.String EnableJobs() on controller ExadelMentorship.WebApi.Controllers.WeatherController (ExadelMentorship.WebApi).
+2022-06-06 00:24:13.360 +04:00 [INF] Executed action ExadelMentorship.WebApi.Controllers.WeatherController.EnableJobs (ExadelMentorship.WebApi) in 127.9423ms
+2022-06-06 00:24:13.390 +04:00 [INF] Executed endpoint 'ExadelMentorship.WebApi.Controllers.WeatherController.EnableJobs (ExadelMentorship.WebApi)'
+2022-06-06 00:24:13.440 +04:00 [ERR] An unhandled exception has occurred while executing the request.
+System.NotSupportedException: Only public methods can be invoked in the background. Ensure your method has the `public` access modifier, and you aren't using explicit interface implementation.
+   at Hangfire.Common.Job.Validate(Type type, String typeParameterName, MethodInfo method, String methodParameterName, Int32 argumentCount, String argumentParameterName)
+   at Hangfire.Common.Job..ctor(Type type, MethodInfo method, Object[] args)
+   at Hangfire.Common.Job.FromExpression(LambdaExpression methodCall, Type explicitType)
+   at Hangfire.Common.Job.FromExpression(Expression`1 methodCall)
+   at Hangfire.RecurringJob.AddOrUpdate(String recurringJobId, Expression`1 methodCall, String cronExpression, TimeZoneInfo timeZone, String queue)
+   at ExadelMentorship.WebApi.Jobs.WeatherJob.HistorySaving() in D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship.Jobs\WeatherJob.cs:line 30
+   at ExadelMentorship.WebApi.Controllers.WeatherController.EnableJobs() in D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship.WebApi\Controllers\WeatherController.cs:line 55
+   at lambda_method15(Closure , Object , Object[] )
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+2022-06-06 00:24:13.441 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/api/Weather/Jobs - - - 500 - - 208.8408ms
+2022-06-06 00:24:15.199 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:24:15.203 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.7375ms
+2022-06-06 00:24:17.222 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:24:17.226 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.7004ms
+2022-06-06 00:24:19.113 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/dashboard/recurring - -
+2022-06-06 00:24:19.120 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/dashboard/recurring - - - 200 - text/html 7.6837ms
+2022-06-06 00:24:19.132 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - -
+2022-06-06 00:24:19.132 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_vs/browserLink - -
+2022-06-06 00:24:19.133 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - - - 200 12016 application/javascript;+charset=utf-8 0.3211ms
+2022-06-06 00:24:19.165 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 32.4065ms
+2022-06-06 00:24:21.182 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:24:21.186 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 4.5981ms
+2022-06-06 00:24:23.197 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
+2022-06-06 00:24:23.198 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 1.3138ms

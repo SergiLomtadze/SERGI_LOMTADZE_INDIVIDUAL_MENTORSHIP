@@ -3,6 +3,7 @@ using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
 using ExadelMentorship.BusinessLogic.Models;
+using ExadelMentorship.WebApi.Jobs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExadelMentorship.WebApi.Controllers
@@ -13,10 +14,12 @@ namespace ExadelMentorship.WebApi.Controllers
     {
         private readonly CommandInvoker _commandInvoker;
         private readonly ILogger<WeatherController> _logger;
-        public WeatherController(CommandInvoker commandInvoker, ILogger<WeatherController> logger)
+        private IWeatherJob _weatherJob;
+        public WeatherController(CommandInvoker commandInvoker, ILogger<WeatherController> logger, IWeatherJob weatherJob)
         {
             _commandInvoker = commandInvoker;
             _logger = logger;
+            _weatherJob = weatherJob;
         }
 
         [HttpGet("currentWeather/{cityName}")]
@@ -44,6 +47,13 @@ namespace ExadelMentorship.WebApi.Controllers
                     DayQuantity = dayQuantity
                 }
             );
+        }
+
+        [HttpGet("Jobs")]
+        public string EnableJobs()
+        {
+            _weatherJob.HistorySaving();
+            return "Jobs Added";
         }
     }
 }
