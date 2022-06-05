@@ -17,6 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddPersistenceServices();
 builder.Services.AddBusinessLogicServices();
+builder.Services.AddJobServices();
 
 
 builder.Configuration.AddJsonFile("appsettings.local.json");
