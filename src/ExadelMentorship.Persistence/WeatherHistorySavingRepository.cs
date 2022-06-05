@@ -16,7 +16,7 @@ namespace ExadelMentorship.Persistence
 
         public async Task SaveInDbAsync(string cityName, double temperature)
         {
-            await _dbContext.AddAsync(new WeatherHistory
+            _dbContext.Add(new WeatherHistory
             {
                 CityName = cityName,
                 Temperature = temperature,
