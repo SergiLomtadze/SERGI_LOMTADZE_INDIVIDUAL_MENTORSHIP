@@ -48,12 +48,5 @@ namespace ExadelMentorship.WebApi.Controllers
                 }
             );
         }
-
-        [HttpGet("Jobs")]
-        public string EnableJobs()
-        {
-            _weatherJob.HistorySaving();
-            return "Jobs Added";
-        }
     }
 }
