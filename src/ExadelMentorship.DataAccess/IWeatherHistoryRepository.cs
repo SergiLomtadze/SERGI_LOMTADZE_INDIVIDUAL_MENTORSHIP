@@ -6,7 +6,7 @@ namespace ExadelMentorship.DataAccess
 {
     public interface IWeatherHistoryRepository
     {
-        IQueryable<WeatherHistory> GetAll();
+        IQueryable<WeatherHistory> GetByCity(string name);
         Task SaveAsync(string cityName, double temperature);
     }
 }
