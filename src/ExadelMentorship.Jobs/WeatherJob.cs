@@ -2,41 +2,41 @@
 using ExadelMentorship.BusinessLogic.Models;
 using ExadelMentorship.DataAccess;
 using Hangfire;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 
 namespace ExadelMentorship.WebApi.Jobs
 {
-    public class WeatherJob : IWeatherJob
+    public class WeatherJob : IHostedService
     {
         private HistorySettingStorage _historySettingStorage;
         private IWeatherApiService _weatherApiService;
-        private IWeatherHistorySavingRepository _weatherHistorySavingRepository;
+        private IServiceProvider _services;
         public WeatherJob(IOptions<HistorySettingStorage> historySettingStorage,
             IWeatherApiService weatherApiService,
-            IWeatherHistorySavingRepository weatherHistorySavingRepository)
+            IServiceProvider services)
         {
             _historySettingStorage = historySettingStorage.Value;
             _weatherApiService = weatherApiService;
-            _weatherHistorySavingRepository = weatherHistorySavingRepository;
+            _services = services;
         }
 
-        public void HistorySaving()
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
+            using var scope = _services.CreateScope();
             foreach (var item in _historySettingStorage.HistorySettings.ToList())
             {
                 string[] time = item.ExecutionTime.Split(":");
+                var temperature = await _weatherApiService.GetTemperatureByCityName(item.City);
                 RecurringJob.AddOrUpdate(
                     $"Job_For_{item.City}",
-                    () => Save(item.City),
+                    () => scope.ServiceProvider.GetRequiredService<IWeatherHistorySavingRepository>().SaveInDbAsync(item.City, temperature),
                     $"0 {time[1]} {time[0]} * * ?"
                 );
             }
         }
 
-        public async Task Save(string cityName)
-        {
-            var temperature = await _weatherApiService.GetTemperatureByCityName(cityName);
-            await _weatherHistorySavingRepository.SaveInDbAsync(cityName, temperature);
-        }
+        public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
     }
 }

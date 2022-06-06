@@ -1,7 +1,10 @@
 using ExadelMentorship.BusinessLogic;
+using ExadelMentorship.BusinessLogic.Models;
 using ExadelMentorship.Persistence;
 using ExadelMentorship.WebApi;
+using ExadelMentorship.WebApi.Jobs;
 using Hangfire;
+using Hangfire.SqlServer;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,8 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddPersistenceServices();
 builder.Services.AddBusinessLogicServices();
 builder.Services.AddJobServices();
-
-
+builder.Services.AddHostedService<WeatherJob>();
 builder.Configuration.AddJsonFile("appsettings.local.json");
 
 var app = builder.Build();

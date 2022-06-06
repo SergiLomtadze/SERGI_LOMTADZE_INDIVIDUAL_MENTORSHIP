@@ -14,7 +14,6 @@ namespace ExadelMentorship.Persistence
                 option.UseSqlServerStorage(s.GetRequiredService<IConfiguration>().GetConnectionString("HangfireConnection")));
             services.AddHangfireServer();
             services.AddOptions<HistorySettingStorage>().BindConfiguration(nameof(HistorySettingStorage));
-            services.AddScoped<IWeatherJob, WeatherJob>();
         }
     }
 }
