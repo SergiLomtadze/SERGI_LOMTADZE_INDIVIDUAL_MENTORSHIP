@@ -1,10 +1,8 @@
 using ExadelMentorship.BusinessLogic;
-using ExadelMentorship.BusinessLogic.Models;
 using ExadelMentorship.Persistence;
 using ExadelMentorship.WebApi;
 using ExadelMentorship.WebApi.Jobs;
 using Hangfire;
-using Hangfire.SqlServer;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);

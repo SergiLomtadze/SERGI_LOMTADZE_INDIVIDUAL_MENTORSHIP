@@ -8,7 +8,7 @@ using Microsoft.Extensions.Options;
 
 namespace ExadelMentorship.WebApi.Jobs
 {
-    public class WeatherJob : IHostedService
+    public class WeatherJob : BackgroundService
     {
         private HistorySettingStorage _historySettingStorage;
         private IWeatherApiService _weatherApiService;
@@ -22,7 +22,7 @@ namespace ExadelMentorship.WebApi.Jobs
             _services = services;
         }
 
-        public async Task StartAsync(CancellationToken cancellationToken)
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             using var scope = _services.CreateScope();
             foreach (var item in _historySettingStorage.HistorySettings.ToList())
@@ -36,7 +36,5 @@ namespace ExadelMentorship.WebApi.Jobs
                 );
             }
         }
-
-        public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
     }
 }
