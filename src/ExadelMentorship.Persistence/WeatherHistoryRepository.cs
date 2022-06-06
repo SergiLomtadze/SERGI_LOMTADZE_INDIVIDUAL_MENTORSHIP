@@ -14,7 +14,7 @@ namespace ExadelMentorship.Persistence
             _dbContext = context;
         }
 
-        public async Task SaveInDbAsync(string cityName, double temperature)
+        public async Task SaveAsync(string cityName, double temperature)
         {
             _dbContext.Add(new WeatherHistory
             {
@@ -27,7 +27,7 @@ namespace ExadelMentorship.Persistence
 
         public IQueryable<WeatherHistory> GetAll()
         {
-            return _dbContext.WeatherHistories.AsQueryable();
+            return _dbContext.WeatherHistories;
         }
     }
 }
