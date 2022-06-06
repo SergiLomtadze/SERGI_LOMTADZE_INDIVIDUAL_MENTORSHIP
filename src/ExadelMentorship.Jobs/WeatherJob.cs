@@ -31,7 +31,7 @@ namespace ExadelMentorship.WebApi.Jobs
                 var temperature = await _weatherApiService.GetTemperatureByCityName(item.City);
                 RecurringJob.AddOrUpdate(
                     $"Job_For_{item.City}",
-                    () => scope.ServiceProvider.GetRequiredService<IWeatherHistorySavingRepository>().SaveInDbAsync(item.City, temperature),
+                    () => scope.ServiceProvider.GetRequiredService<IWeatherHistoryRepository>().SaveInDbAsync(item.City, temperature),
                     $"0 {time[1]} {time[0]} * * ?"
                 );
             }
