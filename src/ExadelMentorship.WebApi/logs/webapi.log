@@ -313,3 +313,57 @@ WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
 2022-06-06 15:23:34.426 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 25.5518ms
 2022-06-06 15:23:36.436 +04:00 [INF] Request starting HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167
 2022-06-06 15:23:36.442 +04:00 [INF] Request finished HTTP/2 POST https://localhost:7066/dashboard/stats application/x-www-form-urlencoded;+charset=UTF-8 167 - 200 - application/json 5.7288ms
+2022-06-06 15:47:20.202 +04:00 [INF] Start installing Hangfire SQL objects...
+2022-06-06 15:47:20.490 +04:00 [INF] Hangfire SQL objects installed.
+2022-06-06 15:47:20.586 +04:00 [INF] Starting Hangfire Server using job storage: 'SQL Server: S-LOMTADZE-NB@Hangfire'
+2022-06-06 15:47:20.586 +04:00 [INF] Using the following options for SQL Server job storage: Queue poll interval: 00:00:15.
+2022-06-06 15:47:20.586 +04:00 [INF] Using the following options for Hangfire Server:
+    Worker count: 20
+    Listening queues: 'default'
+    Shutdown timeout: 00:00:15
+    Schedule polling interval: 00:00:15
+2022-06-06 15:47:20.654 +04:00 [INF] Start processing HTTP request GET "https://api.openweathermap.org/data/2.5/weather?q=Tbilisi&appid=7e66067382ed6a093c3e4b6c22940505&units=metric"
+2022-06-06 15:47:20.657 +04:00 [INF] Sending HTTP request GET "https://api.openweathermap.org/data/2.5/weather?q=Tbilisi&appid=7e66067382ed6a093c3e4b6c22940505&units=metric"
+2022-06-06 15:47:20.865 +04:00 [INF] Now listening on: https://localhost:7066
+2022-06-06 15:47:20.865 +04:00 [INF] Now listening on: http://localhost:5066
+2022-06-06 15:47:20.868 +04:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-06-06 15:47:20.868 +04:00 [INF] Hosting environment: Development
+2022-06-06 15:47:20.868 +04:00 [INF] Content root path: D:\My Info\Programming\Exadel\Mentorship\MainProject\src\ExadelMentorship.WebApi\
+2022-06-06 15:47:20.869 +04:00 [INF] Server s-lomtadze-nb:5140:c5dce0be successfully announced in 255.8672 ms
+2022-06-06 15:47:20.873 +04:00 [INF] Server s-lomtadze-nb:5140:c5dce0be is starting the registered dispatchers: ServerWatchdog, ServerJobCancellationWatcher, ExpirationManager, CountersAggregator, SqlServerHeartbeatProcess, Worker, DelayedJobScheduler, RecurringJobScheduler...
+2022-06-06 15:47:20.893 +04:00 [INF] 2 servers were removed due to timeout
+2022-06-06 15:47:20.942 +04:00 [INF] Server s-lomtadze-nb:5140:c5dce0be all the dispatchers started
+2022-06-06 15:47:21.175 +04:00 [INF] Received HTTP response headers after 510.0854ms - 200
+2022-06-06 15:47:21.176 +04:00 [INF] End processing HTTP request after 537.0159ms - 200
+2022-06-06 15:47:21.517 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/swagger/index.html - -
+2022-06-06 15:47:21.612 +04:00 [INF] Start processing HTTP request GET "https://api.openweathermap.org/data/2.5/weather?q=Tashkent&appid=7e66067382ed6a093c3e4b6c22940505&units=metric"
+2022-06-06 15:47:21.612 +04:00 [INF] Sending HTTP request GET "https://api.openweathermap.org/data/2.5/weather?q=Tashkent&appid=7e66067382ed6a093c3e4b6c22940505&units=metric"
+2022-06-06 15:47:21.684 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/swagger/index.html - - - 200 - text/html;charset=utf-8 167.3125ms
+2022-06-06 15:47:21.703 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - -
+2022-06-06 15:47:21.703 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_vs/browserLink - -
+2022-06-06 15:47:21.706 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - - - 200 12016 application/javascript;+charset=utf-8 2.7303ms
+2022-06-06 15:47:21.730 +04:00 [INF] Received HTTP response headers after 118.1856ms - 200
+2022-06-06 15:47:21.730 +04:00 [INF] End processing HTTP request after 118.3978ms - 200
+2022-06-06 15:47:21.734 +04:00 [INF] Start processing HTTP request GET "https://api.openweathermap.org/data/2.5/weather?q=London&appid=7e66067382ed6a093c3e4b6c22940505&units=metric"
+2022-06-06 15:47:21.734 +04:00 [INF] Sending HTTP request GET "https://api.openweathermap.org/data/2.5/weather?q=London&appid=7e66067382ed6a093c3e4b6c22940505&units=metric"
+2022-06-06 15:47:21.747 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 44.1775ms
+2022-06-06 15:47:21.818 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/swagger/v1/swagger.json - -
+2022-06-06 15:47:21.819 +04:00 [INF] Received HTTP response headers after 85.1015ms - 200
+2022-06-06 15:47:21.819 +04:00 [INF] End processing HTTP request after 85.2363ms - 200
+2022-06-06 15:47:21.887 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 68.7552ms
+2022-06-06 15:47:25.710 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/dashboard - -
+2022-06-06 15:47:25.857 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/dashboard - - - 200 - text/html 147.3218ms
+2022-06-06 15:47:25.867 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - -
+2022-06-06 15:47:25.867 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_vs/browserLink - -
+2022-06-06 15:47:25.868 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - - - 200 12016 application/javascript;+charset=utf-8 0.4773ms
+2022-06-06 15:47:25.898 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 31.1029ms
+2022-06-06 15:47:26.268 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - -
+2022-06-06 15:47:26.268 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_vs/browserLink - -
+2022-06-06 15:47:26.268 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - - - 200 12016 application/javascript;+charset=utf-8 0.7995ms
+2022-06-06 15:47:26.307 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 39.0325ms
+2022-06-06 15:47:28.181 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/dashboard/recurring - -
+2022-06-06 15:47:28.227 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/dashboard/recurring - - - 200 - text/html 45.4426ms
+2022-06-06 15:47:28.237 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - -
+2022-06-06 15:47:28.238 +04:00 [INF] Request starting HTTP/2 GET https://localhost:7066/_vs/browserLink - -
+2022-06-06 15:47:28.238 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_framework/aspnetcore-browser-refresh.js - - - 200 12016 application/javascript;+charset=utf-8 0.3319ms
+2022-06-06 15:47:28.270 +04:00 [INF] Request finished HTTP/2 GET https://localhost:7066/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 32.3974ms
