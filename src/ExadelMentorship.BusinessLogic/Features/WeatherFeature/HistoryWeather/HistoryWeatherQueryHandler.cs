@@ -25,10 +25,13 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.HistoryWeather
                     b.Time.Date >= query.From.Date &&
                     b.Time.Date <= query.To.Date);
             }
+            
+            //will be removed in next PR, added just to have fake await inside Task             
+            await Task.Delay(1);
 
             return new HistoryWeatherQueryResponse
             {
-                //implementation will be in next PR
+                //real await will be here in next PR
             };
         }
     }
