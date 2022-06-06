@@ -10,7 +10,7 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.HistoryWeather
     public class HistoryWeatherQueryHandler : ICommandHandler<HistoryWeatherQuery, IEnumerable<HistoryWeatherQueryResponse>>
     {
         private IWeatherHistoryRepository _weatherHistoryRepository;
-        public HistoryWeatherQueryHandler(IWeatherHistoryRepository weatherHistoryRepository, IServiceProvider services)
+        public HistoryWeatherQueryHandler(IWeatherHistoryRepository weatherHistoryRepository)
         {
             _weatherHistoryRepository = weatherHistoryRepository;
         }
