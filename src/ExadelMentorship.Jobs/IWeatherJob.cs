@@ -2,6 +2,6 @@
 {
     public interface IWeatherJob
     {
-        Task HistorySaving();
+        void HistorySaving();
     }
 }

@@ -1,6 +1,7 @@
 using ExadelMentorship.BusinessLogic;
 using ExadelMentorship.Persistence;
 using ExadelMentorship.WebApi;
+using Hangfire;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,5 +35,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
+app.UseHangfireDashboard("/dashboard");
 app.MapControllers();
 app.Run();
