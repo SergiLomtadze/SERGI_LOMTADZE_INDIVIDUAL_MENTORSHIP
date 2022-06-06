@@ -5,16 +5,16 @@ using ExadelMentorship.Persistence.Context;
 
 namespace ExadelMentorship.Persistence
 {
-    public class WeatherHistorySavingRepository : IWeatherHistorySavingRepository
+    public class WeatherHistoryRepository : IWeatherHistoryRepository
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public WeatherHistorySavingRepository(ApplicationDbContext context)
+        public WeatherHistoryRepository(ApplicationDbContext context)
         {
             _dbContext = context;
         }
 
-        public async Task SaveInDbAsync(string cityName, double temperature)
+        public async Task SaveAsync(string cityName, double temperature)
         {
             _dbContext.Add(new WeatherHistory
             {
@@ -23,6 +23,11 @@ namespace ExadelMentorship.Persistence
                 Time = DateTime.Now
             });
             await _dbContext.SaveChangesAsync();
+        }
+
+        public IQueryable<WeatherHistory> GetAll()
+        {
+            return _dbContext.WeatherHistories;
         }
     }
 }
