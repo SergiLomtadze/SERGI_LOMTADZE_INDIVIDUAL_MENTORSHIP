@@ -10,7 +10,7 @@ namespace ExadelMentorship.WebApi
         {
             return new ExceptionHandlerOptions()
             {
-                ExceptionHandler = (c) =>
+                ExceptionHandler = async (c) =>
                 {
                     var exception = c.Features.Get<IExceptionHandlerFeature>();
                     var statusCode = exception?.Error switch
@@ -21,9 +21,7 @@ namespace ExadelMentorship.WebApi
                     };
                     c.Response.StatusCode = statusCode;
                     var message = exception is not null ? exception.Error.Message : String.Empty;
-                    c.Response.WriteAsync(message);
-                   
-                    return Task.CompletedTask;
+                    await c.Response.WriteAsync(message);
                 }
             };
         }
