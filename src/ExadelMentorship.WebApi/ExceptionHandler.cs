@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
+﻿using ExadelMentorship.BusinessLogic.Exceptions;
+using FluentValidation;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
 
 namespace ExadelMentorship.WebApi
 {
@@ -8,20 +11,33 @@ namespace ExadelMentorship.WebApi
         {
             return new ExceptionHandlerOptions()
             {
-                ExceptionHandler = (c) =>
+                ExceptionHandler = async (c) =>
                 {
                     var exception = c.Features.Get<IExceptionHandlerFeature>();
-                    var statusCode = exception?.Error.GetType().Name switch
+                    if (exception is not null)
                     {
-                        "NotFoundException" => StatusCodes.Status404NotFound,
-                        "FormatException" => StatusCodes.Status400BadRequest,
-                        _ => StatusCodes.Status500InternalServerError
-                    };
-                    c.Response.StatusCode = statusCode;
-                    var message = exception is not null ? exception.Error.Message : String.Empty;
-                    c.Response.WriteAsync(message);
+                        int statusCode;
+                        
+                        switch (exception?.Error)
+                        {
+                            case NotFoundException:
+                                statusCode = StatusCodes.Status404NotFound;
+                                await c.Response.WriteAsync(exception.Error.Message);
+                                break;
+                            case ValidationException:
+                                statusCode = StatusCodes.Status400BadRequest;
+                                var validationException = (ValidationException)exception.Error;
+                                await c.Response.WriteAsJsonAsync(validationException.Errors);
+                                break;
+                            default:
+                                statusCode = StatusCodes.Status500InternalServerError;
+                                var message = exception?.Error.Message;
+                                await c.Response.WriteAsync(message??string.Empty);
+                                break;
+                        };
 
-                    return Task.CompletedTask;
+                        c.Response.StatusCode = statusCode;
+                    }
                 }
             };
         }
