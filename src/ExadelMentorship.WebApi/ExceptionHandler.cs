@@ -17,26 +17,26 @@ namespace ExadelMentorship.WebApi
                     if (exception is not null)
                     {
                         int statusCode;
-                        string message = string.Empty;
+                        
                         switch (exception?.Error)
                         {
                             case NotFoundException:
                                 statusCode = StatusCodes.Status404NotFound;
-                                message = exception.Error.Message;
+                                await c.Response.WriteAsync(exception.Error.Message);
                                 break;
                             case ValidationException:
                                 statusCode = StatusCodes.Status400BadRequest;
                                 var validationException = (ValidationException)exception.Error;
-                                var err = validationException.Errors;
-                                await c.Response.WriteAsync(err.ToString());
+                                await c.Response.WriteAsJsonAsync(validationException.Errors);
                                 break;
                             default:
                                 statusCode = StatusCodes.Status500InternalServerError;
-                                message = exception.Error.Message;
+                                var message = exception?.Error.Message;
+                                await c.Response.WriteAsync(message??string.Empty);
                                 break;
                         };
+
                         c.Response.StatusCode = statusCode;
-                        await c.Response.WriteAsync(message);
                     }
                 }
             };
