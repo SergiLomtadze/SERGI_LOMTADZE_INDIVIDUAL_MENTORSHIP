@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ExadelMentorship.BusinessLogic.Services;
+using FluentValidation;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
 {
@@ -37,14 +38,14 @@ namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
             }
             catch (Exception)
             {
-                throw new FormatException("Day quantity should be number");
+                throw new ValidationException("Day quantity should be number");
             }
 
             int min = _forecastDayInfo.MinForecastDay;
             int max = _forecastDayInfo.MaxForecastDay;
             if (min > day || max < day)
             {
-                throw new NotFoundException("Requested day quantity is not in configuration range");
+                throw new ValidationException("Requested day quantity is not in configuration range");
             }
             return day;
 
