@@ -1,6 +1,7 @@
 ﻿using ExadelMentorship.BusinessLogic.Exceptions;
 using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
 
 namespace ExadelMentorship.WebApi
 {
@@ -13,15 +14,30 @@ namespace ExadelMentorship.WebApi
                 ExceptionHandler = async (c) =>
                 {
                     var exception = c.Features.Get<IExceptionHandlerFeature>();
-                    var statusCode = exception?.Error switch
+                    if (exception is not null)
                     {
-                        NotFoundException => StatusCodes.Status404NotFound,
-                        ValidationException => StatusCodes.Status400BadRequest,
-                        _ => StatusCodes.Status500InternalServerError
-                    };
-                    c.Response.StatusCode = statusCode;
-                    var message = exception is not null ? exception.Error.Message : String.Empty;
-                    await c.Response.WriteAsync(message);
+                        int statusCode;
+                        string message = string.Empty;
+                        switch (exception?.Error)
+                        {
+                            case NotFoundException:
+                                statusCode = StatusCodes.Status404NotFound;
+                                message = exception.Error.Message;
+                                break;
+                            case ValidationException:
+                                statusCode = StatusCodes.Status400BadRequest;
+                                var validationException = (ValidationException)exception.Error;
+                                var err = validationException.Errors;
+                                await c.Response.WriteAsync(err.ToString());
+                                break;
+                            default:
+                                statusCode = StatusCodes.Status500InternalServerError;
+                                message = exception.Error.Message;
+                                break;
+                        };
+                        c.Response.StatusCode = statusCode;
+                        await c.Response.WriteAsync(message);
+                    }
                 }
             };
         }
