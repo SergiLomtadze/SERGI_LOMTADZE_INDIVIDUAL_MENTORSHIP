@@ -2,6 +2,7 @@
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
+using ExadelMentorship.BusinessLogic.Features.WeatherFeature.HistoryWeather;
 using ExadelMentorship.BusinessLogic.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,6 +33,26 @@ namespace ExadelMentorship.WebApi.Controllers
             );
         }
 
+        [HttpGet("historyWeather/{cityName}")]
+        public Task<IEnumerable<HistoryWeatherQueryResponse>> GetHistoryWeatherByCity(
+            [FromRoute] string cityName,
+            DateTime from,
+            DateTime to
+            )
+        {
+            _logger.LogInformation($"requested city for history weather: {cityName}");
+
+            return _commandInvoker.Invoke
+            (
+                new HistoryWeatherQuery
+                {
+                    CityName = cityName,
+                    From = from,
+                    To = to
+                }
+            );
+        }
+
         [HttpGet("currentWeather/{cityName}/days/{dayQuantity}")]
         public Task<IEnumerable<City>> GetFutureWeather([FromRoute] string cityName, [FromRoute] string dayQuantity)
         {
@@ -45,5 +66,7 @@ namespace ExadelMentorship.WebApi.Controllers
                 }
             );
         }
+
+
     }
 }

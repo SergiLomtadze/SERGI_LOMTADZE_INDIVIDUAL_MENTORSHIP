@@ -25,9 +25,9 @@ namespace ExadelMentorship.Persistence
             await _dbContext.SaveChangesAsync();
         }
 
-        public IQueryable<WeatherHistory> GetAll()
+        public IQueryable<WeatherHistory> GetByCity(string name)
         {
-            return _dbContext.WeatherHistories;
+            return _dbContext.WeatherHistories.Where(x => x.CityName == name);
         }
     }
 }
