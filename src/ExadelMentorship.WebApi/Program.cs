@@ -3,6 +3,7 @@ using ExadelMentorship.Persistence;
 using ExadelMentorship.WebApi;
 using ExadelMentorship.WebApi.Jobs;
 using Hangfire;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +23,17 @@ builder.Services.AddBusinessLogicServices();
 builder.Services.AddJobServices();
 builder.Services.AddHostedService<WeatherJob>();
 builder.Configuration.AddJsonFile("appsettings.local.json");
+
+var assembly = typeof(Program).Assembly.GetName().Name;
+var defaultConnString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddIdentityServer()
+    .AddConfigurationStore(options =>
+    {
+        options.ConfigureDbContext = b =>
+        b.UseSqlServer(defaultConnString, opt => opt.MigrationsAssembly(assembly));
+    })
+    .AddDeveloperSigningCredential();
 
 var app = builder.Build();
 
