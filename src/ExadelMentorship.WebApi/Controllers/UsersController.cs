@@ -1,5 +1,5 @@
-﻿using ExadelMentorship.BusinessLogic.Interfaces;
-using ExadelMentorship.BusinessLogic.Models;
+﻿using ExadelMentorship.Auth.Interfaces;
+using ExadelMentorship.Auth.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExadelMentorship.WebApi.Controllers

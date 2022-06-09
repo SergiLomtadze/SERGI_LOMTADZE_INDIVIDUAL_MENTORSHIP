@@ -1,4 +1,4 @@
-﻿namespace ExadelMentorship.BusinessLogic.Models
+﻿namespace ExadelMentorship.Auth.Models
 {
     public class AuthenticationModel
     {

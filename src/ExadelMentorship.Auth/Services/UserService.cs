@@ -1,8 +1,7 @@
-﻿using ExadelMentorship.BusinessLogic.Interfaces;
-using ExadelMentorship.BusinessLogic.Models;
-using System.Threading.Tasks;
+﻿using ExadelMentorship.Auth.Interfaces;
+using ExadelMentorship.Auth.Models;
 
-namespace ExadelMentorship.BusinessLogic.Services
+namespace ExadelMentorship.Auth.Services
 {
     public class UserService : IUserService
     {
