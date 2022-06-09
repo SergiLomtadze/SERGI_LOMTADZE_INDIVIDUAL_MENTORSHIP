@@ -30,6 +30,8 @@ namespace ExadelMentorship.BusinessLogic
 
             services.AddOptions<MaxWeatherSettings>().BindConfiguration(nameof(MaxWeatherSettings));
 
+            services.AddScoped<IUserService, UserService>();
+
         }
     }
 }

@@ -5,6 +5,7 @@ using ExadelMentorship.WebApi;
 using ExadelMentorship.WebApi.Jobs;
 using Hangfire;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -29,21 +30,16 @@ builder.Configuration.AddJsonFile("appsettings.local.json");
 var assembly = typeof(Program).Assembly.GetName().Name;
 var defaultConnString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<AspNetIdentityDbContext>(options =>
+builder.Services.AddDbContext<IdentityDbContext>(options =>
     options.UseSqlServer(defaultConnString,
         b => b.MigrationsAssembly(assembly)));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<AspNetIdentityDbContext>();
+    .AddEntityFrameworkStores<IdentityDbContext>();
 
 builder.Services.AddIdentityServer()
     .AddAspNetIdentity<IdentityUser>()
     .AddConfigurationStore(options =>
-    {
-        options.ConfigureDbContext = b =>
-        b.UseSqlServer(defaultConnString, opt => opt.MigrationsAssembly(assembly));
-    })
-    .AddOperationalStore(options =>
     {
         options.ConfigureDbContext = b =>
         b.UseSqlServer(defaultConnString, opt => opt.MigrationsAssembly(assembly));
