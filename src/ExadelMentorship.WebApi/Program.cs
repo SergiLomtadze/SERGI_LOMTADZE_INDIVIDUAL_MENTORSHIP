@@ -43,6 +43,11 @@ builder.Services.AddIdentityServer()
         options.ConfigureDbContext = b =>
         b.UseSqlServer(defaultConnString, opt => opt.MigrationsAssembly(assembly));
     })
+    .AddOperationalStore(options =>
+    {
+        options.ConfigureDbContext = b =>
+        b.UseSqlServer(defaultConnString, opt => opt.MigrationsAssembly(assembly));
+    })
     .AddDeveloperSigningCredential();
 
 var app = builder.Build();
