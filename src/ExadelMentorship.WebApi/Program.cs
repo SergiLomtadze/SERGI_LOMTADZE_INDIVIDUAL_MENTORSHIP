@@ -23,28 +23,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddPersistenceServices();
 builder.Services.AddBusinessLogicServices();
 builder.Services.AddJobServices();
-builder.Services.AddAuthServices();
 builder.Services.AddHostedService<WeatherJob>();
 builder.Configuration.AddJsonFile("appsettings.local.json");
 
-var assembly = typeof(Program).Assembly.GetName().Name;
-var defaultConnString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<IdentityDbContext>(options =>
-    options.UseSqlServer(defaultConnString,
-        b => b.MigrationsAssembly(assembly)));
-
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-    .AddEntityFrameworkStores<IdentityDbContext>();
-
-builder.Services.AddIdentityServer()
-    .AddAspNetIdentity<IdentityUser>()
-    .AddConfigurationStore(options =>
-    {
-        options.ConfigureDbContext = b =>
-        b.UseSqlServer(defaultConnString, opt => opt.MigrationsAssembly(assembly));
-    })
-    .AddDeveloperSigningCredential();
 
 var app = builder.Build();
 

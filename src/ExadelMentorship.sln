@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExadelMentorship.Persistenc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExadelMentorship.Jobs", "ExadelMentorship.Jobs\ExadelMentorship.Jobs.csproj", "{C44B8B87-4338-4C72-946E-29678D8AB84A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExadelMentorship.Auth", "ExadelMentorship.Auth\ExadelMentorship.Auth.csproj", "{02C3158E-A48A-4235-A0E3-C15DCB2EED93}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExadelMentorship.Auth", "ExadelMentorship.Auth\ExadelMentorship.Auth.csproj", "{A4C2AA6A-23A4-4001-8F8D-8F321A36A676}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,10 +59,10 @@ Global
 		{C44B8B87-4338-4C72-946E-29678D8AB84A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C44B8B87-4338-4C72-946E-29678D8AB84A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C44B8B87-4338-4C72-946E-29678D8AB84A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{02C3158E-A48A-4235-A0E3-C15DCB2EED93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{02C3158E-A48A-4235-A0E3-C15DCB2EED93}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{02C3158E-A48A-4235-A0E3-C15DCB2EED93}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{02C3158E-A48A-4235-A0E3-C15DCB2EED93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4C2AA6A-23A4-4001-8F8D-8F321A36A676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4C2AA6A-23A4-4001-8F8D-8F321A36A676}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4C2AA6A-23A4-4001-8F8D-8F321A36A676}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4C2AA6A-23A4-4001-8F8D-8F321A36A676}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
