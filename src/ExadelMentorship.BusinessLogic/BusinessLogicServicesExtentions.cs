@@ -29,7 +29,6 @@ namespace ExadelMentorship.BusinessLogic
             services.AddOptions<ForecastDaySettings>().BindConfiguration(nameof(ForecastDaySettings));
 
             services.AddOptions<MaxWeatherSettings>().BindConfiguration(nameof(MaxWeatherSettings));
-
         }
     }
 }
