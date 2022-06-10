@@ -62,7 +62,7 @@ namespace ExadelMentorship.Auth
                 {
                     ClientId = "swagger.client",
                     ClientName = "Swagger Client",
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     ClientSecrets = { new Secret("secret".Sha256()) },
                     AllowedScopes = { "WebApi.read" }
                 },
