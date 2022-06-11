@@ -24,6 +24,7 @@ builder.Services.AddBusinessLogicServices();
 builder.Services.AddJobServices();
 builder.Services.AddHostedService<WeatherJob>();
 builder.Configuration.AddJsonFile("appsettings.local.json");
+builder.Services.AddOptions<AuthConfig>().BindConfiguration(nameof(AuthConfig));
 
 builder.Services.AddAuthentication("Bearer")
     .AddIdentityServerAuthentication("Bearer", options =>

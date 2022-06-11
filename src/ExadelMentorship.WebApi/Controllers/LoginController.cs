@@ -14,10 +14,10 @@ namespace ExadelMentorship.WebApi.Controllers
         {
             _tokenService = tokenService;
         }
-        [HttpPost("token/{userName}/{password}")]
-        public async Task<IActionResult> GetTokenAsync([FromRoute] string userName, [FromRoute] string password)
+        [HttpPost("token")]
+        public async Task<IActionResult> GetTokenAsync([FromBody] UserInfo userInfo)
         {
-            var result = await _tokenService.GetToken(userName, password);
+            var result = await _tokenService.GetToken(userInfo.UserName, userInfo.Password);
             return Ok($"token: {result}");
         }
     }
