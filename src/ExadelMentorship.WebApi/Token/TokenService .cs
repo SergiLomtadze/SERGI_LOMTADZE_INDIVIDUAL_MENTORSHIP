@@ -5,7 +5,7 @@ namespace ExadelMentorship.WebApi.Token
 {
     public class TokenService : ITokenService
     {
-        private DiscoveryDocumentResponse? _discDocument { get; set; }
+        private DiscoveryDocumentResponse _discDocument { get; set; }
         private AuthConfig _authConfig;
         public TokenService(IOptions<AuthConfig> authConfig)
         {
