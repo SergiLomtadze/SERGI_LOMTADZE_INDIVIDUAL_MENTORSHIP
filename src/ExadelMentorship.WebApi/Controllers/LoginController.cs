@@ -1,11 +1,9 @@
 ﻿using ExadelMentorship.WebApi.Token;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExadelMentorship.WebApi.Controllers
 {
-    
+
     [Route("api/[controller]")]
     [ApiController]
     public class LoginController : ControllerBase

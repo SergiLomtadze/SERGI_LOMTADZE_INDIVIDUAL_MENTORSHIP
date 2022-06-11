@@ -1,6 +1,4 @@
-﻿using IdentityModel.Client;
-
-namespace ExadelMentorship.WebApi.Token
+﻿namespace ExadelMentorship.WebApi.Token
 {
     public interface ITokenService
     {

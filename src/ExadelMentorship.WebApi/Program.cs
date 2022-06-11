@@ -4,11 +4,8 @@ using ExadelMentorship.WebApi;
 using ExadelMentorship.WebApi.Jobs;
 using ExadelMentorship.WebApi.Token;
 using Hangfire;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
