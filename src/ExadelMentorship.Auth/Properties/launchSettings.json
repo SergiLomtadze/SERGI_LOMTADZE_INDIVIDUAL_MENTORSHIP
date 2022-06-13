@@ -3,16 +3,16 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:35913",
-      "sslPort": 44353
+      "applicationUrl": "http://localhost:11031",
+      "sslPort": 44315
     }
   },
   "profiles": {
-    "ExadelMentorship.Auth": {
+    "Auth": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7162;http://localhost:5162",
+      "applicationUrl": "https://localhost:7046;http://localhost:5046",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

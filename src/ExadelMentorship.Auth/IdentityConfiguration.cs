@@ -7,65 +7,63 @@ namespace ExadelMentorship.Auth
 {
     public class IdentityConfiguration
     {
-        public static List<TestUser> TestUsers =>
-            new List<TestUser>
+        public static IEnumerable<ApiResource> ApiResources => new[]
+        {
+            new ApiResource("WebApi")
             {
-                new TestUser
+                Scopes = { "WebApi.read", "role" },
+                UserClaims = { "role" }
+            }
+        };
+
+        public static IEnumerable<ApiScope> Scopes => new[]
+        {
+            new ApiScope("WebApi.read"),
+            new ApiScope("role")
+        };
+
+        public static IEnumerable<Client> Clients => new[]
+        {
+            new Client
+            {
+                ClientId = "api-swagger",
+                AllowedGrantTypes = GrantTypes.Code,
+                AllowedScopes = { "WebApi.read", "role" },
+                RedirectUris = { "https://localhost:7066/swagger/oauth2-redirect.html" },
+                RequireClientSecret = false,
+                RequirePkce = true,
+                AllowedCorsOrigins = { "https://localhost:7066" },
+            }
+        };
+
+        public static IEnumerable<TestUser> TestUsers => new[]
+        {
+            new TestUser
+            {
+                SubjectId = "1",
+                Username = "admin",
+                Password = "adminpassword",
+                Claims =
                 {
-                    SubjectId = "1000",
-                    Username = "admin",
-                    Password = "adminpassword",
-                    Claims =
-                    {
-                        new Claim(JwtClaimTypes.Name, "Admin"),
-                    }
-                },
-                new TestUser
-                {
-                    SubjectId = "1001",
-                    Username = "user",
-                    Password = "userpassword",
-                    Claims =
-                    {
-                        new Claim(JwtClaimTypes.Name, "User"),
-                    }
+                    new Claim("given_name", "AdminName"),
+                    new Claim("last_name", "AdminLastName"),
+                    new Claim(JwtClaimTypes.Email, "admin@test.com"),
+                    new Claim(JwtClaimTypes.Role, "Admin")
                 }
-            };
-
-        public static IEnumerable<IdentityResource> IdentityResources =>
-            new IdentityResource[]
+            },
+            new TestUser
             {
-                new IdentityResources.OpenId(),
-                new IdentityResources.Profile(),
-            };
-
-        public static IEnumerable<ApiScope> ApiScopes =>
-            new ApiScope[]
-            {
-                new ApiScope("WebApi.read"),
-            };
-
-        public static IEnumerable<ApiResource> ApiResources =>
-            new ApiResource[]
-            {
-                new ApiResource("WebApi")
+                SubjectId = "2",
+                Username = "user",
+                Password = "userpassword",
+                Claims =
                 {
-                    Scopes = new List<string>{ "WebApi.read"},
-                    ApiSecrets = new List<Secret>{ new Secret("supersecret".Sha256()) }
+                    new Claim("given_name", "User"),
+                    new Claim("last_name", "UserLastName"),
+                    new Claim(JwtClaimTypes.Email, "user@test.com"),
+                    new Claim(JwtClaimTypes.Role, "User")
                 }
-            };
-
-        public static IEnumerable<Client> Clients =>
-            new Client[]
-            {
-                new Client
-                {
-                    ClientId = "swagger.client",
-                    ClientName = "Swagger Client",
-                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
-                    ClientSecrets = { new Secret("secret".Sha256()) },
-                    AllowedScopes = { "WebApi.read" }
-                },
-            };
+            }
+        };
     }
 }

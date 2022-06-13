@@ -2,8 +2,8 @@ using ExadelMentorship.BusinessLogic;
 using ExadelMentorship.Persistence;
 using ExadelMentorship.WebApi;
 using ExadelMentorship.WebApi.Jobs;
-using ExadelMentorship.WebApi.Token;
 using Hangfire;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Serilog;
 
@@ -18,66 +18,59 @@ builder.Logging.AddSerilog(logger);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddPersistenceServices();
 builder.Services.AddBusinessLogicServices();
 builder.Services.AddJobServices();
 builder.Services.AddHostedService<WeatherJob>();
 builder.Configuration.AddJsonFile("appsettings.local.json");
-builder.Services.AddOptions<AuthConfig>().BindConfiguration(nameof(AuthConfig));
 
-builder.Services.AddAuthentication("Bearer")
-    .AddIdentityServerAuthentication("Bearer", options =>
-    {
-        options.ApiName = "WebApi";
-        options.Authority = "https://localhost:7162";
-    });
-builder.Services.AddSingleton<ITokenService, TokenService>();
-
-builder.Services.AddSwaggerGen(c =>
+builder.Services.AddSwaggerGen(o =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo
+    o.AddSecurityDefinition("Oidc", new OpenApiSecurityScheme
     {
-        Title = "JWTToken_Auth_API",
-        Version = "v1"
+        Type = SecuritySchemeType.OpenIdConnect,
+        OpenIdConnectUrl = new Uri(builder.Configuration.GetSection("AuthConfig")["url"]),
     });
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    o.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
-        Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey,
-        Scheme = "Bearer",
-        BearerFormat = "JWT",
-        In = ParameterLocation.Header,
-        Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 1safsfsdfdfd\"",
-    });
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
         {
-            new OpenApiSecurityScheme {
-                Reference = new OpenApiReference {
-                    Type = ReferenceType.SecurityScheme,
-                        Id = "Bearer"
-                }
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference { Id = "Oidc", Type = ReferenceType.SecurityScheme }
             },
-            new string[] {}
+            new List<string> { "WebApi.read", "role" }
         }
     });
 });
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, o =>
+    {
+        o.Authority = "https://localhost:7046";
+        o.Audience = "WebApi";
+    });
 
-
-
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 app.UseExceptionHandler(ExceptionHandler.GetExceptionHandlerOptions());
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(o =>
+    {
+        o.OAuthClientId("api-swagger");
+        o.OAuthScopes("WebApi.read", "role");
+        o.OAuthScopeSeparator(" ");
+        o.OAuthUsePkce();
+    });
 }
 
-app.UseHttpsRedirection();
-app.UseAuthentication();
-app.UseAuthorization();
+app.UseHttpsRedirection()
+    .UseDefaultFiles("/swagger")
+    .UseAuthentication()
+    .UseAuthorization();
+
 app.UseHangfireDashboard("/dashboard");
 app.MapControllers();
 app.Run();
