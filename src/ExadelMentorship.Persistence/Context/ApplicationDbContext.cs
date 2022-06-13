@@ -11,5 +11,6 @@ namespace ExadelMentorship.Persistence.Context
         }
 
         public DbSet<WeatherHistory> WeatherHistories { get; set; }
+        public DbSet<ReportUser> ReportUsers { get; set; }
     }
 }
