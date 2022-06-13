@@ -1,12 +1,20 @@
-﻿using IdentityModel;
+﻿using ExadelMentorship.Auth.Models;
+using IdentityModel;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
+using Microsoft.Extensions.Options;
 using System.Security.Claims;
 
 namespace ExadelMentorship.Auth
 {
     public class IdentityConfiguration
     {
+        private IdentityConfig _identityConfig;
+        public IdentityConfiguration(IOptions<IdentityConfig> identityConfig)
+        {
+            _identityConfig = identityConfig.Value;
+
+        }
         public static IEnumerable<ApiResource> ApiResources => new[]
         {
             new ApiResource("WebApi")
@@ -29,7 +37,7 @@ namespace ExadelMentorship.Auth
                 ClientId = "api-swagger",
                 AllowedGrantTypes = GrantTypes.Code,
                 AllowedScopes = { "WebApi.read", "role" },
-                RedirectUris = { "https://localhost:7066/swagger/oauth2-redirect.html" },
+                RedirectUris = {"https://localhost:7066/swagger/oauth2-redirect.html"},
                 RequireClientSecret = false,
                 RequirePkce = true,
                 AllowedCorsOrigins = { "https://localhost:7066" },
