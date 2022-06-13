@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExadelMentorship.WebApi.Controllers
 {
-    [Authorize]
+
     [Route("api/[controller]")]
     [ApiController]
     public class WeatherController : ControllerBase
@@ -35,6 +35,7 @@ namespace ExadelMentorship.WebApi.Controllers
             );
         }
 
+        [Authorize(Roles = "User")]
         [HttpGet("historyWeather/{cityName}")]
         public Task<IEnumerable<HistoryWeatherQueryResponse>> GetHistoryWeatherByCity(
             [FromRoute] string cityName,
@@ -55,6 +56,7 @@ namespace ExadelMentorship.WebApi.Controllers
             );
         }
 
+        [Authorize(Roles = "Admin,User")]
         [HttpGet("currentWeather/{cityName}/days/{dayQuantity}")]
         public Task<IEnumerable<City>> GetFutureWeather([FromRoute] string cityName, [FromRoute] string dayQuantity)
         {
