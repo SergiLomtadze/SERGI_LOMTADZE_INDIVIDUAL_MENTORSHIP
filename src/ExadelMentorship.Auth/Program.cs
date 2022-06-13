@@ -1,6 +1,10 @@
 using ExadelMentorship.Auth;
+using ExadelMentorship.Auth.Models;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddOptions<IdentityConfig>().BindConfiguration(nameof(IdentityConfig));
 
 builder.Services.AddIdentityServer(o =>
     {

@@ -46,7 +46,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, o =>
     {
-        o.Authority = "https://localhost:7046";
+        o.Authority = builder.Configuration.GetSection("AuthConfig")["authority"];
         o.Audience = "WebApi";
     });
 

@@ -9,12 +9,6 @@ namespace ExadelMentorship.Auth
 {
     public class IdentityConfiguration
     {
-        private IdentityConfig _identityConfig;
-        public IdentityConfiguration(IOptions<IdentityConfig> identityConfig)
-        {
-            _identityConfig = identityConfig.Value;
-
-        }
         public static IEnumerable<ApiResource> ApiResources => new[]
         {
             new ApiResource("WebApi")
@@ -40,7 +34,7 @@ namespace ExadelMentorship.Auth
                 RedirectUris = {"https://localhost:7066/swagger/oauth2-redirect.html"},
                 RequireClientSecret = false,
                 RequirePkce = true,
-                AllowedCorsOrigins = { "https://localhost:7066" },
+                AllowedCorsOrigins = {"https://localhost:7066"},
             }
         };
 
