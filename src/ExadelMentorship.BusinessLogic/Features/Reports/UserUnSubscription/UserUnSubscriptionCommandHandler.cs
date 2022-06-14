@@ -1,11 +1,8 @@
 ﻿using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.DataAccess;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace ExadelMentorship.BusinessLogic.Features.Reports.UserSubscription
+namespace ExadelMentorship.BusinessLogic.Features.Reports.UserUnSubscription
 {
     public class UserUnSubscriptionCommandHandler : ICommandHandler<UserUnSubscriptionCommand, string>
     {
@@ -14,10 +11,11 @@ namespace ExadelMentorship.BusinessLogic.Features.Reports.UserSubscription
         {
             _reportUserRepo = reportUserRepo;
         }
+
         public async Task<string> Handle(UserUnSubscriptionCommand command)
         {
-            await _reportUserRepo.SaveAsync(command.UserName, command.Email);
-            return $"User: {command.UserName} succesfully subscribed";
+            _reportUserRepo.Delete(command.userId);
+            return await Task.FromResult($"User with Id: {command.userId} succesfully unsubscribed");
         }
     }
 }

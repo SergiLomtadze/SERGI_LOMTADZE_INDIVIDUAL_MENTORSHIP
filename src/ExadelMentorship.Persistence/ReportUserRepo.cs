@@ -16,6 +16,7 @@ namespace ExadelMentorship.Persistence
         {
             _dbContext = context;
         }
+
         public IQueryable<ReportUser> GelAll()
         {
             return _dbContext.ReportUsers;
@@ -30,6 +31,11 @@ namespace ExadelMentorship.Persistence
 
             });
             await _dbContext.SaveChangesAsync();
+        }
+
+        public void Delete(int userId)
+        {
+            _dbContext.Remove(userId);
         }
     }
 }

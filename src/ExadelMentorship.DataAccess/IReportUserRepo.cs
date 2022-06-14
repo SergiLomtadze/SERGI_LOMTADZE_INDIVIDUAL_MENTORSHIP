@@ -1,8 +1,5 @@
 ﻿using ExadelMentorship.DataAccess.Entities;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ExadelMentorship.DataAccess
@@ -11,5 +8,7 @@ namespace ExadelMentorship.DataAccess
     {
         IQueryable<ReportUser> GelAll();
         Task SaveAsync(string userName, string email);
+
+        void Delete(int userId);
     }
 }
