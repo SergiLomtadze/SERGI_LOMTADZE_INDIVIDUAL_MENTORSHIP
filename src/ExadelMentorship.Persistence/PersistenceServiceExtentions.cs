@@ -14,6 +14,7 @@ namespace ExadelMentorship.Persistence
                 option.UseSqlServer(s.GetRequiredService<IConfiguration>().GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IWeatherHistoryRepository, WeatherHistoryRepository>();
+            services.AddScoped<IReportUserRepo, ReportUserRepo>();
         }
     }
 }
