@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ExadelMentorship.BusinessLogic.Features.Reports.UserUnSubscription
 {
-    public class UserUnSubscriptionCommand : ICommand<string>
+    public class UnSubscribeUserCommand : ICommand<string>
     {
         public int userId { get; set; }
     }

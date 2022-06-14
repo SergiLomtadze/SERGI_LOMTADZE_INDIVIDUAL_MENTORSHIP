@@ -35,7 +35,8 @@ namespace ExadelMentorship.Persistence
 
         public void Delete(int userId)
         {
-            _dbContext.Remove(userId);
+            var user = _dbContext.ReportUsers.Find(userId);
+            _dbContext.Remove(user);
         }
     }
 }

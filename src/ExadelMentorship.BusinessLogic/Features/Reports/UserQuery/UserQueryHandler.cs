@@ -17,23 +17,7 @@ namespace ExadelMentorship.BusinessLogic.Features.Reports.UserQuery
         }
         public async Task<IEnumerable<ReportUser>> Handle(UserQuery command)
         {
-            var response = new List<ReportUser>();
-            var list = _reportUserRepo.GelAll();
-
-            if (list.Any())
-            {
-                foreach (var item in list)
-                {
-                    response.Add(new ReportUser
-                    {
-                        Id = item.Id,
-                        UserName = item.UserName,
-                        Email = item.Email
-                    });
-                }
-            }
-
-            return await Task.FromResult(response);
+            return await Task.FromResult(_reportUserRepo.GelAll().AsEnumerable());  
         }
     }
 }
