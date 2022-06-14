@@ -12,9 +12,9 @@ namespace ExadelMentorship.Persistence
             _dbContext = context;
         }
 
-        public IEnumerable<ReportUser> GelAll()
+        public Task<IEnumerable<ReportUser>> GelAll()
         {
-            return _dbContext.ReportUsers;
+            return Task.FromResult(_dbContext.ReportUsers.AsEnumerable());
         }
 
         public async Task SaveAsync(string userName, string email)

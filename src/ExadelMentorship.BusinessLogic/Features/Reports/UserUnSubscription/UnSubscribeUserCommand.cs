@@ -7,6 +7,6 @@ namespace ExadelMentorship.BusinessLogic.Features.Reports.UserUnSubscription
 {
     public class UnSubscribeUserCommand : ICommand<string>
     {
-        public int userId { get; set; }
+        public int UserId { get; set; }
     }
 }

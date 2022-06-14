@@ -27,24 +27,17 @@ namespace ExadelMentorship.WebApi.Controllers
             _logger.LogInformation($"Subscribed user name: {input.UserName}");
             return _commandInvoker.Invoke
             (
-                new UserSubscriptionCommand
-                {
-                    UserName = input.UserName,
-                    Email = input.Email
-                }
+                input
             );
         }
 
         [HttpDelete("UnsubscribeUser/{userId}")]
-        public Task<string> UnsubscribeUser([FromRoute] int userId)
+        public Task<string> UnsubscribeUser([FromRoute] UnSubscribeUserCommand userId)
         {
             _logger.LogInformation($"Unsubscribed user id: {userId}");
             return _commandInvoker.Invoke
             (
-                new UnSubscribeUserCommand
-                {
-                    userId = userId
-                }
+                userId
             );
         }
 

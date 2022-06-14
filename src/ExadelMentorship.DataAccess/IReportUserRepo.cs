@@ -7,7 +7,7 @@ namespace ExadelMentorship.DataAccess
 {
     public interface IReportUserRepo
     {
-        IEnumerable<ReportUser> GelAll();
+        Task<IEnumerable<ReportUser>> GelAll();
 
         Task SaveAsync(string userName, string email);
 
