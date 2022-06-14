@@ -6,7 +6,7 @@ namespace ExadelMentorship.DataAccess
 {
     public interface IReportUserRepo
     {
-        IQueryable<ReportUser> GelAll();
+        Task<ReportUser[]> GelAll();
         Task SaveAsync(string userName, string email);
 
         void Delete(int userId);
