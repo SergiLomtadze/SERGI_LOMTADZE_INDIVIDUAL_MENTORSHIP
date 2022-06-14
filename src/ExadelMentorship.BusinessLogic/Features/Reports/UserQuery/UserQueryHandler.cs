@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.Reports.UserQuery
 {
-    public class UserQueryHandler : ICommandHandler<UserQuery, ReportUser[]>
+    public class UserQueryHandler : ICommandHandler<UserQuery, IEnumerable<ReportUser>>
     {
         private IReportUserRepo _reportUserRepo;
         public UserQueryHandler(IReportUserRepo reportUserRepo)
         {
             _reportUserRepo = reportUserRepo;
         }
-        public Task<ReportUser[]> Handle(UserQuery command)
+        public async Task<IEnumerable<ReportUser>> Handle(UserQuery command)
         {
-            return _reportUserRepo.GelAll();
+            return await Task.FromResult(_reportUserRepo.GelAll().AsQueryable());
         }
     }
 }
