@@ -1,11 +1,7 @@
 ﻿using ExadelMentorship.DataAccess;
 using ExadelMentorship.DataAccess.Entities;
 using ExadelMentorship.Persistence.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace ExadelMentorship.Persistence
 {
@@ -16,9 +12,10 @@ namespace ExadelMentorship.Persistence
         {
             _dbContext = context;
         }
-        public IQueryable<ReportUser> GelAll()
+
+        public Task<ReportUser[]> GelAll()
         {
-            return _dbContext.ReportUsers;
+            return _dbContext.ReportUsers.ToArrayAsync();
         }
 
         public async Task SaveAsync(string userName, string email)
@@ -30,6 +27,12 @@ namespace ExadelMentorship.Persistence
 
             });
             await _dbContext.SaveChangesAsync();
+        }
+
+        public void Delete(int userId)
+        {
+            var user = _dbContext.ReportUsers.Find(userId);
+            _dbContext.Remove(user);
         }
     }
 }
