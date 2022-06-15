@@ -14,8 +14,8 @@ namespace ExadelMentorship.BusinessLogic.Features.Reports.UserUnSubscription
 
         public async Task<string> Handle(UnSubscribeUserCommand command)
         {
-            _reportUserRepo.Delete(command.userId);
-            return await Task.FromResult($"User with Id: {command.userId} succesfully unsubscribed");
+            _reportUserRepo.Delete(command.UserId);
+            return await Task.FromResult($"User with Id: {command.UserId} succesfully unsubscribed");
         }
     }
 }

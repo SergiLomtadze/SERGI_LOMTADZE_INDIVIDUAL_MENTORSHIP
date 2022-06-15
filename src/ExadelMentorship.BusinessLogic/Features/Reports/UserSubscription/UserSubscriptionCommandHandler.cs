@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Features.Reports.UserSubscription
 {
-    public class UserUnSubscriptionCommandHandler : ICommandHandler<UserUnSubscriptionCommand, string>
+    public class UserSubscriptionCommandHandler : ICommandHandler<UserSubscriptionCommand, string>
     {
         private IReportUserRepo _reportUserRepo;
-        public UserUnSubscriptionCommandHandler(IReportUserRepo reportUserRepo)
+        public UserSubscriptionCommandHandler(IReportUserRepo reportUserRepo)
         {
             _reportUserRepo = reportUserRepo;
         }
-        public async Task<string> Handle(UserUnSubscriptionCommand command)
+        public async Task<string> Handle(UserSubscriptionCommand command)
         {
             await _reportUserRepo.SaveAsync(command.UserName, command.Email);
             return $"User: {command.UserName} succesfully subscribed";

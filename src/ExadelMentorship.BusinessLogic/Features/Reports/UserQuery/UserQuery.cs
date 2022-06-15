@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ExadelMentorship.BusinessLogic.Features.Reports.UserQuery
 {
-    public class UserQuery : ICommand<ReportUser[]>
+    public class UserQuery : ICommand<IEnumerable<ReportUser>>
     {
     }
 }

@@ -1,10 +1,14 @@
-﻿using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
+﻿using ExadelMentorship.BusinessLogic.Features.Reports.UserQuery;
+using ExadelMentorship.BusinessLogic.Features.Reports.UserSubscription;
+using ExadelMentorship.BusinessLogic.Features.Reports.UserUnSubscription;
+using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.HistoryWeather;
 using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
 using ExadelMentorship.BusinessLogic.Services;
+using ExadelMentorship.DataAccess.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 
@@ -24,11 +28,19 @@ namespace ExadelMentorship.BusinessLogic
 
             services.AddScoped<ICommandHandler<HistoryWeatherQuery, IEnumerable<HistoryWeatherQueryResponse>>, HistoryWeatherQueryHandler>();
 
+            services.AddScoped<ICommandHandler<UserSubscriptionCommand, string>, UserSubscriptionCommandHandler>();
+
+            services.AddScoped<ICommandHandler<UnSubscribeUserCommand, string>, UnSubscribeUserCommandHandler>();
+
+            services.AddScoped<ICommandHandler<UserQuery, IEnumerable<ReportUser>>, UserQueryHandler>();
+
             services.AddHttpClient();
 
             services.AddOptions<ForecastDaySettings>().BindConfiguration(nameof(ForecastDaySettings));
 
             services.AddOptions<MaxWeatherSettings>().BindConfiguration(nameof(MaxWeatherSettings));
+
+
         }
     }
 }
