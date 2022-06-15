@@ -1,4 +1,5 @@
 ﻿using ExadelMentorship.BusinessLogic.Exceptions;
+using ExadelMentorship.BusinessLogic.Features.Reports.UserSubscription;
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature.CurrentWeather;
 using ExadelMentorship.BusinessLogic.Models;
 using FluentValidation.Results;
@@ -64,6 +65,19 @@ namespace ExadelMentorship.BusinessLogic.Services
             if ((int)result.StatusCode == 404)
             {
                 throw new NotFoundException($"City: {name} was not found");
+            }
+        }
+
+        public static void ValidateUserSubscription(UserSubscriptionCommand command)
+        {
+            Validators.UserSubscriptionValidator validator = new Validators.UserSubscriptionValidator();
+            ValidationResult results = validator.Validate(command);
+            if (!results.IsValid)
+            {
+                foreach (var failure in results.Errors)
+                {
+                    throw new NotFoundException($"Wrong period");
+                }
             }
         }
     }

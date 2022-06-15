@@ -1,4 +1,5 @@
 ﻿using ExadelMentorship.BusinessLogic.Interfaces;
+using ExadelMentorship.BusinessLogic.Services;
 using ExadelMentorship.DataAccess;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,9 @@ namespace ExadelMentorship.BusinessLogic.Features.Reports.UserSubscription
         }
         public async Task<string> Handle(UserSubscriptionCommand command)
         {
-            await _reportUserRepo.SaveAsync(command.UserName, command.Email);
+            WeatherHelperService.ValidateUserSubscription(command);
+
+            await _reportUserRepo.SaveAsync(command.UserName, command.Email, command.Cities, command.Period);
             return $"User: {command.UserName} succesfully subscribed";
         }
     }

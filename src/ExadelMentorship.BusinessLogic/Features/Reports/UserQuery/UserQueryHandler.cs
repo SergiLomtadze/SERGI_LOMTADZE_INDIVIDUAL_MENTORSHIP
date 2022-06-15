@@ -17,7 +17,7 @@ namespace ExadelMentorship.BusinessLogic.Features.Reports.UserQuery
         }
         public Task<IEnumerable<ReportUser>> Handle(UserQuery command)
         {
-            return _reportUserRepo.GelAll();
+            return _reportUserRepo.GetAll();
         }
     }
 }
