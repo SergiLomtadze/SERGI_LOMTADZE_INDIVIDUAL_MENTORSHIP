@@ -9,5 +9,7 @@ namespace ExadelMentorship.BusinessLogic.Features.Reports.UserSubscription
     {
         public string UserName { get; set; }
         public string Email { get; set; }
+        public string Cities { get; set; }
+        public int Period { get; set; }
     }
 }
