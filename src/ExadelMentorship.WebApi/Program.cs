@@ -2,6 +2,7 @@ using ExadelMentorship.BusinessLogic;
 using ExadelMentorship.Persistence;
 using ExadelMentorship.WebApi;
 using ExadelMentorship.WebApi.Jobs;
+using ExadelMentorship.WebApi.RabbitMQ;
 using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
@@ -22,6 +23,8 @@ builder.Services.AddPersistenceServices();
 builder.Services.AddBusinessLogicServices();
 builder.Services.AddJobServices();
 builder.Services.AddHostedService<WeatherJob>();
+builder.Services.AddScoped<IMessageProducer, RabbitMQProducer>();
+builder.Services.AddOptions<RabbitMQSettings>().BindConfiguration(nameof(RabbitMQSettings));
 builder.Configuration.AddJsonFile("appsettings.local.json");
 
 builder.Services.AddSwaggerGen(o =>
