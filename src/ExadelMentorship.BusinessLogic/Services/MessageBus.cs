@@ -6,6 +6,7 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Services
 {
@@ -43,21 +44,23 @@ namespace ExadelMentorship.BusinessLogic.Services
             channel.BasicConsume("direct-queue",false,consumer);
         }
 
-        public void SendMessage<T>(T message)
+        public Task SendMessage<T>(T message)
         {
-
-            var factory = new ConnectionFactory
+            return Task.Run(() =>
+            {
+                var factory = new ConnectionFactory
             {
                 Uri = new Uri(_rabbitMQSettings.Uri)
             };
-            using var connection = factory.CreateConnection();
-            using var channel = connection.CreateModel();
-            channel.ExchangeDeclare("direct-exchange", ExchangeType.Direct);
+                using var connection = factory.CreateConnection();
+                using var channel = connection.CreateModel();
+                channel.ExchangeDeclare("direct-exchange", ExchangeType.Direct);
 
-            var messageToSend = new { Name = "WebApi", Message = message };
-            var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(messageToSend));
+                var messageToSend = new { Name = "WebApi", Message = message };
+                var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(messageToSend));
 
-            channel.BasicPublish("direct-exchange", "firstTest", null, body);
+                channel.BasicPublish("direct-exchange", "firstTest", null, body);
+            });
         }
     }
 }

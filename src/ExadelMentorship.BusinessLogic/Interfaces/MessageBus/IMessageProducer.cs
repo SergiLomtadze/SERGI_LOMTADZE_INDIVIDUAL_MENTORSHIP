@@ -1,7 +1,9 @@
-﻿namespace ExadelMentorship.BusinessLogic.Interfaces.MessageBus
+﻿using System.Threading.Tasks;
+
+namespace ExadelMentorship.BusinessLogic.Interfaces.MessageBus
 {
     public interface IMessageProducer
     {
-        void SendMessage<T>(T message);
+        Task SendMessage<T>(T message);
     }
 }
