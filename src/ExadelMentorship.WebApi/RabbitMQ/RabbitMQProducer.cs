@@ -23,7 +23,7 @@ namespace ExadelMentorship.WebApi.RabbitMQ
 
             channel.ExchangeDeclare("direct-exchange", ExchangeType.Direct);
 
-            var message = new { Name = "Producer", Message = text };
+            var message = new { Name = "WebApi", Message = text };
             var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
 
             channel.BasicPublish("direct-exchange", "firstTest", null, body);

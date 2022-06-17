@@ -15,7 +15,6 @@ namespace ExadelMentorship.BackgroundApp
                 autoDelete: false,
                 arguments: null);
             channel.QueueBind("direct-queue", "direct-exchange", "firstTest");
-            channel.BasicQos(0, 10, false);
 
             var consumer = new EventingBasicConsumer(channel);
             consumer.Received += (sender, e) => {
