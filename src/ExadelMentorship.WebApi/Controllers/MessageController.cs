@@ -16,11 +16,11 @@ namespace ExadelMentorship.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateOrder(string message)
+        public string CreateOrder(string message)
         {
             _messagePublisher.SendMessage(message);
 
-            return await Task.FromResult(Ok("Message Send"));
+            return "Message Send";
         }
     }
 }
