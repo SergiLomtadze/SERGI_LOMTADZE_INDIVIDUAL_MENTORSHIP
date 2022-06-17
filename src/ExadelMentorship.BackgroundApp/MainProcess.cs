@@ -1,3 +1,5 @@
+using ExadelMentorship.BusinessLogic.Interfaces.MessageBus;
+using ExadelMentorship.BusinessLogic.Services;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 
@@ -5,22 +7,17 @@ namespace ExadelMentorship.BackgroundApp
 {
     public class MainProcess : BackgroundService
     {
-        private RabbitMQSettings _rabbitMQSettings;
-        public MainProcess(IOptions<RabbitMQSettings> rabbitMQSettings)
+        private readonly IMessageConsumer _messagePublisher;
+
+        public MainProcess(IMessageConsumer messagePublisher)
         {
-            _rabbitMQSettings = rabbitMQSettings.Value;
+            _messagePublisher = messagePublisher;
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                var factory = new ConnectionFactory
-                {
-                    Uri = new Uri(_rabbitMQSettings.Uri)
-                };
-                using var connection = factory.CreateConnection();
-                using var channel = connection.CreateModel();
-                DirectExchangeConsumer.Consume(channel);
+                _messagePublisher.ReceiveMessage();
 
                 await Task.Delay(10000, stoppingToken);
             }

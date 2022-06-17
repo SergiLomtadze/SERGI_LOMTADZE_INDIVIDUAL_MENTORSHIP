@@ -1,4 +1,5 @@
-﻿namespace ExadelMentorship.WebApi.RabbitMQ
+﻿namespace ExadelMentorship.BusinessLogic.Models
+
 {
     public class RabbitMQSettings
     {

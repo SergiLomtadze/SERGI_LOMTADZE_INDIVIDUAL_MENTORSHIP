@@ -1,4 +1,4 @@
-﻿namespace ExadelMentorship.WebApi.RabbitMQ
+﻿namespace ExadelMentorship.BusinessLogic.Interfaces.MessageBus
 {
     public interface IMessageProducer
     {

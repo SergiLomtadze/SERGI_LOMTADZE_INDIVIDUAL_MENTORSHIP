@@ -1,5 +1,4 @@
-﻿using ExadelMentorship.BusinessLogic.Exceptions;
-using ExadelMentorship.BusinessLogic.Interfaces;
+﻿using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
 using Microsoft.Extensions.Options;
 using System;

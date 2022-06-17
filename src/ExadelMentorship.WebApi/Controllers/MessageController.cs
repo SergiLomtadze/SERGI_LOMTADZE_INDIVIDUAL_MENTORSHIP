@@ -1,5 +1,4 @@
-﻿using ExadelMentorship.WebApi.RabbitMQ;
-using Microsoft.AspNetCore.Http;
+﻿using ExadelMentorship.BusinessLogic.Interfaces.MessageBus;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExadelMentorship.WebApi.Controllers

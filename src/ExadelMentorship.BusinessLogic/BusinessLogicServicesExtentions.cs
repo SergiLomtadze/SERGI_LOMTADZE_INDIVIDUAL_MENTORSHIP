@@ -40,7 +40,7 @@ namespace ExadelMentorship.BusinessLogic
 
             services.AddOptions<MaxWeatherSettings>().BindConfiguration(nameof(MaxWeatherSettings));
 
-
+            services.AddOptions<RabbitMQSettings>().BindConfiguration(nameof(RabbitMQSettings));
         }
     }
 }
