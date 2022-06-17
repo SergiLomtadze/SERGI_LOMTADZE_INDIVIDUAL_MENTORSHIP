@@ -7,17 +7,17 @@ namespace ExadelMentorship.BackgroundApp
 {
     public class MainProcess : BackgroundService
     {
-        private readonly IMessageConsumer _messagePublisher;
+        private readonly IMessageConsumer _messageConsumer;
 
-        public MainProcess(IMessageConsumer messagePublisher)
+        public MainProcess(IMessageConsumer messageConsumer)
         {
-            _messagePublisher = messagePublisher;
+            _messageConsumer = messageConsumer;
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                _messagePublisher.ReceiveMessage();
+                _messageConsumer.ReceiveMessage();
 
                 await Task.Delay(10000, stoppingToken);
             }
