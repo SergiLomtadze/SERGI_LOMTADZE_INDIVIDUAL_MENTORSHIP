@@ -1,7 +1,4 @@
 using ExadelMentorship.BusinessLogic.Interfaces.MessageBus;
-using ExadelMentorship.BusinessLogic.Services;
-using Microsoft.Extensions.Options;
-using RabbitMQ.Client;
 
 namespace ExadelMentorship.BackgroundApp
 {
@@ -17,10 +14,14 @@ namespace ExadelMentorship.BackgroundApp
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                _messageConsumer.ReceiveMessage();
+                _messageConsumer.ReceiveMessage(ProcessMessage);
 
-                await Task.Delay(10000, stoppingToken);
+                await Task.Delay(1000, stoppingToken);
             }
+        }
+        private void ProcessMessage(string message)
+        {
+            Console.WriteLine(message);
         }
     }
 }

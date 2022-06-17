@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace ExadelMentorship.BusinessLogic.Services
@@ -18,9 +17,8 @@ namespace ExadelMentorship.BusinessLogic.Services
             _rabbitMQSettings = rabbitMQSettings.Value;
         }
 
-        public void ReceiveMessage()
+        public void ReceiveMessage(Action<string> callback)
         {
-            Console.WriteLine("ReceiveMessage method invoked");
             var factory = new ConnectionFactory
             {
                 Uri = new Uri(_rabbitMQSettings.Uri)
@@ -39,8 +37,10 @@ namespace ExadelMentorship.BusinessLogic.Services
             consumer.Received += (sender, e) => {
                 var body = e.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
-                Console.WriteLine(message);
-            };           
+                callback.Invoke(message);
+            };
+
+            channel.BasicConsume("direct-queue",false,consumer);
         }
 
         public void SendMessage<T>(T message)

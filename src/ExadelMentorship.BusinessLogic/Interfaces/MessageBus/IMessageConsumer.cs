@@ -1,7 +1,9 @@
-﻿namespace ExadelMentorship.BusinessLogic.Interfaces.MessageBus
+﻿using System;
+
+namespace ExadelMentorship.BusinessLogic.Interfaces.MessageBus
 {
     public interface IMessageConsumer
     {
-        void ReceiveMessage();
+        void ReceiveMessage(Action<string> callback);
     }
 }
