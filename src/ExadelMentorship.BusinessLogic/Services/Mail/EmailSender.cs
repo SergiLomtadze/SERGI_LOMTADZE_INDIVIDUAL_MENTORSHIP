@@ -1,11 +1,11 @@
 ﻿using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
 using MailKit.Net.Smtp;
-using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
 using MimeKit.Text;
 using System;
+using System.Security.Authentication;
 
 namespace ExadelMentorship.BusinessLogic.Services.Mail
 {
@@ -49,7 +49,7 @@ namespace ExadelMentorship.BusinessLogic.Services.Mail
             }
             finally
             {
-                client.Disconnect(true);
+                client.Dispose();
             }
         }
     }
