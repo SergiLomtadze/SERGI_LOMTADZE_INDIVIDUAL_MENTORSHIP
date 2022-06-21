@@ -10,14 +10,13 @@ namespace ExadelMentorship.BackgroundApp
         {
             _messageConsumer = messageConsumer;
         }
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)
             {
                 _messageConsumer.ReceiveMessage(ProcessMessage);
-
-                await Task.Delay(1000, stoppingToken);
             }
+            return Task.CompletedTask;
         }
         private void ProcessMessage(string message)
         {

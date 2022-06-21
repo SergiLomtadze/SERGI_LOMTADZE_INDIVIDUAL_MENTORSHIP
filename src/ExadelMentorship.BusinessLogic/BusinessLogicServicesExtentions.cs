@@ -8,6 +8,7 @@ using ExadelMentorship.BusinessLogic.Features.WeatherFeature.HistoryWeather;
 using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
 using ExadelMentorship.BusinessLogic.Services;
+using ExadelMentorship.BusinessLogic.Services.Mail;
 using ExadelMentorship.DataAccess.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
@@ -33,6 +34,8 @@ namespace ExadelMentorship.BusinessLogic
             services.AddScoped<ICommandHandler<UnSubscribeUserCommand, string>, UnSubscribeUserCommandHandler>();
 
             services.AddScoped<ICommandHandler<UserQuery, IEnumerable<ReportUser>>, UserQueryHandler>();
+            
+            services.AddScoped<IEmailSender, EmailSender>();
 
             services.AddHttpClient();
 
@@ -41,6 +44,8 @@ namespace ExadelMentorship.BusinessLogic
             services.AddOptions<MaxWeatherSettings>().BindConfiguration(nameof(MaxWeatherSettings));
 
             services.AddOptions<RabbitMQSettings>().BindConfiguration(nameof(RabbitMQSettings));
+
+            services.AddOptions<EmailConfiguration>().BindConfiguration(nameof(EmailConfiguration));
         }
     }
 }
