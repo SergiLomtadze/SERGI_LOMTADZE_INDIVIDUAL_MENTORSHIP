@@ -1,10 +1,4 @@
-﻿using MimeKit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ExadelMentorship.BusinessLogic.Services.Mail
+﻿namespace ExadelMentorship.BusinessLogic.Services.Mail
 {
     public class Message
     {

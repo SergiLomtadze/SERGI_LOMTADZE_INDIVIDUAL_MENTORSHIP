@@ -19,11 +19,11 @@ namespace ExadelMentorship.WebApi.Controllers
         }
 
         [HttpGet("TestMail")]
-        public string SendMail()
+        public async Task<string> SendMail()
         {
-            var message = new Message("sergi.lomtadze@gmail.com", "TestMail", "This is mail from .net app");
+            var message = new Message("sergi.lomtadze@gmail.com", "Test Mail", "This is mail from Exadel Mentorship");
             
-            _emailSender.SendEmail(message);
+            await _emailSender.SendEmailAsync(message);
 
             return "Mail Sent";
         }

@@ -44,8 +44,9 @@ namespace ExadelMentorship.BusinessLogic
             services.AddOptions<MaxWeatherSettings>().BindConfiguration(nameof(MaxWeatherSettings));
 
             services.AddOptions<RabbitMQSettings>().BindConfiguration(nameof(RabbitMQSettings));
-
-            services.AddOptions<EmailConfiguration>().BindConfiguration(nameof(EmailConfiguration));
+            
+            services.AddOptions<SMTPConfig>().BindConfiguration(nameof(SMTPConfig));
+            
         }
     }
 }

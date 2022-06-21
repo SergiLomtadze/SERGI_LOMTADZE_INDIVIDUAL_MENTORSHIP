@@ -1,52 +1,62 @@
 ﻿using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
-using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
-using MimeKit;
-using MimeKit.Text;
-using System;
-using System.Security.Authentication;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Services.Mail
 {
     public class EmailSender : IEmailSender
     {
-        private EmailConfiguration _emailConfiguration;
-        public EmailSender(IOptions<EmailConfiguration> emailConfiguration)
+        private SMTPConfig _smtpConfig;
+        public EmailSender(IOptions<SMTPConfig> smtpConfig)
         {
-            _emailConfiguration = emailConfiguration.Value;
-        }
-        public void SendEmail(Message message)
-        {
-            var emailMessage = CreateEmailMessage(message);
-            Send(emailMessage);
+            _smtpConfig = smtpConfig.Value;
         }
 
-        private MimeMessage CreateEmailMessage(Message message)
+        public async Task SendEmailAsync(Message message)
         {
-            var emailMessage = new MimeMessage();
-            emailMessage.From.Add(MailboxAddress.Parse(_emailConfiguration.From));
-            emailMessage.To.Add(MailboxAddress.Parse(message.To));
-            emailMessage.Subject = message.Subject;
-            emailMessage.Body = new TextPart(TextFormat.Text) { Text = message.Content };
+            var mailMessage = CreateMessage(message);
+            var smtpClient = CreateClient();
 
-            return emailMessage; 
-        }
-
-        private void Send(MimeMessage mailMessage)
-        {
-            using var client = new SmtpClient();
             try
             {
-                client.Connect(_emailConfiguration.SmtpServer, _emailConfiguration.Port, true);
-                client.Authenticate(_emailConfiguration.UserName, _emailConfiguration.Password);
-
-                client.Send(mailMessage);
+                 await smtpClient.SendMailAsync(mailMessage);
             }
-            catch (Exception ex)
+            catch (SmtpException e)
             {
-                throw new AuthenticationException(ex.Message);
+                throw new SmtpException(e.Message);
             }
+        }
+
+        private MailMessage CreateMessage(Message message)
+        {
+            MailMessage mail = new MailMessage
+            {
+                Subject = message.Subject,
+                Body = message.Content,
+                From = new MailAddress(_smtpConfig.SenderAdress, _smtpConfig.SenderDssplayName),
+
+            };
+
+            mail.To.Add(message.To);
+            mail.BodyEncoding = Encoding.Default;
+
+            return mail;
+        }
+        private SmtpClient CreateClient()
+        {
+            return new SmtpClient
+            {
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                Host = _smtpConfig.Host,
+                Port = _smtpConfig.Port,
+                EnableSsl = true,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(_smtpConfig.UserName, _smtpConfig.Password)
+            };
         }
     }
 }
