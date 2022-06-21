@@ -47,10 +47,6 @@ namespace ExadelMentorship.BusinessLogic.Services.Mail
             {
                 throw new AuthenticationException(ex.Message);
             }
-            finally
-            {
-                client.Dispose();
-            }
         }
     }
 }
