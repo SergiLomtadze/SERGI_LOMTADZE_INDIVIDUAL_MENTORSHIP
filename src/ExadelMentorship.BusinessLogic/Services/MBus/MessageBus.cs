@@ -8,24 +8,19 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExadelMentorship.BusinessLogic.Services
+namespace ExadelMentorship.BusinessLogic.Services.MBus
 {
     public class MessageBus : IMessageProducer, IMessageConsumer
     {
-        private RabbitMQSettings _rabbitMQSettings;
-        public MessageBus(IOptions<RabbitMQSettings> rabbitMQSettings)
+        private readonly IConnectionProvider _connectionProvider;
+        public MessageBus(IConnectionProvider connectionProvider)
         {
-            _rabbitMQSettings = rabbitMQSettings.Value;
+            _connectionProvider = connectionProvider;
         }
 
         public void ReceiveMessage(Func<string, bool> callback, string queue, string key)
         {
-            var factory = new ConnectionFactory
-            {
-                Uri = new Uri(_rabbitMQSettings.Uri)
-            };
-            var connection = factory.CreateConnection();
-            var channel = connection.CreateModel();
+            var channel = _connectionProvider.GetConnection().CreateModel();
             channel.ExchangeDeclare("direct-exchange", ExchangeType.Direct);
             channel.QueueDeclare(queue,
                 durable: true,
@@ -33,9 +28,10 @@ namespace ExadelMentorship.BusinessLogic.Services
                 autoDelete: false,
                 arguments: null);
             channel.QueueBind(queue, "direct-exchange", key);
-            
+
             var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += (sender, e) => {
+            consumer.Received += (sender, e) =>
+            {
                 var body = e.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
                 bool success = callback.Invoke(message);
@@ -52,12 +48,7 @@ namespace ExadelMentorship.BusinessLogic.Services
         {
             return Task.Run(() =>
             {
-                var factory = new ConnectionFactory
-            {
-                Uri = new Uri(_rabbitMQSettings.Uri)
-            };
-                using var connection = factory.CreateConnection();
-                using var channel = connection.CreateModel();
+                var channel = _connectionProvider.GetConnection().CreateModel();
                 channel.ExchangeDeclare("direct-exchange", ExchangeType.Direct);
 
                 var messageToSend = new { Message = message };

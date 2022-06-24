@@ -22,8 +22,8 @@ namespace ExadelMentorship.WebApi.Controllers
         public async Task<string> SendMail()
         {
             var message = new Message("sergi.lomtadze@gmail.com", "Test Mail", "This is mail from Exadel Mentorship");
-            
-            _emailSender.SendEmailAsync(message);
+
+            await _emailSender.SendEmailAsync(message);
 
             return "Mail Sent";
         }

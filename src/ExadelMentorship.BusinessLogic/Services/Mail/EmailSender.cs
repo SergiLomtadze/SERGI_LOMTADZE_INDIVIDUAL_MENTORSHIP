@@ -16,14 +16,14 @@ namespace ExadelMentorship.BusinessLogic.Services.Mail
             _smtpConfig = smtpConfig.Value;
         }
 
-        public void SendEmailAsync(Message message)
+        public async Task SendEmailAsync(Message message)
         {
             var mailMessage = CreateMessage(message);
             var smtpClient = CreateClient();
 
             try
             {
-                 smtpClient.SendMailAsync(mailMessage);
+                await smtpClient.SendMailAsync(mailMessage);
             }
             catch (SmtpException e)
             {
