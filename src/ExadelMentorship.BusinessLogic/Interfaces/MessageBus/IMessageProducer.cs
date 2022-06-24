@@ -4,6 +4,6 @@ namespace ExadelMentorship.BusinessLogic.Interfaces.MessageBus
 {
     public interface IMessageProducer
     {
-        Task SendMessage<T>(T message);
+        Task SendMessage<T>(T message, string key);
     }
 }

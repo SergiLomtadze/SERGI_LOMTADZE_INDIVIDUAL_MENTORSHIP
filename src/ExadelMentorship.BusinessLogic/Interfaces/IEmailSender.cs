@@ -5,6 +5,6 @@ namespace ExadelMentorship.BusinessLogic.Interfaces
 {
     public interface IEmailSender
     {
-        Task SendEmailAsync(Message message);
+        void SendEmailAsync(Message message);
     }
 }

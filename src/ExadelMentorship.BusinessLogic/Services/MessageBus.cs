@@ -18,33 +18,37 @@ namespace ExadelMentorship.BusinessLogic.Services
             _rabbitMQSettings = rabbitMQSettings.Value;
         }
 
-        public void ReceiveMessage(Action<string> callback)
+        public void ReceiveMessage(Func<string, bool> callback, string queue, string key)
         {
             var factory = new ConnectionFactory
             {
                 Uri = new Uri(_rabbitMQSettings.Uri)
             };
-            using var connection = factory.CreateConnection();
-            using var channel = connection.CreateModel();
+            var connection = factory.CreateConnection();
+            var channel = connection.CreateModel();
             channel.ExchangeDeclare("direct-exchange", ExchangeType.Direct);
-            channel.QueueDeclare("direct-queue",
+            channel.QueueDeclare(queue,
                 durable: true,
                 exclusive: false,
                 autoDelete: false,
                 arguments: null);
-            channel.QueueBind("direct-queue", "direct-exchange", "firstTest");
-
+            channel.QueueBind(queue, "direct-exchange", key);
+            
             var consumer = new EventingBasicConsumer(channel);
             consumer.Received += (sender, e) => {
                 var body = e.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
-                callback.Invoke(message);
+                bool success = callback.Invoke(message);
+                if (success)
+                {
+                    channel.BasicAck(e.DeliveryTag, true);
+                }
             };
 
-            channel.BasicConsume("direct-queue",false,consumer);
+            channel.BasicConsume(queue, false, consumer);
         }
 
-        public Task SendMessage<T>(T message)
+        public Task SendMessage<T>(T message, string key)
         {
             return Task.Run(() =>
             {
@@ -56,10 +60,10 @@ namespace ExadelMentorship.BusinessLogic.Services
                 using var channel = connection.CreateModel();
                 channel.ExchangeDeclare("direct-exchange", ExchangeType.Direct);
 
-                var messageToSend = new { Name = "WebApi", Message = message };
+                var messageToSend = new { Message = message };
                 var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(messageToSend));
 
-                channel.BasicPublish("direct-exchange", "firstTest", null, body);
+                channel.BasicPublish("direct-exchange", key, null, body);
             });
         }
     }
