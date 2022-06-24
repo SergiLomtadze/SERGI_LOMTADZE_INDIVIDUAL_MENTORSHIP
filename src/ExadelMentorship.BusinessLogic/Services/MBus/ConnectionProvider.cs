@@ -8,23 +8,28 @@ using System.Text;
 
 namespace ExadelMentorship.BusinessLogic.Services.MBus
 {
-    public class ConnectionProvider : IConnectionProvider
+    public class ConnectionProvider : IConnectionProvider, IDisposable
     {
-        private readonly ConnectionFactory _factory;
-
-        private readonly IConnection _connection;
+        private RabbitMQSettings _rabbitMQSettings;
+        private IConnection _connection;
 
         public ConnectionProvider(IOptions<RabbitMQSettings> rabbitMQSettings)
         {
-            _factory = new ConnectionFactory
-            {
-                Uri = new Uri(rabbitMQSettings.Value.Uri)
-            };
-            _connection = _factory.CreateConnection();
+            _rabbitMQSettings = rabbitMQSettings.Value;
+        }
+
+        public void Dispose()
+        {
+            _connection.Close();
         }
 
         public IConnection GetConnection()
         {
+            _connection = new ConnectionFactory
+            {
+                Uri = new Uri(_rabbitMQSettings.Uri)
+            }.CreateConnection();
+
             return _connection;
         }
 
