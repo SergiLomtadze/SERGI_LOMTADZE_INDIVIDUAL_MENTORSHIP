@@ -12,15 +12,11 @@ namespace ExadelMentorship.BusinessLogic.Services.MBus
     {
         private RabbitMQSettings _rabbitMQSettings;
         private IConnection _connection;
+        private bool _disposed;
 
         public ConnectionProvider(IOptions<RabbitMQSettings> rabbitMQSettings)
         {
             _rabbitMQSettings = rabbitMQSettings.Value;
-        }
-
-        public void Dispose()
-        {
-            _connection.Close();
         }
 
         public IConnection GetConnection()
@@ -31,6 +27,25 @@ namespace ExadelMentorship.BusinessLogic.Services.MBus
             }.CreateConnection();
 
             return _connection;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                if (disposing)
+                {
+                    _connection?.Close();
+                }
+
+                _disposed = true;
+            }
         }
 
     }
