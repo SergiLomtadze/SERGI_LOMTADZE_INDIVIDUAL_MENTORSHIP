@@ -21,11 +21,13 @@ namespace ExadelMentorship.BusinessLogic.Services.MBus
 
         public IConnection GetConnection()
         {
-            _connection = new ConnectionFactory
+            if (_connection == null)
             {
-                Uri = new Uri(_rabbitMQSettings.Uri)
-            }.CreateConnection();
-
+                _connection = new ConnectionFactory
+                {
+                    Uri = new Uri(_rabbitMQSettings.Uri)
+                }.CreateConnection();
+            }
             return _connection;
         }
 
