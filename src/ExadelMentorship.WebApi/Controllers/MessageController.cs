@@ -22,7 +22,7 @@ namespace ExadelMentorship.WebApi.Controllers
         public async Task<string> SendMail()
         {
             var message = new Message("sergi.lomtadze@gmail.com", "Test Mail", "This is mail from Exadel Mentorship");
-            
+
             await _emailSender.SendEmailAsync(message);
 
             return "Mail Sent";
@@ -31,9 +31,9 @@ namespace ExadelMentorship.WebApi.Controllers
         [HttpPost]
         public string CreateOrder(string message)
         {
-            _messagePublisher.SendMessage(message);
+            _messagePublisher.SendMessage(message,"fromWebApi");
 
-            return "Message Send";
+            return "Message Sent";
         }
     }
 }

@@ -1,6 +1,6 @@
 using ExadelMentorship.BusinessLogic;
 using ExadelMentorship.BusinessLogic.Interfaces.MessageBus;
-using ExadelMentorship.BusinessLogic.Services;
+using ExadelMentorship.BusinessLogic.Services.MBus;
 using ExadelMentorship.Persistence;
 using ExadelMentorship.WebApi;
 using ExadelMentorship.WebApi.Jobs;
@@ -22,9 +22,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddPersistenceServices();
 builder.Services.AddBusinessLogicServices();
+builder.Services.AddMessageBusServices();
 builder.Services.AddJobServices();
 builder.Services.AddHostedService<WeatherJob>();
-builder.Services.AddScoped<IMessageProducer, MessageBus>();
+builder.Services.AddSingleton<IMessageProducer, MessageBus>();
 builder.Configuration.AddJsonFile("appsettings.local.json");
 
 builder.Services.AddSwaggerGen(o =>

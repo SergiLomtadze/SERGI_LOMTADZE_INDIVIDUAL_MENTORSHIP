@@ -23,7 +23,7 @@ namespace ExadelMentorship.BusinessLogic.Services.Mail
 
             try
             {
-                 await smtpClient.SendMailAsync(mailMessage);
+                await smtpClient.SendMailAsync(mailMessage);
             }
             catch (SmtpException e)
             {

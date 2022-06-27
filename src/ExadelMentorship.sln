@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExadelMentorship.Jobs", "Ex
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExadelMentorship.Auth", "ExadelMentorship.Auth\ExadelMentorship.Auth.csproj", "{A4C2AA6A-23A4-4001-8F8D-8F321A36A676}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExadelMentorship.BackgroundApp", "ExadelMentorship.BackgroundApp\ExadelMentorship.BackgroundApp.csproj", "{765465D1-EC7C-493C-B2FD-5B2DC4EECA64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExadelMentorship.BackgroundApp", "ExadelMentorship.BackgroundApp\ExadelMentorship.BackgroundApp.csproj", "{765465D1-EC7C-493C-B2FD-5B2DC4EECA64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

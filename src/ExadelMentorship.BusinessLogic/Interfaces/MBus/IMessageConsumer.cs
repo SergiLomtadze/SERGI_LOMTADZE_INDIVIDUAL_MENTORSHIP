@@ -4,6 +4,6 @@ namespace ExadelMentorship.BusinessLogic.Interfaces.MessageBus
 {
     public interface IMessageConsumer
     {
-        void ReceiveMessage(Action<string> callback);
+        void ReceiveMessage(Func<string, bool> callback, string queue, string key);
     }
 }
