@@ -1,6 +1,4 @@
 ﻿using ExadelMentorship.BusinessLogic.Interfaces.MessageBus;
-using ExadelMentorship.BusinessLogic.Models;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -12,15 +10,15 @@ namespace ExadelMentorship.BusinessLogic.Services.MBus
 {
     public class MessageBus : IMessageProducer, IMessageConsumer
     {
-        private readonly IConnectionProvider _connectionProvider;
-        public MessageBus(IConnectionProvider connectionProvider)
+        private readonly IConnection _connection;
+        public MessageBus(IConnection connection)
         {
-            _connectionProvider = connectionProvider;
+            _connection = connection;
         }
 
         public void ReceiveMessage(Func<string, bool> callback, string queue, string key)
         {
-            var channel = _connectionProvider.GetConnection().CreateModel();
+            var channel = _connection.CreateModel();
             channel.ExchangeDeclare("direct-exchange", ExchangeType.Direct);
             channel.QueueDeclare(queue,
                 durable: true,
@@ -48,7 +46,7 @@ namespace ExadelMentorship.BusinessLogic.Services.MBus
         {
             return Task.Run(() =>
             {
-                var channel = _connectionProvider.GetConnection().CreateModel();
+                var channel = _connection.CreateModel();
                 channel.ExchangeDeclare("direct-exchange", ExchangeType.Direct);
 
                 var messageToSend = new { Message = message };

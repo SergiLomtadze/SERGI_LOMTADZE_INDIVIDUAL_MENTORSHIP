@@ -1,12 +1,15 @@
 using ExadelMentorship.BusinessLogic;
 using ExadelMentorship.BusinessLogic.Interfaces.MessageBus;
+using ExadelMentorship.BusinessLogic.Models;
 using ExadelMentorship.BusinessLogic.Services.MBus;
 using ExadelMentorship.Persistence;
 using ExadelMentorship.WebApi;
 using ExadelMentorship.WebApi.Jobs;
 using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using RabbitMQ.Client;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,7 +27,13 @@ builder.Services.AddPersistenceServices();
 builder.Services.AddBusinessLogicServices();
 builder.Services.AddJobServices();
 builder.Services.AddHostedService<WeatherJob>();
-builder.Services.AddSingleton<IConnectionProvider, ConnectionProvider>();
+builder.Services.AddSingleton<IConnection>(sp =>
+{
+    return new ConnectionFactory
+    {
+        Uri = new Uri(sp.GetRequiredService<IOptions<RabbitMQSettings>>().Value.Uri)
+    }.CreateConnection();
+});
 builder.Services.AddSingleton<IMessageProducer, MessageBus>();
 builder.Configuration.AddJsonFile("appsettings.local.json");
 
