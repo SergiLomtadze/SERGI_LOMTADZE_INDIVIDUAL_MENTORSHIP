@@ -11,6 +11,9 @@ using ExadelMentorship.BusinessLogic.Services;
 using ExadelMentorship.BusinessLogic.Services.Mail;
 using ExadelMentorship.DataAccess.Entities;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using RabbitMQ.Client;
+using System;
 using System.Collections.Generic;
 
 namespace ExadelMentorship.BusinessLogic
@@ -47,6 +50,16 @@ namespace ExadelMentorship.BusinessLogic
             
             services.AddOptions<SMTPConfig>().BindConfiguration(nameof(SMTPConfig));
             
+        }
+
+        public static void AddMessageBusServices(this IServiceCollection services)
+        {
+            services.AddSingleton<IConnection>(sp =>
+                new ConnectionFactory
+                {
+                    Uri = new Uri(sp.GetRequiredService<IOptions<RabbitMQSettings>>().Value.Uri)
+                }.CreateConnection()
+            );
         }
     }
 }

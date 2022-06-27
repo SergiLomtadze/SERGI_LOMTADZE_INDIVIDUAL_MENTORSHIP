@@ -44,6 +44,7 @@ namespace ExadelMentorship.BusinessLogic.Services.MBus
 
         public Task SendMessage<T>(T message, string key)
         {
+            //Not to make blocking I/O operation
             return Task.Run(() =>
             {
                 var channel = _connection.CreateModel();
