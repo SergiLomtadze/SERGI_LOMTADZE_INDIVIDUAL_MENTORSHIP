@@ -34,8 +34,15 @@ namespace ExadelMentorship.BackgroundApp
             var report = (string)reportObj["Result"];
 
             var messageToSend = new Message(mail, $"Report For {user}", report);
-            await _emailSender.SendEmailAsync(messageToSend);           
-            return true;
+            try
+            {
+                await _emailSender.SendEmailAsync(messageToSend);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

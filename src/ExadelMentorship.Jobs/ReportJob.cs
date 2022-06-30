@@ -31,13 +31,15 @@ namespace ExadelMentorship.Jobs
                 );
             }
         }
-        public async Task Execute(ReportUser reportUser)
+        
+        //System.NotSupportedException: 'Only public methods can be invoked in the background'
+        public void Execute(ReportUser reportUser)
         {
             using var scope = _services.CreateScope();
             var report = scope.ServiceProvider.GetRequiredService<IReportServices>().GenerateReportForUser(reportUser.Id);
             var message = new { Email = reportUser.Email, UserName = reportUser.UserName, Report = report };
 
-            await _messagePublisher.SendMessage(message, "sendMail");
+            _messagePublisher.SendMessage(message, "sendMail");
         }
     }
 }
