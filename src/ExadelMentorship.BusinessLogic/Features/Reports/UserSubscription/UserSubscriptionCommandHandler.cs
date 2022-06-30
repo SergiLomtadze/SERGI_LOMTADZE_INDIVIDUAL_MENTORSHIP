@@ -1,5 +1,5 @@
 ﻿using ExadelMentorship.BusinessLogic.Interfaces;
-using ExadelMentorship.BusinessLogic.Services;
+using ExadelMentorship.BusinessLogic.Services.Weather;
 using ExadelMentorship.DataAccess;
 using System;
 using System.Collections.Generic;

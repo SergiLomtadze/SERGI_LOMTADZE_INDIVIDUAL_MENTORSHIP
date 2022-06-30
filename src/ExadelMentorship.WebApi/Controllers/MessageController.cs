@@ -29,9 +29,9 @@ namespace ExadelMentorship.WebApi.Controllers
         }
 
         [HttpPost]
-        public string CreateOrder(string message)
+        public async Task<string> CreateOrder(string message)
         {
-            _messagePublisher.SendMessage(message,"fromWebApi");
+            await _messagePublisher.SendMessage(message,"fromWebApi");
 
             return "Message Sent";
         }

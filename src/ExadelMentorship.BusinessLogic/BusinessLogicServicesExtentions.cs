@@ -9,6 +9,7 @@ using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Models;
 using ExadelMentorship.BusinessLogic.Services;
 using ExadelMentorship.BusinessLogic.Services.Mail;
+using ExadelMentorship.BusinessLogic.Services.Weather;
 using ExadelMentorship.DataAccess.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
@@ -25,7 +26,9 @@ namespace ExadelMentorship.BusinessLogic
             services.AddScoped<CommandInvoker>();
         
             services.AddSingleton<IWeatherApiService, WeatherApiService>();
-        
+            
+            services.AddScoped<IReportServices, ReportServices>();
+
             services.AddSingleton<ICommandHandler<CurrentWeatherCommand, CurrentWeatherCommandResponse>, CurrentWeatherCommandHandler>();
         
             services.AddSingleton<ICommandHandler<FutureWeatherCommand, IEnumerable<City>>, FutureWeatherCommandHandler>();
@@ -36,9 +39,7 @@ namespace ExadelMentorship.BusinessLogic
 
             services.AddScoped<ICommandHandler<UnSubscribeUserCommand, string>, UnSubscribeUserCommandHandler>();
 
-            services.AddScoped<ICommandHandler<UserQuery, IEnumerable<ReportUser>>, UserQueryHandler>();
-            
-            services.AddScoped<IEmailSender, EmailSender>();
+            services.AddScoped<ICommandHandler<UserQuery, IEnumerable<ReportUser>>, UserQueryHandler>();            
 
             services.AddHttpClient();
 
@@ -47,9 +48,16 @@ namespace ExadelMentorship.BusinessLogic
             services.AddOptions<MaxWeatherSettings>().BindConfiguration(nameof(MaxWeatherSettings));
 
             services.AddOptions<RabbitMQSettings>().BindConfiguration(nameof(RabbitMQSettings));
-            
+
+            AddMailServices(services);
+
+            AddMessageBusServices(services);
+        }
+
+        public static void AddMailServices(this IServiceCollection services)
+        {
+            services.AddSingleton<IEmailSender, EmailSender>();
             services.AddOptions<SMTPConfig>().BindConfiguration(nameof(SMTPConfig));
-            
         }
 
         public static void AddMessageBusServices(this IServiceCollection services)

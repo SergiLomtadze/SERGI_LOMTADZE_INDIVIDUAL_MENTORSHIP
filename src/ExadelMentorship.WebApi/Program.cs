@@ -3,11 +3,11 @@ using ExadelMentorship.BusinessLogic.Interfaces.MessageBus;
 using ExadelMentorship.BusinessLogic.Services.MBus;
 using ExadelMentorship.Persistence;
 using ExadelMentorship.WebApi;
-using ExadelMentorship.WebApi.Jobs;
 using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using Serilog;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,14 +17,11 @@ var logger = new LoggerConfiguration()
   .CreateLogger();
 builder.Logging.ClearProviders();
 builder.Logging.AddSerilog(logger);
-
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddPersistenceServices();
 builder.Services.AddBusinessLogicServices();
-builder.Services.AddMessageBusServices();
 builder.Services.AddJobServices();
-builder.Services.AddHostedService<WeatherJob>();
 builder.Services.AddSingleton<IMessageProducer, MessageBus>();
 builder.Configuration.AddJsonFile("appsettings.local.json");
 

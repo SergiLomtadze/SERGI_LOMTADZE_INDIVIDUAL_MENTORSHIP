@@ -13,28 +13,35 @@ namespace ExadelMentorship.WebApi.Jobs
         private HistorySettingStorage _historySettingStorage;
         private IWeatherApiService _weatherApiService;
         private IServiceProvider _services;
+
         public WeatherJob(IOptions<HistorySettingStorage> historySettingStorage,
-            IWeatherApiService weatherApiService,
-            IServiceProvider services)
+            IWeatherApiService weatherApiService, IServiceProvider services)
         {
             _historySettingStorage = historySettingStorage.Value;
             _weatherApiService = weatherApiService;
             _services = services;
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-            using var scope = _services.CreateScope();
+        protected override Task ExecuteAsync(CancellationToken stoppingToken)
+        {            
             foreach (var item in _historySettingStorage.HistorySettings.ToList())
             {
                 string[] time = item.ExecutionTime.Split(":");
-                var temperature = await _weatherApiService.GetTemperatureByCityName(item.City);
+
                 RecurringJob.AddOrUpdate(
                     $"Job_For_{item.City}",
-                    () => scope.ServiceProvider.GetRequiredService<IWeatherHistoryRepository>().SaveAsync(item.City, temperature),
+                    () => this.Execute(item.City),
                     $"0 {time[1]} {time[0]} * * ?"
                 );
             }
+            return Task.CompletedTask;
+        }
+
+        public async Task Execute(string cityName)
+        {
+            using var scope = _services.CreateScope();
+            var temp = await _weatherApiService.GetTemperatureByCityName(cityName);
+            await scope.ServiceProvider.GetRequiredService<IWeatherHistoryRepository>().SaveAsync(cityName, temp);
         }
     }
 }

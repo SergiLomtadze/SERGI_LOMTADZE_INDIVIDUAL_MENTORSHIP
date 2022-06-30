@@ -1,30 +1,40 @@
+using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.BusinessLogic.Interfaces.MessageBus;
-using ExadelMentorship.BusinessLogic.Models;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
-using System.Text;
+using ExadelMentorship.BusinessLogic.Services.Mail;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ExadelMentorship.BackgroundApp
 {
     public class MainProcess : BackgroundService
     {
         private readonly IMessageConsumer _messageConsumer;
-        public MainProcess(IMessageConsumer messageConsumer)
+        private readonly IEmailSender _emailSender;
+        public MainProcess(IMessageConsumer messageConsumer,
+            IEmailSender emailSender)
         {
             _messageConsumer = messageConsumer;
+            _emailSender = emailSender;
         }
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _messageConsumer.ReceiveMessage(ProcessMessage,"webApiQueue", "fromWebApi");
+            _messageConsumer.ReceiveMessage(ProcessMail, "mailQueue", "sendMail");            
             while (!stoppingToken.IsCancellationRequested)
             {
             };
-
             return Task.CompletedTask;
         }
-        private bool ProcessMessage(string message)
+        private async Task<bool> ProcessMail(string message)
         {
-            Console.WriteLine(message);
+            JObject obj = JsonConvert.DeserializeObject<JObject>(message);
+            JObject messageObj = obj["Message"] as JObject;
+            var mail = (string)messageObj["Email"];            
+            var user = (string)messageObj["UserName"];
+            JObject reportObj = messageObj["Report"] as JObject;
+            var report = (string)reportObj["Result"];
+
+            var messageToSend = new Message(mail, $"Report For {user}", report);
+            await _emailSender.SendEmailAsync(messageToSend);           
             return true;
         }
     }
