@@ -42,10 +42,10 @@ namespace ExadelMentorship.BusinessLogic.Services.MBus
             channel.BasicConsume(queue, false, consumer);
         }
 
-        public void SendMessage<T>(T message, string key)
+        public Task SendMessage<T>(T message, string key)
         {
             //Not to make blocking I/O operation
-            Task.Run(() => 
+            return Task.Run(() => 
             {
                 var channel = _connection.CreateModel();
                 channel.ExchangeDeclare("direct-exchange", ExchangeType.Direct);

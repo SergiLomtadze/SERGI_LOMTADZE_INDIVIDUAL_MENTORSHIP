@@ -19,32 +19,16 @@ namespace ExadelMentorship.WebApi.Controllers
         }
 
         [HttpGet("TestMail")]
-        public async Task<ActionResult<string>> SendMail()
+        public async Task SendMail()
         {
             var message = new Message("sergi.lomtadze@gmail.com", "Test Mail", "This is mail from Exadel Mentorship");
-            try
-            {
-                await _emailSender.SendEmailAsync(message);
-                return "Mail Sent";
-            }
-            catch (Exception)
-            {
-                return BadRequest("Failed");
-            }
+            await _emailSender.SendEmailAsync(message);
         }
 
         [HttpPost]
-        public async Task<ActionResult<string>> PublishMessage(string message)
+        public async Task PublishMessage(string message)
         {
-            try
-            {
-                _messagePublisher.SendMessage(message, "fromWebApi");
-                return Ok("Message Published to messageBus");
-            }
-            catch (Exception)
-            {
-                return BadRequest("Failed");
-            }
+              await _messagePublisher.SendMessage(message, "fromWebApi");
         }
     }
 }

@@ -29,10 +29,5 @@ namespace ExadelMentorship.Persistence
         {
             return _dbContext.WeatherHistories.Where(x => x.CityName == name);
         }
-
-        public async Task SaveAsync(string cityName, Func<double> temperature)
-        {
-            await this.SaveAsync(cityName, temperature());
-        }
     }
 }
