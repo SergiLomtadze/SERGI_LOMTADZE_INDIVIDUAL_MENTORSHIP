@@ -1,44 +1,51 @@
 ﻿using ExadelMentorship.DataAccess;
 using ExadelMentorship.DataAccess.Entities;
 using ExadelMentorship.Persistence.Context;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ExadelMentorship.Persistence
 {
     public class ReportUserRepo : IReportUserRepo
     {
-        private readonly ApplicationDbContext _dbContext;
-        public ReportUserRepo(ApplicationDbContext context)
+        private IServiceProvider _services;
+        public ReportUserRepo(IServiceProvider services)
         {
-            _dbContext = context;
+            _services = services;
         }
 
         public Task<IEnumerable<ReportUser>> GetAll()
         {
-            return Task.FromResult(_dbContext.ReportUsers.AsEnumerable());
+            var scope = _services.CreateScope();
+            return Task.FromResult(scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().ReportUsers.AsEnumerable());
         }
 
         public async Task SaveAsync(string userName, string email, string cities, int period)
         {
-            _dbContext.ReportUsers.Add(new ReportUser
+            var scope = _services.CreateScope();
+            scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().ReportUsers.Add(new ReportUser
             {
                 UserName = userName,
                 Email = email,
                 Cities = cities,
                 Period = period
             });
-            await _dbContext.SaveChangesAsync();
+
+            await scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().SaveChangesAsync();
         }
 
         public void Delete(int userId)
         {
-            var user = _dbContext.ReportUsers.Find(userId);
-            _dbContext.Remove(user);
-            _dbContext.SaveChanges();
+            var scope = _services.CreateScope();
+            var user = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().ReportUsers.Find(userId);
+            scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Remove(user);
+            scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().SaveChanges();
         }
 
         public Task<ReportUser> GetById(int id)
         {
-            return Task.FromResult(_dbContext.ReportUsers.Where(x => x.Id==id).FirstOrDefault());
+            var scope = _services.CreateScope();
+            return Task.FromResult(scope.ServiceProvider.GetRequiredService<ApplicationDbContext>()
+                .ReportUsers.Where(x => x.Id==id).FirstOrDefault());
         }
     }
 }

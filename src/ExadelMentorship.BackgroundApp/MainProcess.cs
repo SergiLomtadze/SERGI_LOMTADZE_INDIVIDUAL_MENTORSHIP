@@ -39,7 +39,7 @@ namespace ExadelMentorship.BackgroundApp
                 await _emailSender.SendEmailAsync(messageToSend);
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
             }

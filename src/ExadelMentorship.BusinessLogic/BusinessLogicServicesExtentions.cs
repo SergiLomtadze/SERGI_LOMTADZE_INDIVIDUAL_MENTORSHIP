@@ -27,7 +27,7 @@ namespace ExadelMentorship.BusinessLogic
         
             services.AddSingleton<IWeatherApiService, WeatherApiService>();
             
-            services.AddScoped<IReportServices, ReportServices>();
+            services.AddSingleton<IReportServices, ReportServices>();
 
             services.AddSingleton<ICommandHandler<CurrentWeatherCommand, CurrentWeatherCommandResponse>, CurrentWeatherCommandHandler>();
         
