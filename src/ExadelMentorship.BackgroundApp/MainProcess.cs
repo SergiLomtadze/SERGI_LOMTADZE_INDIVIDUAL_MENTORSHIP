@@ -28,12 +28,11 @@ namespace ExadelMentorship.BackgroundApp
         {
             JObject obj = JsonConvert.DeserializeObject<JObject>(message);
             JObject messageObj = obj["Message"] as JObject;
-            var mail = (string)messageObj["Email"];            
+            var mail = (string)messageObj["To"];            
             var user = (string)messageObj["UserName"];
-            JObject reportObj = messageObj["Report"] as JObject;
-            var report = (string)reportObj["Result"];
+            var content = (string)messageObj["Content"];
 
-            var messageToSend = new Message(mail, $"Report For {user}", report);
+            var messageToSend = new Message(mail, $"Report For {user}", content);
             try
             {
                 await _emailSender.SendEmailAsync(messageToSend);
