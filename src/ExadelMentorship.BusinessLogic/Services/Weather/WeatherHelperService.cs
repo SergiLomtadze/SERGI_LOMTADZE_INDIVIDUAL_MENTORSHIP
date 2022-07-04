@@ -6,7 +6,7 @@ using FluentValidation.Results;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace ExadelMentorship.BusinessLogic.Services
+namespace ExadelMentorship.BusinessLogic.Services.Weather
 {
     public static class WeatherHelperService
     {

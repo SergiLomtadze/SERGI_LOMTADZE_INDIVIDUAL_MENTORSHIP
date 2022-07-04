@@ -1,9 +1,8 @@
 ﻿using ExadelMentorship.BusinessLogic.Interfaces;
 using ExadelMentorship.DataAccess;
+using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ExadelMentorship.BusinessLogic.Services
@@ -23,6 +22,7 @@ namespace ExadelMentorship.BusinessLogic.Services
             var userInfo= await _reportUserRepo.GetById(userId);
             var period = userInfo.Period;
             var cities = userInfo.Cities.Split(',');
+
             foreach (var city in cities)
             {
                 try

@@ -11,7 +11,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ExadelMentorship.BusinessLogic.Services
+namespace ExadelMentorship.BusinessLogic.Services.Weather
 {
     public class WeatherApiService : IWeatherApiService
     {

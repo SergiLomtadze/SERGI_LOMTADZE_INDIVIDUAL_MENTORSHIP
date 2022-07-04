@@ -4,8 +4,8 @@ using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ExadelMentorship.BusinessLogic.Services;
 using FluentValidation;
+using ExadelMentorship.BusinessLogic.Services.Weather;
 
 namespace ExadelMentorship.BusinessLogic.Features.WeatherFeature.FutureWeather
 {

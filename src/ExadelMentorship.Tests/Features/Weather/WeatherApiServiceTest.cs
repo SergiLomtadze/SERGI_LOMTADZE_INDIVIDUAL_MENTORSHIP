@@ -1,7 +1,7 @@
 ﻿
 using ExadelMentorship.BusinessLogic.Features.WeatherFeature;
 using ExadelMentorship.BusinessLogic.Models;
-using ExadelMentorship.BusinessLogic.Services;
+using ExadelMentorship.BusinessLogic.Services.Weather;
 using Microsoft.Extensions.Options;
 using Moq;
 using System.Collections.Generic;

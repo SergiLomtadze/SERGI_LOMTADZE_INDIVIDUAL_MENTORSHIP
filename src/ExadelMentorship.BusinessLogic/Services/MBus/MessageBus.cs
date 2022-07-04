@@ -16,7 +16,7 @@ namespace ExadelMentorship.BusinessLogic.Services.MBus
             _connection = connection;
         }
 
-        public void ReceiveMessage(Func<string, bool> callback, string queue, string key)
+        public void ReceiveMessage(Func<string, Task<bool>> callback, string queue, string key)
         {
             var channel = _connection.CreateModel();
             channel.ExchangeDeclare("direct-exchange", ExchangeType.Direct);
@@ -28,11 +28,11 @@ namespace ExadelMentorship.BusinessLogic.Services.MBus
             channel.QueueBind(queue, "direct-exchange", key);
 
             var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += (sender, e) =>
+            consumer.Received += async (sender, e) =>
             {
                 var body = e.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
-                bool success = callback.Invoke(message);
+                bool success =await callback.Invoke(message);
                 if (success)
                 {
                     channel.BasicAck(e.DeliveryTag, true);
@@ -45,7 +45,7 @@ namespace ExadelMentorship.BusinessLogic.Services.MBus
         public Task SendMessage<T>(T message, string key)
         {
             //Not to make blocking I/O operation
-            return Task.Run(() =>
+            return Task.Run(() => 
             {
                 var channel = _connection.CreateModel();
                 channel.ExchangeDeclare("direct-exchange", ExchangeType.Direct);
