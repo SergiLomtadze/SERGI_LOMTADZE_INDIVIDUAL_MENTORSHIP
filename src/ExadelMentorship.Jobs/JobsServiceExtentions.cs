@@ -17,6 +17,7 @@ namespace ExadelMentorship.Persistence
             services.AddOptions<HistorySettingStorage>().BindConfiguration(nameof(HistorySettingStorage));
             services.AddHostedService<ReportJob>();
             services.AddHostedService<WeatherJob>();
+            services.AddOptions<ApiConfig>().BindConfiguration(nameof(ApiConfig));
         }
     }
 }
