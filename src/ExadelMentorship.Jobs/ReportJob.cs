@@ -1,24 +1,30 @@
 ﻿using ExadelMentorship.BusinessLogic.Interfaces;
-using ExadelMentorship.BusinessLogic.Interfaces.MessageBus;
+using ExadelMentorship.BusinessLogic.Services.Mail;
 using ExadelMentorship.DataAccess;
 using ExadelMentorship.DataAccess.Entities;
 using Hangfire;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ExadelMentorship.Jobs
 {
     public class ReportJob : BackgroundService
     {
-        private readonly IMessageProducer _messagePublisher;
         private IReportUserRepo _reportUserRepo;
         private IReportServices _reportServices;
+        private readonly IHttpClientFactory _httpClientFactory;
+        private ApiConfig _apiConfig;
 
-        public ReportJob(IMessageProducer messagePublisher, IReportUserRepo reportUserRepo, IReportServices reportServices)
+        public ReportJob(IReportUserRepo reportUserRepo, IReportServices reportServices,
+            IHttpClientFactory httpClientFactory, IOptions<ApiConfig> apiConfig)
         {
-            _messagePublisher = messagePublisher;
             _reportUserRepo = reportUserRepo;
             _reportServices = reportServices;
+            _httpClientFactory = httpClientFactory;
+            _apiConfig = apiConfig.Value;
         }
         protected async override Task ExecuteAsync(CancellationToken stoppingToken)
         {
@@ -34,12 +40,16 @@ namespace ExadelMentorship.Jobs
         }
         
         //System.NotSupportedException: 'Only public methods can be invoked in the background'
-        public void Execute(ReportUser reportUser)
+        public async Task Execute(ReportUser reportUser)
         {
-            var report = _reportServices.GenerateReportForUser(reportUser.Id);
-            var message = new { Email = reportUser.Email, UserName = reportUser.UserName, Report = report };
+            var report = await _reportServices.GenerateReportForUser(reportUser.Id);
+            Message message = new Message(reportUser.Email, reportUser.UserName, report);
 
-            _messagePublisher.SendMessage(message, "sendMail");
+            var url = _apiConfig.publishMessage;
+            var httpClient = _httpClientFactory.CreateClient();
+            HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(message), Encoding.UTF8, Application.Json);
+
+            await httpClient.PostAsync(url, httpContent);
         }
     }
 }

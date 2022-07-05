@@ -25,10 +25,11 @@ namespace ExadelMentorship.WebApi.Controllers
             await _emailSender.SendEmailAsync(message);
         }
 
-        [HttpPost]
-        public async Task PublishMessage(string message)
+
+        [HttpPost("SendMail")]
+        public async Task PublishMessage([FromBody] Message message)
         {
-              await _messagePublisher.SendMessage(message, "fromWebApi");
+            await _messagePublisher.SendMessage(message, "sendMail");
         }
     }
 }
