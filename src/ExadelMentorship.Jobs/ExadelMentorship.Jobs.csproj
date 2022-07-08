@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Hangfire" Version="1.7.29" />
+    <PackageReference Include="IdentityModel" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

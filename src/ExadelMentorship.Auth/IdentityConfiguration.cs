@@ -1,8 +1,6 @@
-﻿using ExadelMentorship.Auth.Models;
-using IdentityModel;
+﻿using IdentityModel;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
-using Microsoft.Extensions.Options;
 using System.Security.Claims;
 
 namespace ExadelMentorship.Auth
@@ -21,7 +19,8 @@ namespace ExadelMentorship.Auth
         public static IEnumerable<ApiScope> Scopes => new[]
         {
             new ApiScope("WebApi.read"),
-            new ApiScope("role")
+            new ApiScope("role"),
+            new ApiScope("mailApi" , "mail sending API"),
         };
 
         public static IEnumerable<Client> Clients => new[]
@@ -35,6 +34,17 @@ namespace ExadelMentorship.Auth
                 RequireClientSecret = false,
                 RequirePkce = true,
                 AllowedCorsOrigins = {"https://localhost:7066"},
+            },
+
+            new Client
+            {
+              ClientId = "reportJob",
+              AllowedGrantTypes = GrantTypes.ClientCredentials,
+              ClientSecrets =
+              {
+                new Secret("secret".Sha256())
+              },
+              AllowedScopes = { "mailApi" }
             }
         };
 

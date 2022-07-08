@@ -3,9 +3,12 @@ using ExadelMentorship.BusinessLogic.Services.Mail;
 using ExadelMentorship.DataAccess;
 using ExadelMentorship.DataAccess.Entities;
 using Hangfire;
+using IdentityModel.Client;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -42,14 +45,29 @@ namespace ExadelMentorship.Jobs
         //System.NotSupportedException: 'Only public methods can be invoked in the background'
         public async Task Execute(ReportUser reportUser)
         {
+            var client = new HttpClient
+            {
+            };
+
+            var disco = await client.GetDiscoveryDocumentAsync("https://localhost:7046");
+            var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
+            {
+                Address = disco.TokenEndpoint,
+                ClientId = "reportJob",
+                ClientSecret = "secret",
+                Scope = "mailApi"
+            });
+
+            var apiClient = _httpClientFactory.CreateClient();
+            apiClient.SetBearerToken(tokenResponse.AccessToken);
+
             var report = await _reportServices.GenerateReportForUser(reportUser.Id);
             Message message = new Message(reportUser.Email, reportUser.UserName, report);
-
-            var url = _apiConfig.publishMessage;
-            var httpClient = _httpClientFactory.CreateClient();
             HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(message), Encoding.UTF8, Application.Json);
 
-            await httpClient.PostAsync(url, httpContent);
+            var url = _apiConfig.publishMessage;
+
+            await apiClient.PostAsync(url, httpContent);
         }
     }
 }

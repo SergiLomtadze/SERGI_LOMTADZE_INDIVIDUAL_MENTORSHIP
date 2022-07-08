@@ -49,6 +49,8 @@ namespace ExadelMentorship.BusinessLogic
 
             services.AddOptions<RabbitMQSettings>().BindConfiguration(nameof(RabbitMQSettings));
 
+            services.AddOptions<MailServerSettings>().BindConfiguration(nameof(MailServerSettings));
+
             AddMailServices(services);
 
             AddMessageBusServices(services);
