@@ -1,4 +1,5 @@
 ﻿using ExadelMentorship.BusinessLogic.Interfaces;
+using ExadelMentorship.BusinessLogic.Models;
 using ExadelMentorship.BusinessLogic.Services.Mail;
 using ExadelMentorship.DataAccess;
 using ExadelMentorship.DataAccess.Entities;
@@ -20,14 +21,16 @@ namespace ExadelMentorship.Jobs
         private IReportServices _reportServices;
         private readonly IHttpClientFactory _httpClientFactory;
         private ApiConfig _apiConfig;
+        private ClientInfo _clientInfo;
 
         public ReportJob(IReportUserRepo reportUserRepo, IReportServices reportServices,
-            IHttpClientFactory httpClientFactory, IOptions<ApiConfig> apiConfig)
+            IHttpClientFactory httpClientFactory, IOptions<ApiConfig> apiConfig, IOptions<ClientInfo> clientInfo)
         {
             _reportUserRepo = reportUserRepo;
             _reportServices = reportServices;
             _httpClientFactory = httpClientFactory;
             _apiConfig = apiConfig.Value;
+            _clientInfo = clientInfo.Value;
         }
         protected async override Task ExecuteAsync(CancellationToken stoppingToken)
         {
@@ -49,12 +52,12 @@ namespace ExadelMentorship.Jobs
             {
             };
 
-            var disco = await client.GetDiscoveryDocumentAsync("https://localhost:7046");
+            var tokenInfo = await client.GetDiscoveryDocumentAsync("https://localhost:7046");
             var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
             {
-                Address = disco.TokenEndpoint,
+                Address = tokenInfo.TokenEndpoint,
                 ClientId = "reportJob",
-                ClientSecret = "secret",
+                ClientSecret = _clientInfo.ReportJobSecret,
                 Scope = "mailApi"
             });
 

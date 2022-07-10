@@ -1,8 +1,6 @@
-﻿using ExadelMentorship.Auth.Models;
-using IdentityModel;
+﻿using IdentityModel;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
-using Microsoft.Extensions.Options;
 using System.Security.Claims;
 
 namespace ExadelMentorship.Auth

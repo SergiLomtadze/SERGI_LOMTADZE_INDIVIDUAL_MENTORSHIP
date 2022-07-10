@@ -51,6 +51,8 @@ namespace ExadelMentorship.BusinessLogic
 
             services.AddOptions<MailServerSettings>().BindConfiguration(nameof(MailServerSettings));
 
+            services.AddOptions<ClientInfo>().BindConfiguration(nameof(ClientInfo));           
+
             AddMailServices(services);
 
             AddMessageBusServices(services);
