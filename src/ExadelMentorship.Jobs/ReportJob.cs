@@ -22,15 +22,18 @@ namespace ExadelMentorship.Jobs
         private readonly IHttpClientFactory _httpClientFactory;
         private ApiConfig _apiConfig;
         private ClientInfo _clientInfo;
+        private AuthConfig _authConfig;
 
         public ReportJob(IReportUserRepo reportUserRepo, IReportServices reportServices,
-            IHttpClientFactory httpClientFactory, IOptions<ApiConfig> apiConfig, IOptions<ClientInfo> clientInfo)
+            IHttpClientFactory httpClientFactory, IOptions<ApiConfig> apiConfig, 
+            IOptions<ClientInfo> clientInfo, IOptions<AuthConfig> authConfig)
         {
             _reportUserRepo = reportUserRepo;
             _reportServices = reportServices;
             _httpClientFactory = httpClientFactory;
             _apiConfig = apiConfig.Value;
             _clientInfo = clientInfo.Value;
+            _authConfig = authConfig.Value;
         }
         protected async override Task ExecuteAsync(CancellationToken stoppingToken)
         {
@@ -48,11 +51,8 @@ namespace ExadelMentorship.Jobs
         //System.NotSupportedException: 'Only public methods can be invoked in the background'
         public async Task Execute(ReportUser reportUser)
         {
-            var client = new HttpClient
-            {
-            };
-
-            var tokenInfo = await client.GetDiscoveryDocumentAsync("https://localhost:7046");
+            var client = _httpClientFactory.CreateClient();
+            var tokenInfo = await client.GetDiscoveryDocumentAsync(_authConfig.Authority);
             var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
             {
                 Address = tokenInfo.TokenEndpoint,

@@ -30,10 +30,10 @@ namespace ExadelMentorship.Auth
                 ClientId = "api-swagger",
                 AllowedGrantTypes = GrantTypes.Code,
                 AllowedScopes = { "WebApi.read", "role" },
-                RedirectUris = {"https://localhost:7066/swagger/oauth2-redirect.html"},
+                RedirectUris = {ConfigurationHelper.config.GetSection("RedirectUris").Value },
                 RequireClientSecret = false,
                 RequirePkce = true,
-                AllowedCorsOrigins = {"https://localhost:7066"},
+                AllowedCorsOrigins = {ConfigurationHelper.config.GetSection("AllowedCorsOrigins").Value},
             },
 
             new Client
@@ -44,7 +44,7 @@ namespace ExadelMentorship.Auth
               {
                 new Secret(ConfigurationHelper.config.GetSection("ReportJobSecret").Value.Sha256())
               },
-              AllowedScopes = { "mailApi" }
+              AllowedScopes = { "mailApi" },
             }
         };
 
