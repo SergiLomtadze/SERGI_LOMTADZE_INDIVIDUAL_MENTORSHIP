@@ -1,6 +1,8 @@
-﻿using IdentityModel;
+﻿using ExadelMentorship.Auth.Models;
+using IdentityModel;
 using IdentityServer4.Models;
 using IdentityServer4.Test;
+using Microsoft.Extensions.Options;
 using System.Security.Claims;
 
 namespace ExadelMentorship.Auth
@@ -42,7 +44,7 @@ namespace ExadelMentorship.Auth
               AllowedGrantTypes = GrantTypes.ClientCredentials,
               ClientSecrets =
               {
-                new Secret("secret".Sha256())
+                new Secret(ConfigurationHelper.config.GetSection("ReportJobSecret").Value.Sha256())
               },
               AllowedScopes = { "mailApi" }
             }

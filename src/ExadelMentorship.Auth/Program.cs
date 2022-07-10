@@ -1,8 +1,8 @@
 using ExadelMentorship.Auth;
-using ExadelMentorship.Auth.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddOptions<IdentityConfig>().BindConfiguration(nameof(IdentityConfig));
+
+ConfigurationHelper.Initialize(builder.Configuration);
 
 builder.Services.AddIdentityServer(o =>
     {
