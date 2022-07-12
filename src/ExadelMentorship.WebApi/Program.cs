@@ -5,6 +5,7 @@ using ExadelMentorship.Persistence;
 using ExadelMentorship.WebApi;
 using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 
@@ -43,13 +44,25 @@ builder.Services.AddSwaggerGen(o =>
         }
     });
 });
-builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, o =>
     {
         o.Authority = builder.Configuration.GetSection("AuthConfig")["authority"];
         o.Audience = "WebApi";
+        o.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateAudience = false
+        };
     });
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ApiScope", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("scope", "mailApi");
+    });
+});
+
 
 WebApplication app = builder.Build();
 
@@ -74,4 +87,5 @@ app.UseHttpsRedirection()
 
 app.UseHangfireDashboard("/dashboard");
 app.MapControllers();
+
 app.Run();

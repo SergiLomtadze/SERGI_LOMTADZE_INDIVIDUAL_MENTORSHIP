@@ -1,13 +1,13 @@
 ﻿using ExadelMentorship.BusinessLogic.Interfaces;
+using ExadelMentorship.BusinessLogic.Models;
 using ExadelMentorship.BusinessLogic.Services.Mail;
 using ExadelMentorship.DataAccess;
 using ExadelMentorship.DataAccess.Entities;
 using Hangfire;
+using IdentityModel.Client;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using System.Text;
-using static System.Net.Mime.MediaTypeNames;
+using System.Net.Http.Json;
 
 namespace ExadelMentorship.Jobs
 {
@@ -17,14 +17,19 @@ namespace ExadelMentorship.Jobs
         private IReportServices _reportServices;
         private readonly IHttpClientFactory _httpClientFactory;
         private ApiConfig _apiConfig;
+        private ClientInfo _clientInfo;
+        private AuthConfig _authConfig;
 
         public ReportJob(IReportUserRepo reportUserRepo, IReportServices reportServices,
-            IHttpClientFactory httpClientFactory, IOptions<ApiConfig> apiConfig)
+            IHttpClientFactory httpClientFactory, IOptions<ApiConfig> apiConfig, 
+            IOptions<ClientInfo> clientInfo, IOptions<AuthConfig> authConfig)
         {
             _reportUserRepo = reportUserRepo;
             _reportServices = reportServices;
             _httpClientFactory = httpClientFactory;
             _apiConfig = apiConfig.Value;
+            _clientInfo = clientInfo.Value;
+            _authConfig = authConfig.Value;
         }
         protected async override Task ExecuteAsync(CancellationToken stoppingToken)
         {
@@ -42,14 +47,25 @@ namespace ExadelMentorship.Jobs
         //System.NotSupportedException: 'Only public methods can be invoked in the background'
         public async Task Execute(ReportUser reportUser)
         {
+            var client = _httpClientFactory.CreateClient();
+            var tokenInfo = await client.GetDiscoveryDocumentAsync(_authConfig.Authority);
+            var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
+            {
+                Address = tokenInfo.TokenEndpoint,
+                ClientId = "reportJob",
+                ClientSecret = _clientInfo.ReportJobSecret,
+                Scope = "mailApi"
+            });
+
+            var apiClient = _httpClientFactory.CreateClient();
+            apiClient.SetBearerToken(tokenResponse.AccessToken);
+
             var report = await _reportServices.GenerateReportForUser(reportUser.Id);
             Message message = new Message(reportUser.Email, reportUser.UserName, report);
 
             var url = _apiConfig.publishMessage;
-            var httpClient = _httpClientFactory.CreateClient();
-            HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(message), Encoding.UTF8, Application.Json);
 
-            await httpClient.PostAsync(url, httpContent);
+            await apiClient.PostAsJsonAsync(url, message);
         }
     }
 }

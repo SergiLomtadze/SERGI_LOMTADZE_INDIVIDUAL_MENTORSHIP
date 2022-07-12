@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ExadelMentorship.DataAccess.Entities
+﻿namespace ExadelMentorship.DataAccess.Entities
 {
     public class ReportUser
     {
