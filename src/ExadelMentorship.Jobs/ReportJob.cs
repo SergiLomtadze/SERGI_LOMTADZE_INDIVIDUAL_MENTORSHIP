@@ -7,11 +7,7 @@ using Hangfire;
 using IdentityModel.Client;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using static System.Net.Mime.MediaTypeNames;
+using System.Net.Http.Json;
 
 namespace ExadelMentorship.Jobs
 {
@@ -66,11 +62,10 @@ namespace ExadelMentorship.Jobs
 
             var report = await _reportServices.GenerateReportForUser(reportUser.Id);
             Message message = new Message(reportUser.Email, reportUser.UserName, report);
-            HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(message), Encoding.UTF8, Application.Json);
 
             var url = _apiConfig.publishMessage;
 
-            await apiClient.PostAsync(url, httpContent);
+            await apiClient.PostAsJsonAsync(url, message);
         }
     }
 }
