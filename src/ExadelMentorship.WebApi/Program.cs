@@ -68,17 +68,14 @@ WebApplication app = builder.Build();
 
 app.UseExceptionHandler(ExceptionHandler.GetExceptionHandlerOptions());
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(o =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(o =>
-    {
-        o.OAuthClientId("api-swagger");
-        o.OAuthScopes("WebApi.read", "role");
-        o.OAuthScopeSeparator(" ");
-        o.OAuthUsePkce();
-    });
-}
+    o.OAuthClientId("api-swagger");
+    o.OAuthScopes("WebApi.read", "role");
+    o.OAuthScopeSeparator(" ");
+    o.OAuthUsePkce();
+});
 
 app.UseHttpsRedirection()
     .UseDefaultFiles("/swagger")
